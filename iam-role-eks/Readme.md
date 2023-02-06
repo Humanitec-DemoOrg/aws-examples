@@ -60,6 +60,8 @@ Below that, you will find:
 
 Note that is possible to reference a terraform output, as `Input` on another resource using this format `"$${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm}"` [More Information here](https://docs.humanitec.com/reference/concepts/resources/references).
 
+What if you'd like to just provide an existing role to a service account? Modify `resource "humanitec_resource_definition" "aws_eks_injector"` accordingly, instead of referencing `eks.amazonaws.com/role-arn: $${resources.workload#aws-terrafom-eks-role.outputs.role}` you could directly add `eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT_ID:role/myapp-$${context.app.id}-$${context.env.id}-{{trimPrefix "modules." "$${context.res.id}"}}`  for a dynamic role scoped per environment, the end result will look like `arn:aws:iam::ACCOUNT_ID:role/myapp-test-myeksapp-development`
+
 ## App Configuration within Humanitec
 The App can be configured with Score, Humanitec CLI, API or the UI. Below is a video on how to configure the example application and verify its funcitonality:
 https://humanitec-cse.s3.amazonaws.com/example-eks-iam-roles.mov
