@@ -69,8 +69,8 @@ Note that is possible to reference a terraform output, as `Input` on another res
 What if you'd like to just provide an existing role to a service account? 
 Modify `resource "humanitec_resource_definition" "aws_eks_injector"`:
 
-    - Replace`eks.amazonaws.com/role-arn: $${resources.workload#aws-terrafom-eks-role.outputs.role}` by
-    - `eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT_ID:role/myapp-$${context.app.id}-$${context.env.id}-{{trimPrefix "modules." "$${context.res.id}"}}`
+- Replace`eks.amazonaws.com/role-arn`: `$${resources.workload#aws-terrafom-eks-role.outputs.role}` by
+- `eks.amazonaws.com/role-arn`: `arn:aws:iam::ACCOUNT_ID:role/myapp-$${context.app.id}-$${context.env.id}-{{trimPrefix "modules." "$${context.res.id}"}}`
 
 This will generate a dynamic role name (that you have created earlier) scoped per environment, the end result will look like this `arn:aws:iam::ACCOUNT_ID:role/myapp-test-myeksapp-development`. Additionaly, you could just input an existing role without any sort of interpolation.
 
