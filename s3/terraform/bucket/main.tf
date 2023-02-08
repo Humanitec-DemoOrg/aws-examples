@@ -7,8 +7,21 @@ resource "aws_s3_bucket" "b" {
   }
 }
 
-output "parameter" {
+output "bucket" {
   value = aws_s3_bucket.b.bucket
+}
+
+output "region" {
+  value = var.region
+}
+
+output "aws_access_key_id" {
+  value     = ""
+  sensitive = true
+}
+output "aws_secret_access_key" {
+  value     = ""
+  sensitive = true
 }
 
 // boilerplate for Humanitec terraform driver
