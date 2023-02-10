@@ -49,7 +49,7 @@ Please note that for some resources that have longer creation/update times (such
 Documentation is available [here](https://github.com/nickhumanitec/humanitec-onboarding-aws-iam-user) on how to setup cross account roles.
 
 ## Example Humanitec Architecture
-Within `main.tf` you will find context variables at the beginning.
+Our examples use the  Humanitec Terraform Provider, documentation can be found [here](https://registry.terraform.io/providers/humanitec/humanitec/latest/docs). Within `main.tf` you will find context variables at the beginning.
 
 Below that, you will find:
 
