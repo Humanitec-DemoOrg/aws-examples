@@ -45,6 +45,9 @@ These repositories can be on different GitHub repositories, and have their own A
 You can provide keys from an AWS User with permissions to only assume a role (and then configure the Terraform provider) to assume such role, thus scoping Terraform runners to their custom policies.
 Please note that for some resources that have longer creation/update times (such as RDS), the use of chained roles means these have an expiration of at most 1 hour, the Terraform runner might crash in such cases.
 
+### Terraform IAM Roles and AWS Temporary Credentials
+Documentation is available [here](https://github.com/nickhumanitec/humanitec-onboarding-aws-iam-user) on how to setup cross account roles.
+
 ## Example Humanitec Architecture
 Within `main.tf` you will find context variables at the beginning.
 
