@@ -2,6 +2,9 @@ variable "policy_ssm_name" {
   default = "humanitec-"
 }
 
+variable "parameter_arn" {
+}
+
 resource "aws_iam_policy" "policy_ssm" {
   name_prefix = var.policy_ssm_name
   policy = jsonencode({
@@ -13,7 +16,7 @@ resource "aws_iam_policy" "policy_ssm" {
         "Action" : [
           "ssm:GetParameter"
         ],
-        "Resource" : "*",
+        "Resource" : "${var.parameter_arn}",
         "Condition" : {
           "StringEquals" : {
             "ssm:resourceTag/Humanitec" : "true"
