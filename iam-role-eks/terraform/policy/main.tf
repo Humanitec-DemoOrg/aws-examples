@@ -27,8 +27,12 @@ resource "aws_iam_policy" "policy_ssm" {
   }
 }
 
-output "policy_ssm" {
+output "policy_ssm_arn" {
   value = aws_iam_policy.policy_ssm.arn
+}
+
+output "policy_ssm_name" {
+  value = aws_iam_policy.policy_ssm.name
 }
 
 
