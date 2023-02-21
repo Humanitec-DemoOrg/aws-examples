@@ -88,7 +88,8 @@ resource "humanitec_resource_definition" "aws_terraform_resource_ssm_policy" {
       )
       "variables" = jsonencode(
         {
-          region = var.region
+          region        = var.region
+          parameter_arn = "$${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}"
         }
       )
     }
