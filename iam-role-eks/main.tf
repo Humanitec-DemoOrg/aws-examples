@@ -218,7 +218,7 @@ serviceaccount.yaml:
       name: $${context.app.id}-$${context.env.id}-{{trimPrefix "modules." "$${context.res.id}"}}
       annotations:
         eks.amazonaws.com/role-arn: $${resources.workload#aws-terrafom-eks-role.outputs.role}
-        parameter: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter}
+        parameter: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}
         policy: $${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm}
   location: namespace
 EOL
@@ -229,7 +229,7 @@ update:
     value: $${context.app.id}-$${context.env.id}-{{trimPrefix "modules." "$${context.res.id}"}}
   - op: add
     path: /spec/containers/aws-cli/variables/AWS_PARAMETER
-    value: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter}
+    value: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}
 EOL
       })
     }
