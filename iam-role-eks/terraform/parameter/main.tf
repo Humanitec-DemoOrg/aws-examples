@@ -10,8 +10,13 @@ resource "aws_ssm_parameter" "test" {
     Humanitec = "true"
   }
 }
-output "parameter" {
+
+output "parameter_arn" {
   value = aws_ssm_parameter.test.arn
+}
+
+output "parameter_name" {
+  value = aws_ssm_parameter.test.name
 }
 
 // boilerplate for Humanitec terraform driver
