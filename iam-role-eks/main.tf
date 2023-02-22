@@ -88,7 +88,8 @@ resource "humanitec_resource_definition" "aws_terraform_resource_ssm_policy" {
       )
       "variables" = jsonencode(
         {
-          region = var.region
+          region        = var.region
+          parameter_arn = "$${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}"
         }
       )
     }
@@ -216,9 +217,9 @@ serviceaccount.yaml:
     metadata:
       name: $${context.app.id}-$${context.env.id}-{{trimPrefix "modules." "$${context.res.id}"}}
       annotations:
-        eks.amazonaws.com/role-arn: $${resources.workload#aws-terrafom-eks-role.outputs.role}
-        parameter: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter}
-        policy: $${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm}
+        eks.amazonaws.com/role-arn: $${resources.workload#aws-terrafom-eks-role.outputs.role_arn}
+        parameter: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}
+        policy: $${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm_arn}
   location: namespace
 EOL
         outputs   = <<EOL
@@ -228,7 +229,7 @@ update:
     value: $${context.app.id}-$${context.env.id}-{{trimPrefix "modules." "$${context.res.id}"}}
   - op: add
     path: /spec/containers/aws-cli/variables/AWS_PARAMETER
-    value: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter}
+    value: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}
 EOL
       })
     }
