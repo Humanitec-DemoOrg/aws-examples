@@ -127,10 +127,10 @@ resource "humanitec_resource_definition" "aws_terraform_resource_role" {
       )
       "variables" = jsonencode(
         {
-          policies        = ["$${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm}"]
+          policies        = ["$${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm_arn}"]
           cluster_oidc    = var.cluster_oidc
           namespace       = "$${context.app.id}-$${context.env.id}"
-          service_account = "$${context.res.id}"
+          service_account = "$${context.app.id}-$${context.env.id}-backend"
           region          = var.region
         }
       )
@@ -215,18 +215,22 @@ serviceaccount.yaml:
     apiVersion: v1
     kind: ServiceAccount
     metadata:
-      name: $${context.app.id}-$${context.env.id}-{{trimPrefix "modules." "$${context.res.id}"}}
+      name: $${context.app.id}-$${context.env.id}-backend
       annotations:
         eks.amazonaws.com/role-arn: $${resources.workload#aws-terrafom-eks-role.outputs.role_arn}
         parameter: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}
         policy: $${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm_arn}
+        context: {{trimPrefix "modules." "$${context.res.id}"}}
+        fullContext: $${context.res.id}
+        app: $${context.app.id}
+        env: $${context.env.id}
   location: namespace
 EOL
         outputs   = <<EOL
 update:
   - op: add
     path: /spec/serviceAccountName
-    value: $${context.app.id}-$${context.env.id}-{{trimPrefix "modules." "$${context.res.id}"}}
+    value: $${context.app.id}-$${context.env.id}-backend
   - op: add
     path: /spec/containers/aws-cli/variables/AWS_PARAMETER
     value: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}

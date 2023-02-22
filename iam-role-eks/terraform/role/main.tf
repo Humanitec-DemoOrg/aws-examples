@@ -26,7 +26,7 @@ resource "aws_iam_role" "eks" {
         "Action" : "sts:AssumeRoleWithWebIdentity",
         "Condition" : {
           "StringLike" : {
-            "oidc.eks.${data.aws_region.current.name}.amazonaws.com/id/${var.cluster_oidc}:sub" : "system:serviceaccount:${var.namespace}:${replace(var.service_account, "modules.", "")}",
+            "oidc.eks.${data.aws_region.current.name}.amazonaws.com/id/${var.cluster_oidc}:sub" : "system:serviceaccount:${var.namespace}:${var.service_account}",
             "oidc.eks.${data.aws_region.current.name}.amazonaws.com/id/${var.cluster_oidc}:aud" : "sts.amazonaws.com"
           }
         }

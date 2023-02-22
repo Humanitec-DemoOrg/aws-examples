@@ -19,6 +19,11 @@ This resource receives the current context of a workload (say - the backend port
 
 You would use this resource to create workload scoped resources (so they will be configured for each environment), for instance, if you were configuring a CloudFront distribution, you will end with three of them if you had 3 environments.
 
+### How to run the example App
+Create an app called `myeksapp`, a workload called `backend`, create a container called `aws-cli` for image use `amazon/aws-cli:latest`, add a command override `- aws` for argument overrides `- sts - get-caller-identity`.
+
+The example will generate a namespace `"${context.app.id}-${context.env.id}"` basically `applicationName-environmentName` for the service account, we know and we are targeting (via criteria) specific workload `backend` (normally there's one role per workload), so that's a known value, and it will be `applicationName-environmentNam-backend`.
+
 ### Example of production-like architecture:
 Requirements: S3 buckets and access points, RDS Database, DynamoDB database for the app "MyApp".
 
@@ -73,9 +78,7 @@ What if you'd like to just provide an existing role to a service account?
 Modify `resource "humanitec_resource_definition" "aws_eks_injector"`:
 
 - Replace`eks.amazonaws.com/role-arn`: `$${resources.workload#aws-terrafom-eks-role.outputs.role}` by
-- `eks.amazonaws.com/role-arn`: `arn:aws:iam::ACCOUNT_ID:role/myapp-$${context.app.id}-$${context.env.id}-{{trimPrefix "modules." "$${context.res.id}"}}`
-
-This will generate a dynamic role name (that you have created earlier) scoped per environment, the end result will look like this `arn:aws:iam::ACCOUNT_ID:role/myapp-test-myeksapp-development`. Additionaly, you could just input an existing role without any sort of interpolation.
+- `eks.amazonaws.com/role-arn`: `arn:aws:iam::ACCOUNT_ID:role/my-own-role`, make sure the namespace and service account are configured accordingly or use "*" (not recommended)
 
 ## App Configuration within Humanitec
 The App can be configured with Score, Humanitec CLI, API or the UI. Below is a video on how to configure the example application and verify its funcitonality:
