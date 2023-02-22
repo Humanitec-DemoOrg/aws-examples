@@ -22,7 +22,7 @@ You would use this resource to create workload scoped resources (so they will be
 ### How to run the example App
 Create an app called `myeksapp`, a workload called `backend`, create a container called `aws-cli` for image use `amazon/aws-cli:latest`, add a command override `- aws` for argument overrides `- sts - get-caller-identity`.
 
-The example will generate a namespace `"${context.app.id}-${context.env.id}"` basically `applicationName-environment-Name` for the service account, we know and we are targeting (via criteria) specific workload `backend` (normally there's one role per workload), so that's a known value.
+The example will generate a namespace `"${context.app.id}-${context.env.id}"` basically `applicationName-environmentName` for the service account, we know and we are targeting (via criteria) specific workload `backend` (normally there's one role per workload), so that's a known value, and it will be `applicationName-environmentNam-backend`.
 
 ### Example of production-like architecture:
 Requirements: S3 buckets and access points, RDS Database, DynamoDB database for the app "MyApp".
