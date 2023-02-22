@@ -2,8 +2,8 @@
 # Driver example
 
 # apply must be done in two parts (as policies are dynamically injected)
-# that works inside a workload, but within one terraform file doen't as 
-# it needs to know the policies in advance 
+# this works inside a humanitec manifest workload, but within a terraform file doen't as 
+# it needs to know the policies ARNs in advance to use foreach
 
 # terraform apply -target module.parameter -target module.policy
 # terraform apply -target module.role
