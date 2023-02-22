@@ -217,9 +217,9 @@ serviceaccount.yaml:
     metadata:
       name: $${context.app.id}-$${context.env.id}-{{trimPrefix "modules." "$${context.res.id}"}}
       annotations:
-        eks.amazonaws.com/role-arn: $${resources.workload#aws-terrafom-eks-role.outputs.role}
+        eks.amazonaws.com/role-arn: $${resources.workload#aws-terrafom-eks-role.outputs.role_arn}
         parameter: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}
-        policy: $${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm}
+        policy: $${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm_arn}
   location: namespace
 EOL
         outputs   = <<EOL

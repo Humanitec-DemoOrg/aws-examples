@@ -41,8 +41,16 @@ resource "aws_iam_role" "eks" {
 
 }
 
-output "role" {
+output "role_arn" {
   value = aws_iam_role.eks.arn
+}
+
+output "role_name" {
+  value = aws_iam_role.eks.name
+}
+
+output "role_id" {
+  value = aws_iam_role.eks.id
 }
 
 // boilerplate for Humanitec terraform driver

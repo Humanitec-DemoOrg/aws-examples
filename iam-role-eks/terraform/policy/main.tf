@@ -16,12 +16,7 @@ resource "aws_iam_policy" "policy_ssm" {
         "Action" : [
           "ssm:GetParameter"
         ],
-        "Resource" : "${var.parameter_arn}",
-        "Condition" : {
-          "StringEquals" : {
-            "ssm:resourceTag/Humanitec" : "true"
-          }
-        }
+        "Resource" : "${var.parameter_arn}"
       }
     ]
   })
@@ -38,6 +33,9 @@ output "policy_ssm_name" {
   value = aws_iam_policy.policy_ssm.name
 }
 
+output "policy_ssm_id" {
+  value = aws_iam_policy.policy_ssm.policy_id
+}
 
 // boilerplate for Humanitec terraform driver
 variable "region" {}
