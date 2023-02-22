@@ -20,9 +20,13 @@ This resource receives the current context of a workload (say - the backend port
 You would use this resource to create workload scoped resources (so they will be configured for each environment), for instance, if you were configuring a CloudFront distribution, you will end with three of them if you had 3 environments.
 
 ### How to run the example App
-Create an app called `myeksapp`, a workload called `backend`, create a container called `aws-cli` for image use `amazon/aws-cli:latest`, add a command override `- aws` for argument overrides `- sts - get-caller-identity`.
+Create an app called `myeksapp`, a workload called `backend`, create a container called `aws-cli` for image use `amazon/aws-cli:latest`, add a command override `- aws` for argument overrides:`- sts - get-caller-identity`.
+```
+    command: ["aws"]
+    args: ["sts", "get-caller-identity"]
+```
 
-The example will generate a namespace `"${context.app.id}-${context.env.id}"` basically `applicationName-environmentName` for the service account, we know and we are targeting (via criteria) specific workload `backend` (normally there's one role per workload), so that's a known value, and it will be `applicationName-environmentNam-backend`.
+The example will generate a namespace `"${context.app.id}-${context.env.id}"` basically `applicationName-environmentName` for the service account, we know and we are targeting (via criteria) a specific workload `backend` (normally there's one role per workload), so that's a known value, and it will be `applicationName-environmentName-backend`.
 
 ### Example of production-like architecture:
 Requirements: S3 buckets and access points, RDS Database, DynamoDB database for the app "MyApp".
@@ -70,7 +74,7 @@ Below that, you will find:
 - `resource "humanitec_resource_definition" "aws_eks_injector"`:
     - This resource takes all the outputs and injects them on the manifest to be deployed, basically configures the service account and environment variables.
 
-Note that is possible to reference a terraform output, as `Input` on another resource using this format `"$${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm}"` [More Information here](https://docs.humanitec.com/reference/concepts/resources/references).
+Note that is possible to reference a terraform output, as `Input` on another resource using this format `"$${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm_arn}"` [More Information here](https://docs.humanitec.com/reference/concepts/resources/references).
 
 ### Existing values and roles
 
