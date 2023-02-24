@@ -20,7 +20,7 @@ This resource receives the current context of a workload (say - the backend port
 You would use this resource to create workload scoped resources (so they will be configured for each environment), for instance, if you were configuring a CloudFront distribution, you will end with three of them if you had 3 environments.
 
 ### Example app architecture
-![App Architecture](/images/EKS-Roles-2023-02-24-1007.svg "App Architecture")
+![App Architecture](images/EKS-Roles-2023-02-24-1007.svg "App Architecture")
 
 ### How to run the example App
 Create an app called `myeksapp`, a workload called `backend`, create a container called `aws-cli` for image use `amazon/aws-cli:latest`, add a command override `- aws` for argument overrides:`- sts - get-caller-identity`.
