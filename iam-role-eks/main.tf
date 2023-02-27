@@ -52,6 +52,7 @@ resource "humanitec_resource_definition" "aws_terraform_resource_ssm_parameter" 
           region          = var.region,
           parameter_name  = "/humanitec/test-$${context.app.id}-$${context.env.id}"
           parameter_value = "$${context.app.id}-$${context.env.id}"
+          assume_role_arn = "arn:aws:iam::ACCOUNT_ID:role/<<HUMANITEC-ROLE-NAMES-FOR-DEPLOYMENT>>"
         }
       )
     }
@@ -88,8 +89,9 @@ resource "humanitec_resource_definition" "aws_terraform_resource_ssm_policy" {
       )
       "variables" = jsonencode(
         {
-          region        = var.region
-          parameter_arn = "$${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}"
+          region          = var.region
+          parameter_arn   = "$${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}"
+          assume_role_arn = "arn:aws:iam::ACCOUNT_ID:role/<<HUMANITEC-ROLE-NAMES-FOR-DEPLOYMENT>>"
         }
       )
     }
@@ -132,6 +134,7 @@ resource "humanitec_resource_definition" "aws_terraform_resource_role" {
           namespace       = "$${context.app.id}-$${context.env.id}"
           service_account = "$${context.app.id}-$${context.env.id}-backend"
           region          = var.region
+          assume_role_arn = "arn:aws:iam::ACCOUNT_ID:role/<<HUMANITEC-ROLE-NAMES-FOR-DEPLOYMENT>>"
         }
       )
     }
