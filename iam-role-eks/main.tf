@@ -8,6 +8,9 @@ variable "cluster_oidc" {}
 variable "terraform_role" {}
 
 variable "app_id" {}
+variable "workload_name" {}
+variable "container_name" {}
+
 
 terraform {
   required_providers {
@@ -134,7 +137,7 @@ resource "humanitec_resource_definition" "aws_terraform_resource_role" {
           policies                  = ["$${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm_arn}"]
           cluster_oidc              = var.cluster_oidc
           namespace                 = "$${context.app.id}-$${context.env.id}"
-          service_account           = "$${context.app.id}-$${context.env.id}-backend"
+          service_account           = "$${context.app.id}-$${context.env.id}-${var.workload_name}"
           region                    = var.region
           terraform_assume_role_arn = var.terraform_role
         }
@@ -199,7 +202,7 @@ resource "humanitec_resource_definition" "aws_eks_injector" {
       app_id   = var.app_id
       env_id   = null
       env_type = null
-      res_id   = "modules.backend"
+      res_id   = "modules.${var.workload_name}"
     }
   ]
 
@@ -220,7 +223,7 @@ serviceaccount.yaml:
     apiVersion: v1
     kind: ServiceAccount
     metadata:
-      name: $${context.app.id}-$${context.env.id}-backend
+      name: $${context.app.id}-$${context.env.id}-${var.workload_name}
       annotations:
         eks.amazonaws.com/role-arn: $${resources.workload#aws-terrafom-eks-role.outputs.role_arn}
         parameter: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}
@@ -237,7 +240,7 @@ update:
     path: /spec/serviceAccountName
     value: $${context.app.id}-$${context.env.id}-backend
   - op: add
-    path: /spec/containers/aws-cli/variables/AWS_PARAMETER
+    path: /spec/containers/${var.container_name}/variables/AWS_PARAMETER
     value: $${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}
 EOL
       })
