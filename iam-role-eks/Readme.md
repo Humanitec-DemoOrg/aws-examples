@@ -1,5 +1,7 @@
 # iam-role-eks
 
+** THIS WILL BE REPLACED FOR CUSTOM RESOURCES INSTEAD OF WORKLOADS **
+
 ## Objective
 Deploy AWS Resources and create IAM roles to be assumed by an EKS cluster
 
@@ -14,7 +16,7 @@ Deploy AWS Resources and create IAM roles to be assumed by an EKS cluster
 - `main.tf`: Humanitec Resource definitions.
 
 ## Humanitec Architecture
-The architecture for resource definitions relies on the [workload](https://docs.humanitec.com/integrations/resource-types/workload) resource type.
+The architecture for resource definitions relies on the [workload](https://docs.humanitec.com/integrations/resource-types/workload) resource type. This will change very soon.
 This resource receives the current context of a workload (say - the backend portion) from an Application in the current environment.
 
 You would use this resource to create workload scoped resources (so they will be configured for each environment), for instance, if you were configuring a CloudFront distribution, you will end with three of them if you had 3 environments.
@@ -119,7 +121,9 @@ The example above goes to public Github, to configure a private git repository, 
       )
       "variables" = jsonencode(
         {
-          region          = var.region
+          region                    = var.region
+          terraform_assume_role_arn = var.terraform_role
+
         }
       )
     }

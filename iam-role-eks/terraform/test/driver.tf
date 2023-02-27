@@ -14,13 +14,16 @@ variable "access_key" {
 }
 variable "secret_key" {
 }
+variable "terraform_role" {
+}
 
 module "parameter" {
   source = "../parameter"
 
-  region     = var.region
-  access_key = var.access_key
-  secret_key = var.secret_key
+  region                    = var.region
+  access_key                = var.access_key
+  secret_key                = var.secret_key
+  terraform_assume_role_arn = var.terraform_role
 
   parameter_name  = "/humanitec/example/parameter"
   parameter_value = "my value"
@@ -30,9 +33,10 @@ module "parameter" {
 module "policy" {
   source = "../policy"
 
-  region     = var.region
-  access_key = var.access_key
-  secret_key = var.secret_key
+  region                    = var.region
+  access_key                = var.access_key
+  secret_key                = var.secret_key
+  terraform_assume_role_arn = var.terraform_role
 
   policy_ssm_name = "humanitec-ssm-example-policy"
   parameter_arn   = module.parameter.parameter_arn
@@ -41,9 +45,10 @@ module "policy" {
 module "role" {
   source = "../role"
 
-  region     = var.region
-  access_key = var.access_key
-  secret_key = var.secret_key
+  region                    = var.region
+  access_key                = var.access_key
+  secret_key                = var.secret_key
+  terraform_assume_role_arn = var.terraform_role
 
   role_name = "humanitec-eks-example-role"
   policies  = [module.policy.policy_ssm_arn]

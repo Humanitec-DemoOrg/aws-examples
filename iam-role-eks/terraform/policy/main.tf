@@ -41,7 +41,7 @@ output "policy_ssm_id" {
 variable "region" {}
 variable "access_key" {}
 variable "secret_key" {}
-variable "assume_role_arn" {}
+variable "terraform_assume_role_arn" {}
 
 
 terraform {
@@ -57,7 +57,7 @@ provider "aws" {
   access_key = var.access_key
   secret_key = var.secret_key
   assume_role {
-    role_arn = var.assume_role_arn
+    role_arn = var.terraform_assume_role_arn
   }
 }
 

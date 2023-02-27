@@ -1,11 +1,13 @@
-variable "humanitec_organization" { default = "HUMANITEC_ORGANIZATION" }
-variable "humanitec_token" { default = "HUMANITEC_TOKEN" }
-variable "region" { default = "ca-central-1" }
-variable "access_key" { default = "AWS_ACCESS_KEY" }
-variable "secret_key" { default = "AWS_SECRET_KEY" }
-variable "cluster_oidc" { default = "CLUSTER_OIDC" }
+variable "humanitec_organization" {}
+variable "humanitec_token" {}
+variable "region" {}
+variable "access_key" {}
+variable "secret_key" {}
+variable "cluster_oidc" {}
 
-variable "app_id" { default = "myeksapp" }
+variable "terraform_role" {}
+
+variable "app_id" {}
 
 terraform {
   required_providers {
@@ -49,10 +51,10 @@ resource "humanitec_resource_definition" "aws_terraform_resource_ssm_parameter" 
       )
       "variables" = jsonencode(
         {
-          region          = var.region,
-          parameter_name  = "/humanitec/test-$${context.app.id}-$${context.env.id}"
-          parameter_value = "$${context.app.id}-$${context.env.id}"
-          assume_role_arn = "arn:aws:iam::ACCOUNT_ID:role/<<HUMANITEC-ROLE-NAMES-FOR-DEPLOYMENT>>"
+          region                    = var.region,
+          parameter_name            = "/humanitec/test-$${context.app.id}-$${context.env.id}"
+          parameter_value           = "$${context.app.id}-$${context.env.id}"
+          terraform_assume_role_arn = var.terraform_role
         }
       )
     }
@@ -89,9 +91,9 @@ resource "humanitec_resource_definition" "aws_terraform_resource_ssm_policy" {
       )
       "variables" = jsonencode(
         {
-          region          = var.region
-          parameter_arn   = "$${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}"
-          assume_role_arn = "arn:aws:iam::ACCOUNT_ID:role/<<HUMANITEC-ROLE-NAMES-FOR-DEPLOYMENT>>"
+          region                    = var.region
+          parameter_arn             = "$${resources.workload#aws-terrafom-eks-ssm-parameter.outputs.parameter_arn}"
+          terraform_assume_role_arn = var.terraform_role
         }
       )
     }
@@ -129,12 +131,12 @@ resource "humanitec_resource_definition" "aws_terraform_resource_role" {
       )
       "variables" = jsonencode(
         {
-          policies        = ["$${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm_arn}"]
-          cluster_oidc    = var.cluster_oidc
-          namespace       = "$${context.app.id}-$${context.env.id}"
-          service_account = "$${context.app.id}-$${context.env.id}-backend"
-          region          = var.region
-          assume_role_arn = "arn:aws:iam::ACCOUNT_ID:role/<<HUMANITEC-ROLE-NAMES-FOR-DEPLOYMENT>>"
+          policies                  = ["$${resources.workload#aws-terrafom-eks-ssm-policy.outputs.policy_ssm_arn}"]
+          cluster_oidc              = var.cluster_oidc
+          namespace                 = "$${context.app.id}-$${context.env.id}"
+          service_account           = "$${context.app.id}-$${context.env.id}-backend"
+          region                    = var.region
+          terraform_assume_role_arn = var.terraform_role
         }
       )
     }
