@@ -31,8 +31,8 @@ variable "access_key" {}
 variable "secret_key" {}
 
 variable "assume_role_arn" {}
-variable "assume_role_session_name" {}
-variable "assume_role_external_id" {}
+# variable "assume_role_session_name" {}
+# variable "assume_role_external_id" {}
 
 terraform {
   required_providers {
@@ -48,8 +48,8 @@ provider "aws" {
   secret_key = var.secret_key
   assume_role {
     role_arn     = var.assume_role_arn
-    session_name = var.assume_role_session_name
-    external_id  = var.assume_role_external_id
+#     session_name = var.assume_role_session_name
+#     external_id  = var.assume_role_external_id
   }
 }
 
