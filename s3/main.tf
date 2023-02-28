@@ -47,14 +47,23 @@ resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
       )
       "variables" = jsonencode(
         {
-          region                   = var.region,
-          bucket                   = "my-company-my-app-$${context.app.id}-$${context.env.id}",
-          assume_role_arn          = "arn:aws:iam::ACCOUNT_ID:role/<<HUMANITEC-ROLE-NAME-FOR-S3>>"
-          assume_role_session_name = "<<HUMANITEC-SAAS-ACCESS-EXAMPLE-TO-S3>>"
-          assume_role_external_id  = "<<SOME-KNOWN-EXTERNAL-ID>>"
+          region          = var.region,
+          bucket          = "my-company-my-app-$${context.app.id}-$${context.env.id}",
+          assume_role_arn = "arn:aws:iam::ACCOUNT_ID:role/<<HUMANITEC-ROLE-NAME-FOR-S3>>"
         }
       )
     }
   }
 
 }
+
+# If you are using externals IDs and Session name (recommended), the definition would look like this (depending on your Terraform Code):
+# "variables" = jsonencode(
+#   {
+#     region                   = var.region,
+#     bucket                   = "my-company-my-app-$${context.app.id}-$${context.env.id}",
+#     assume_role_arn          = "arn:aws:iam::ACCOUNT_ID:role/<<HUMANITEC-ROLE-NAME-FOR-S3>>"
+#     assume_role_session_name = "<<HUMANITEC-SAAS-ACCESS-EXAMPLE-TO-S3>>"
+#     assume_role_external_id  = "<<SOME-KNOWN-EXTERNAL-ID>>"
+#   }
+# )

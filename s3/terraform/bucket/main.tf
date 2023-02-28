@@ -47,9 +47,9 @@ provider "aws" {
   access_key = var.access_key
   secret_key = var.secret_key
   assume_role {
-    role_arn     = var.assume_role_arn
-#     session_name = var.assume_role_session_name
-#     external_id  = var.assume_role_external_id
+    role_arn = var.assume_role_arn
+    # session_name = var.assume_role_session_name
+    # external_id  = var.assume_role_external_id
   }
 }
 
