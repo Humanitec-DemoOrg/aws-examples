@@ -1,0 +1,15 @@
+---
+apiVersion: humanitec.org/v1b1
+
+resources:
+  "myalbdns":
+    scope: shared
+
+spec:
+  "ingress":
+    rules:
+      "${resources.myalbdns}":
+        http:
+          "/":
+            type: prefix
+            port: 80
