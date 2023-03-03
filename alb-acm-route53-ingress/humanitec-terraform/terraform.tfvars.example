@@ -1,0 +1,19 @@
+humanitec_organization = ""
+humanitec_token        = ""
+region                 = "ca-central-1"
+app_name               = "myalb"
+
+eks_name          = "myalbcluster"
+eks_resource_name = "myalbcluster"
+eks_proxy_url     = "http://proxy.agent:8002"
+
+# Humanitec User, allows to connect to your EKS cluster
+aws_access_key_id     = ""
+aws_secret_access_key = ""
+
+dns_resource_name = "myalbdns"
+dns_domain        = "apps.mycompany.dev"
+
+ingress_resource_name = "myalbingress"
+ingress_cert_arn      = "arn:aws:acm:ca-central-1:XXX:certificate/XXX"
+ingress_group_name    = "humanitec-public"
