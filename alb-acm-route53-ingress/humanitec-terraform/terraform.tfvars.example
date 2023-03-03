@@ -3,6 +3,7 @@ humanitec_token        = ""
 region                 = "ca-central-1"
 app_name               = "myalb"
 
+eks_enable        = 0
 eks_name          = "myalbcluster"
 eks_resource_name = "myalbcluster"
 # eks_proxy_url     = "http://proxy.agent:XXXX"
