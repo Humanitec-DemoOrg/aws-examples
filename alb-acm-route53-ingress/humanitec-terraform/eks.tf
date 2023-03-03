@@ -1,8 +1,8 @@
 variable "region" {}
 variable "eks_name" {}
 variable "eks_resource_name" {}
-variable "aws_access_key_id" {}
-variable "aws_secret_access_key" {}
+variable "aws_access_key_id" { sensensitive = true }
+variable "aws_secret_access_key" { sensensitive = true }
 variable "eks_proxy_url" { default = "" }
 
 resource "humanitec_resource_definition" "eks" {
