@@ -1,11 +1,13 @@
 variable "region" {}
 variable "eks_name" {}
 variable "eks_resource_name" {}
-variable "aws_access_key_id" { sensensitive = true }
-variable "aws_secret_access_key" { sensensitive = true }
+variable "aws_access_key_id" { sensitive = true }
+variable "aws_secret_access_key" { sensitive = true }
 variable "eks_proxy_url" { default = "" }
+variable "eks_enable" { default = 0 }
 
 resource "humanitec_resource_definition" "eks" {
+  count       = var.eks_enable
   id          = var.eks_resource_name
   name        = var.eks_resource_name
   type        = "k8s-cluster"

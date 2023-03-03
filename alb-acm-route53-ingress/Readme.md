@@ -8,7 +8,12 @@
 - Create a Shared ALB for use in multiple workloads
 
 ### Architecture
+
+ALB Architecture with Humanitec]
 ![ALB Architecture with Humanitec](images/architecture.png)
+
+DNS Architecture
+![DNS Architecture](images/architecture-dns.png)
 
 This example uses [ALB Controller `Group Names` feature](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/ingress/annotations/#group.name) to use an existing ALB to provide ingress for multiple namespaces and services, along with wildcard DNS and ACM to allow the creation of dynamic hostnames.
 
@@ -17,6 +22,7 @@ This example uses [ALB Controller `Group Names` feature](https://kubernetes-sigs
   - Configure an EKS cluster
   - Deploy ALB Controller [https://kubernetes-sigs.github.io/aws-load-balancer-controller/](https://kubernetes-sigs.github.io/aws-load-balancer-controller/) (v2.4 is tested)
     - Configure IAM Roles for Service Accounts (IRSA) 
+    - Don't forget to tag your subnets properly
 
 In your AWS account, with Terraform or similar:
   - Configure a Route 53 Hosted Zone
@@ -45,8 +51,10 @@ In Humanitec:
 - Deploy using kubectl or any other tool of your choice the following manifest [manifests/shared-alb-final.template.yaml](manifests/shared-alb-final.template.yaml)
   - This manifest will:
     - Create a blackhole service, optionally, you can create a deployment with a custom `404` or some sort of redirection.
-    - Create an ALB
+    - Create an ALB named `alb-public`.
   - You must configure
+    - Scheme: internal or public-facing
+    - Subnets, if you did not tag them or added them to the controller
     - Configure a trusted default deployment `404` or `redirect` image (or use a blackhole service).
     - ACM Certificate ARN
     - ALB Group Name: used to combine ALBs [https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/ingress/annotations/#group.name](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/ingress/annotations/#group.name) 
@@ -58,13 +66,16 @@ In Humanitec:
     - You will need proper IRSA permissions within the service account that external DNS runs on [https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/integrations/external_dns/](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/integrations/external_dns/)
 
 #### Configure a Resource Definition `EKS` in Humanitec
+Use this if you don't have an EKS already configured
 - See [humanitec-terraform/eks.tf](humanitec-terraform/eks.tf)
+
 
 #### Configure a Resource Definition `Wildcard DNS` in Humanitec
 - See [humanitec-terraform/wildcard-dns.tf](humanitec-terraform/wildcard-dns.tf)
 
 #### Configure a Resource Definition `Ingress` in Humanitec
 - See [humanitec-terraform/ingress.tf](humanitec-terraform/ingress.tf)
+Do not forget to configure your scheme, subnets if needed, and any other service, you might need to add more variables to acomplish this.
 
 #### Configure an Application in Humanitec
 - See [humanitec-terraform/app.tf](humanitec-terraform/app.tf)
