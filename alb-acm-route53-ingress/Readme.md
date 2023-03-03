@@ -13,7 +13,6 @@
 This example uses [ALB Controller `Group Names` feature](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/ingress/annotations/#group.name) to use an existing ALB to provide ingress for multiple namespaces and services, along with wildcard DNS and ACM to allow the creation of dynamic hostnames.
 
 ### Steps
-Steps:
   - Configure Humanitec Onboarding User
   - Configure an EKS cluster
   - Deploy ALB Controller [https://kubernetes-sigs.github.io/aws-load-balancer-controller/](https://kubernetes-sigs.github.io/aws-load-balancer-controller/) (v2.4 is tested)
@@ -33,7 +32,7 @@ In Humanitec:
   - Configure a Resource Definition `Ingress` in Humanitec
   - Add matching criteria for all the resources
   - Create an App, add a `shared` DNS, use the resource ID from the Wildcard DNS
-  - Add a ingress to a workload
+  - Create an app, add a shared DNS, and an ingress and routes to a workload
 
 #### Configure a Route 53 Hosted Zone
 - Using Terraform or any other tool, configure a Hosted Zone.
@@ -104,3 +103,8 @@ score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_N
 ```
 
 Verify `app-development.apps.mycompany.dev` to see your application.
+
+### TODO:
+- Terraform examples for ACM/Route53
+- External DNS integration
+- Setup a mix of private/internal, shared and private ALBs
