@@ -59,13 +59,16 @@ In Humanitec:
     - You will need proper IRSA permissions within the service account that external DNS runs on [https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/integrations/external_dns/](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/integrations/external_dns/)
 
 #### Configure a Resource Definition `EKS` in Humanitec
-- See [humanitec-terraform/eks.tf]
+- See [humanitec-terraform/eks.tf](humanitec-terraform/eks.tf)
 
 #### Configure a Resource Definition `Wildcard DNS` in Humanitec
-- See [humanitec-terraform/wildcard-dns.tf]
+- See [humanitec-terraform/wildcard-dns.tf](humanitec-terraform/wildcard-dns.tf)
 
 #### Configure a Resource Definition `Ingress` in Humanitec
-- See [humanitec-terraform/ingress.tf]
+- See [humanitec-terraform/ingress.tf](humanitec-terraform/ingress.tf)
+
+#### Configure an Application in Humanitec
+- See [humanitec-terraform/app.tf](humanitec-terraform/app.tf)
 
 Patch the driver (bug in Terraform Provider) to set no TLS. _might not be required_
 ```
@@ -87,6 +90,11 @@ terraform apply
 ```
 
 #### Deploy a Score app
+
+This application will create a workload called `backend` along the dependencies for a shared dns `myalbdns` and a ingress `myalbingress` configured earlier.
+
+See [score/score.yaml](score/score.yaml) and [score/extensions.yaml](score/extensions.yaml), and for more details [https://docs.score.dev/docs/reference/humanitec-extension/](https://docs.score.dev/docs/reference/humanitec-extension/) and [https://github.com/score-spec/score-humanitec](https://github.com/score-spec/score-humanitec).
+
 ```
 export HUMANITEC_ORG="myorg"
 export HUMANITEC_TOKEN="mytoken"
