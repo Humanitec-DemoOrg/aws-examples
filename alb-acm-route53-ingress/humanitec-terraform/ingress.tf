@@ -20,7 +20,7 @@ resource "humanitec_resource_definition" "ingress" {
       }),
       "api_version" : "v1",
       "class" : "alb",
-      #   "no_tls" : true
+      "no_tls" : true
     }
     secrets = {
     }
