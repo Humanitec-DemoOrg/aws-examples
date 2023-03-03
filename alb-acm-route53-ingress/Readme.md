@@ -69,17 +69,6 @@ In Humanitec:
 #### Configure an Application in Humanitec
 - See [humanitec-terraform/app.tf](humanitec-terraform/app.tf)
 
-Patch the driver (bug in Terraform Provider) to set no TLS. _might not be required_
-```
-export HUMANITEC_ORG="myorg"
-export HUMANITEC_TOKEN="mytoken"
-export INGRESS_NAME="myalbingress"
-curl "https://api.humanitec.io/orgs/${HUMANITEC_ORG}/resources/defs/${INGRESS_NAME}" \
-  -X 'PATCH' \
-  -H "Authorization: Bearer ${HUMANITEC_TOKEN}" \
-  -H 'Content-Type: application/json' \
-  --data-raw '{"id":"${INGRESS_NAME}","name":"${INGRESS_NAME}","type":"ingress","driver_inputs":{"values":{"no_tls":true}}}'
-```
 
 #####  Deploy to Humanitec using Terraform
 - Modify `humanitec-terraform/terraform.tfvars.example`
