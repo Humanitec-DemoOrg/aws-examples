@@ -3,7 +3,7 @@ variable "eks_name" {}
 variable "eks_resource_name" {}
 variable "aws_access_key_id" {}
 variable "aws_secret_access_key" {}
-variable "eks_proxy_url" {}
+variable "eks_proxy_url" { default = "" }
 
 resource "humanitec_resource_definition" "eks" {
   id          = var.eks_resource_name

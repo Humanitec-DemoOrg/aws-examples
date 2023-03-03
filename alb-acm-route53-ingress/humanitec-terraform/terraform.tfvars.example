@@ -5,7 +5,7 @@ app_name               = "myalb"
 
 eks_name          = "myalbcluster"
 eks_resource_name = "myalbcluster"
-eks_proxy_url     = "http://proxy.agent:8002"
+# eks_proxy_url     = "http://proxy.agent:XXXX"
 
 # Humanitec User, allows to connect to your EKS cluster
 aws_access_key_id     = ""
