@@ -9,7 +9,7 @@
 
 ### Architecture
 
-ALB Architecture with Humanitec]
+ALB Architecture with Humanitec
 ![ALB Architecture with Humanitec](images/architecture.png)
 
 DNS Architecture
