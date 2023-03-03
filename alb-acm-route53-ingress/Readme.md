@@ -74,9 +74,10 @@ In Humanitec:
 - Modify `humanitec-terraform/terraform.tfvars.example`
 ```
 cd humanitec-terraform/
-terraform init
+terraform init -upgrade
 terraform apply
 ```
+- Make sure to always use `terraform init -upgrade` as we constantly upgrade the Terraform provider.
 
 #### Deploy a Score app
 
