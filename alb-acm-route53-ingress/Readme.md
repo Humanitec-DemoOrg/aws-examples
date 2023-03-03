@@ -20,7 +20,7 @@ This example uses [ALB Controller `Group Names` feature](https://kubernetes-sigs
 ### Steps
   - Configure Humanitec Onboarding User
   - Configure an EKS cluster
-  - Deploy ALB Controller [https://kubernetes-sigs.github.io/aws-load-balancer-controller/](https://kubernetes-sigs.github.io/aws-load-balancer-controller/) (v2.4 is tested)
+  - Deploy ALB Controller [https://kubernetes-sigs.github.io/aws-load-balancer-controller/](https://kubernetes-sigs.github.io/aws-load-balancer-controller/) (v2.4 was tested)
     - Configure IAM Roles for Service Accounts (IRSA) 
     - Don't forget to tag your subnets properly
 
@@ -37,8 +37,8 @@ In Humanitec:
   - Configure a Resource Definition `Wildcard DNS` in Humanitec
   - Configure a Resource Definition `Ingress` in Humanitec
   - Add matching criteria for all the resources
-  - Create an App, add a `shared` DNS, use the resource ID from the Wildcard DNS
-  - Create an app, add a shared DNS, and an ingress and routes to a workload
+  - Create an App, add a `shared DNS`, use the resource ID from the Wildcard DNS
+  - Create a workload, add an image (ex: `httpd:latest`) add an ingress (select `shared dns`) - `Prefix: /, port 80`, configure the service ports `name: http, port: 80, container port: 80`
 
 #### Configure a Route 53 Hosted Zone
 - Using Terraform or any other tool, configure a Hosted Zone.
@@ -50,12 +50,12 @@ In Humanitec:
 #### Deploy a Shared ALB into a namespace
 - Deploy using kubectl or any other tool of your choice the following manifest [manifests/shared-alb-final.template.yaml](manifests/shared-alb-final.template.yaml)
   - This manifest will:
-    - Create a blackhole service, optionally, you can create a deployment with a custom `404` or some sort of redirection.
-    - Create an ALB named `alb-public`.
+    - Create a blackhole service, optionally, you can create a deployment with a custom `404` or some sort of redirection
+    - Create an ALB named `alb-public`
   - You must configure
     - Scheme: internal or public-facing
     - Subnets, if you did not tag them or added them to the controller
-    - Configure a trusted default deployment `404` or `redirect` image (or use a blackhole service).
+    - Configure a trusted default deployment `404` or `redirect` image (or use a blackhole service)
     - ACM Certificate ARN
     - ALB Group Name: used to combine ALBs [https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/ingress/annotations/#group.name](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/ingress/annotations/#group.name) 
 
@@ -66,9 +66,8 @@ In Humanitec:
     - You will need proper IRSA permissions within the service account that external DNS runs on [https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/integrations/external_dns/](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/integrations/external_dns/)
 
 #### Configure a Resource Definition `EKS` in Humanitec
-Use this if you don't have an EKS already configured
 - See [humanitec-terraform/eks.tf](humanitec-terraform/eks.tf)
-
+Use this if you don't have an EKS cluster already configured
 
 #### Configure a Resource Definition `Wildcard DNS` in Humanitec
 - See [humanitec-terraform/wildcard-dns.tf](humanitec-terraform/wildcard-dns.tf)
@@ -99,12 +98,12 @@ See [score/score.yaml](score/score.yaml) and [score/extensions.yaml](score/exten
 ```
 export HUMANITEC_ORG="myorg"
 export HUMANITEC_TOKEN="mytoken"
-export APP_TOKEN="myalb"
+export APP_NAME="myalbapp"
 
 score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_NAME --env development -f score/score.yaml --extensions score/extensions.yaml --deploy
 ```
 
-Verify `app-development.apps.mycompany.dev` to see your application.
+Verify `myalbapp-development.apps.mycompany.dev` to see your application.
 
 ### TODO:
 - Terraform examples for ACM/Route53
