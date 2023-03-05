@@ -1,0 +1,74 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: alb-private
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: alb
+#   namespace: alb-private
+#   labels:
+#     app: alb
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: alb
+#   template:
+#     metadata:
+#       labels:
+#         app: alb
+#     spec:
+#       containers:
+#         - name: alb
+#           image: "nginxdemos/hello:latest"
+#           ports:
+#             - containerPort: 80
+#               name: p80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alb-service
+  namespace: alb-private
+spec:
+  type: ClusterIP
+  # selector:
+  #   app: alb
+  ports:
+    - name: default-http
+      protocol: TCP
+      port: 80
+      targetPort: p80
+    - name: default-https
+      protocol: TCP
+      port: 443
+      targetPort: p80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alb-private
+  namespace: alb-private
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/certificate-arn: "REPLACE: CERTIFICATE ARN"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/group.name: "REPLACE: GROUP NAME ex: humanitec-private"
+spec:
+  rules:
+    - host: "REPLACE: parent domain ex: apps.mycompany.dev"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: alb-service
+                port:
+                  name: default-http

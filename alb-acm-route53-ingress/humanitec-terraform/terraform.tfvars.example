@@ -1,20 +1,26 @@
 humanitec_organization = ""
 humanitec_token        = ""
 region                 = "ca-central-1"
-app_name               = "myalbapp"
+app_name               = "test-alb"
 
 eks_enable        = 0
-eks_name          = "myalbcluster"
-eks_resource_name = "myalbcluster"
-# eks_proxy_url     = "http://proxy.agent:XXXX"
+eks_name          = ""
+eks_resource_name = "test-alb-cluster"
+eks_proxy_url     = "http://proxy.agent:8XXX"
 
 # Humanitec User, allows to connect to your EKS cluster
 aws_access_key_id     = ""
 aws_secret_access_key = ""
 
-dns_resource_name = "myalbdns"
-dns_domain        = "apps.mycompany.dev"
+namespace_resource_name = "test-alb-namespace"
 
-ingress_resource_name = "myalbingress"
+dns_shared_resource_name = "test-alb-shared-dns"
+dns_shared_domain        = "apps.mycompany.dev"
+
+dns_local_resource_name = "test-alb-local-dns"
+dns_local_domain        = "apps.mycompany.dev"
+
+ingress_resource_name = "test-alb-ingress"
 ingress_cert_arn      = "arn:aws:acm:ca-central-1:XXX:certificate/XXX"
 ingress_group_name    = "humanitec-public"
+
