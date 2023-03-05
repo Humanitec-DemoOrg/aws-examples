@@ -17,7 +17,8 @@ DNS Architecture
 
 This example uses [ALB Controller `Group Names` feature](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/ingress/annotations/#group.name) to use an existing ALB to provide ingress for multiple namespaces and services, along with wildcard DNS and ACM to allow the creation of dynamic hostnames.
 
-### Steps
+### High level plan
+In your AWS account
   - Configure Humanitec Onboarding User
   - Configure an EKS cluster
   - Deploy ALB Controller [https://kubernetes-sigs.github.io/aws-load-balancer-controller/](https://kubernetes-sigs.github.io/aws-load-balancer-controller/) (v2.4 was tested)
@@ -42,6 +43,7 @@ In Humanitec, for a Shared DNS/Hostname:
   - Create an App, add a `shared DNS`, use the resource ID from the Wildcard DNS
   - Create a workload, add an image (ex: `httpd:latest`) add an ingress (select `shared dns`) - `Prefix: /, port 80`, configure the service ports `name: http, port: 80, container port: 80`
 
+### Step by Step
 #### Configure a Route 53 Hosted Zone
 - Using Terraform or any other tool, configure a Hosted Zone
 
@@ -82,6 +84,7 @@ Use this if you don't have an EKS cluster already configured
 
 #### Configure a Resource Definition `Ingress` in Humanitec
 - See [humanitec-terraform/ingress.tf](humanitec-terraform/ingress.tf)
+
 Do not forget to configure your scheme, subnets if needed, and any other service, you might need to add more variables to acomplish this.
 
 #### Configure an Application in Humanitec
@@ -100,7 +103,13 @@ terraform apply
 
 This application will create a workload called `backend` and another `frontend` along the dependencies configured earlier.
 
-See [score/score-frontend.yaml](score/score-frontend.yaml), [score/extensions-frontend.yaml](score/extensions-frontend.yaml) and [score/score-backend.yaml](score/score-backend.yaml), [score/extensions-backend.yaml](score/extensions-backend.yaml), and for more details [https://docs.score.dev/docs/reference/humanitec-extension/](https://docs.score.dev/docs/reference/humanitec-extension/) and [https://github.com/score-spec/score-humanitec](https://github.com/score-spec/score-humanitec).
+See:
+- [score/frontend.yaml](score/frontend.yaml), [score/extensions-frontend.yaml](score/extensions-frontend.yaml)
+- [score/backend.yaml](score/backend.yaml), [score/extensions-backend.yaml](score/extensions-backend.yaml)
+
+For more details:
+- [https://docs.score.dev/docs/reference/humanitec-extension/](https://docs.score.dev/docs/reference/humanitec-extension/)
+- [https://github.com/score-spec/score-humanitec](https://github.com/score-spec/score-humanitec).
 
 ```
 export HUMANITEC_ORG="myorg"
@@ -111,9 +120,13 @@ score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_N
 score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_NAME --env development -f score/backend.yaml --extensions score/extensions-backend.yaml --deploy
 ```
 
-Verify:
-- `test-alb-development.apps.mycompany.dev/frontend` or `test-alb-development-frontend.apps.mycompany.dev/backend`
-- `test-alb-development.apps.mycompany.dev/backend` or `test-alb-development-backend.apps.mycompany.dev/backend`
+Frontend:
+- `test-alb-development.apps.mycompany.dev/frontend` or
+- `test-alb-development-frontend.apps.mycompany.dev/backend`
+
+Backend:
+- `test-alb-development.apps.mycompany.dev/backend` or
+- `test-alb-development-backend.apps.mycompany.dev/backend`
 
 ### TODO:
 - Terraform examples for ACM/Route53
