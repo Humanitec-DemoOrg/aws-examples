@@ -3,13 +3,13 @@
 ## How to configure a Shared ALB within Humanitec
 
 ### Objectives
-- Generate DNS names such as `${app}-${env}.apps.mycompany.dev`
-- Use a public facing ALB
+- Generate DNS names such as a shared `${app}-${env}.apps.mycompany.dev` or local `${app}-${workload}-${env}.apps.mycompany.dev`
+- Use a public or private facing ALB
 - Create a Shared ALB for use in multiple workloads
 
 ### Architecture
 
-ALB Architecture with Humanitec]
+ALB Architecture with Humanitec
 ![ALB Architecture with Humanitec](images/architecture.png)
 
 DNS Architecture
@@ -27,31 +27,33 @@ This example uses [ALB Controller `Group Names` feature](https://kubernetes-sigs
 In your AWS account, with Terraform or similar:
   - Configure a Route 53 Hosted Zone
   - Configure a wildcard ACM certificate
+
 In your EKS cluster:
   - Deploy a Shared ALB into a namespace
+
 In your AWS account, with Terraform or similar:
   - Configure a wildcard CNAME to the ALB CNAME from the prior step (or use `external-dns` directly from within the EKS Cluster)
 
-In Humanitec:
+In Humanitec, for a Shared DNS/Hostname:
   - Configure a Resource Definition `EKS` in Humanitec
-  - Configure a Resource Definition `Wildcard DNS` in Humanitec
+  - Configure a Resource Definition `Wildcard Shared DNS` in Humanitec
   - Configure a Resource Definition `Ingress` in Humanitec
   - Add matching criteria for all the resources
   - Create an App, add a `shared DNS`, use the resource ID from the Wildcard DNS
   - Create a workload, add an image (ex: `httpd:latest`) add an ingress (select `shared dns`) - `Prefix: /, port 80`, configure the service ports `name: http, port: 80, container port: 80`
 
 #### Configure a Route 53 Hosted Zone
-- Using Terraform or any other tool, configure a Hosted Zone.
+- Using Terraform or any other tool, configure a Hosted Zone
 
 ####  Configure a Wildcard ACM certificate
 - Using Terraform or any other tool, configure and request a certificate, as an example, for domain name request use `*.apps.mycompany.dev` and `apps.mycompany.dev`
 - Make sure to create the Route 53 validation records in Route 53
 
 #### Deploy a Shared ALB into a namespace
-- Deploy using kubectl or any other tool of your choice the following manifest [manifests/shared-alb-final.template.yaml](manifests/shared-alb-final.template.yaml)
+- Deploy using kubectl or any other tool of your choice the following manifest [manifests/shared-public-alb.template.yaml](manifests/shared-public-alb.template.yaml) or [manifests/shared-private-alb.template.yaml](manifests/shared-private-alb.template.yaml)
   - This manifest will:
     - Create a blackhole service, optionally, you can create a deployment with a custom `404` or some sort of redirection
-    - Create an ALB named `alb-public`
+    - Create an ALB named `alb-public` or `alb-private` on a namespace of the same nace
   - You must configure
     - Scheme: internal or public-facing
     - Subnets, if you did not tag them or added them to the controller
@@ -69,8 +71,14 @@ In Humanitec:
 - See [humanitec-terraform/eks.tf](humanitec-terraform/eks.tf)
 Use this if you don't have an EKS cluster already configured
 
-#### Configure a Resource Definition `Wildcard DNS` in Humanitec
-- See [humanitec-terraform/wildcard-dns.tf](humanitec-terraform/wildcard-dns.tf)
+#### Configure a Resource Definition `Namespace` in Humanitec
+- See [humanitec-terraform/namespace.tf](humanitec-terraform/namespace.tf)
+
+#### Configure a Resource Definition `Wildcard Shared DNS` in Humanitec
+- See [humanitec-terraform/wildcard-shared-dns.tf](humanitec-terraform/wildcard-shared-dns.tf)
+
+#### Configure a Resource Definition `Wildcard Local DNS` in Humanitec
+- See [humanitec-terraform/wildcard-local-dns.tf](humanitec-terraform/wildcard-local-dns.tf)
 
 #### Configure a Resource Definition `Ingress` in Humanitec
 - See [humanitec-terraform/ingress.tf](humanitec-terraform/ingress.tf)
@@ -78,7 +86,6 @@ Do not forget to configure your scheme, subnets if needed, and any other service
 
 #### Configure an Application in Humanitec
 - See [humanitec-terraform/app.tf](humanitec-terraform/app.tf)
-
 
 #####  Deploy to Humanitec using Terraform
 - Modify `humanitec-terraform/terraform.tfvars.example`
@@ -91,19 +98,22 @@ terraform apply
 
 #### Deploy a Score app
 
-This application will create a workload called `backend` along the dependencies for a shared dns `myalbdns` and a ingress `myalbingress` configured earlier.
+This application will create a workload called `backend` and another `frontend` along the dependencies configured earlier.
 
-See [score/score.yaml](score/score.yaml) and [score/extensions.yaml](score/extensions.yaml), and for more details [https://docs.score.dev/docs/reference/humanitec-extension/](https://docs.score.dev/docs/reference/humanitec-extension/) and [https://github.com/score-spec/score-humanitec](https://github.com/score-spec/score-humanitec).
+See [score/score-frontend.yaml](score/score-frontend.yaml), [score/extensions-frontend.yaml](score/extensions-frontend.yaml) and [score/score-backend.yaml](score/score-backend.yaml), [score/extensions-backend.yaml](score/extensions-backend.yaml), and for more details [https://docs.score.dev/docs/reference/humanitec-extension/](https://docs.score.dev/docs/reference/humanitec-extension/) and [https://github.com/score-spec/score-humanitec](https://github.com/score-spec/score-humanitec).
 
 ```
 export HUMANITEC_ORG="myorg"
 export HUMANITEC_TOKEN="mytoken"
-export APP_NAME="myalbapp"
+export APP_NAME="test-alb"
 
-score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_NAME --env development -f score/score.yaml --extensions score/extensions.yaml --deploy
+score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_NAME --env development -f score/frontend.yaml --extensions score/extensions-frontend.yaml --deploy
+score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_NAME --env development -f score/backend.yaml --extensions score/extensions-backend.yaml --deploy
 ```
 
-Verify `myalbapp-development.apps.mycompany.dev` to see your application.
+Verify:
+- `test-alb-development.apps.mycompany.dev/frontend` or `test-alb-development-frontend.apps.mycompany.dev/backend`
+- `test-alb-development.apps.mycompany.dev/backend` or `test-alb-development-backend.apps.mycompany.dev/backend`
 
 ### TODO:
 - Terraform examples for ACM/Route53

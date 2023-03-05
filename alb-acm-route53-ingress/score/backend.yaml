@@ -1,0 +1,20 @@
+---
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: backend
+
+service:
+  ports:
+    p80:
+      port: 80
+      targetPort: 80
+
+containers:
+  backend:
+    image: nginxdemos/hello:latest
+resources:
+  "test-alb-shared-dns":
+    type: dns
+  "test-alb-local-dns":
+    type: dns

@@ -1,0 +1,20 @@
+---
+apiVersion: humanitec.org/v1b1
+
+resources:
+  "test-alb-shared-dns":
+    scope: shared
+
+spec:
+  "ingress":
+    rules:
+      "${resources.test-alb-shared-dns}":
+        http:
+          "/backend":
+            type: prefix
+            port: 80
+      "${resources.test-alb-local-dns}":
+        http:
+          "/":
+            type: prefix
+            port: 80
