@@ -59,7 +59,7 @@ metadata:
     alb.ingress.kubernetes.io/certificate-arn: "REPLACE: CERTIFICATE ARN"
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
     alb.ingress.kubernetes.io/ssl-redirect: "443"
-    alb.ingress.kubernetes.io/group.name: "REPLACE: GROUP NAME ex: humanitec-private"
+    alb.ingress.kubernetes.io/group.name: "REPLACE: GROUP NAME ex: humanitec-public"
 spec:
   rules:
     - host: "REPLACE: parent domain ex: apps.mycompany.dev"
