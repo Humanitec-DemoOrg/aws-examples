@@ -13,11 +13,11 @@ resource "humanitec_resource_definition" "dns_local" {
       templates = jsonencode({
         init      = <<EOL
 D: ".${var.dns_local_domain}"
-S: {{ trimSuffix ".externals.${var.dns_local_resource_name}" "$${context.res.id}" }}
+W: {{ index (regexSplit "\\." "$${context.res.id}" -1) 1 }}
 EOL
         manifests = ""
         outputs   = <<EOL
-host: $${context.app.id}-{{ trimPrefix "modules." .init.S }}-$${context.env.id}{{.init.D}}
+host: $${context.app.id}-{{.init.W}}-$${context.env.id}{{.init.D}}
 EOL
         cookie    = ""
       })
