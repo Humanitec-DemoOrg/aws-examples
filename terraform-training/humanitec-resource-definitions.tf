@@ -33,7 +33,7 @@ resource "humanitec_resource_definition" "s3" {
     values = {
       "source" = jsonencode(
         {
-          path = "humanitec-aws-examples/terraform-training/s3/"
+          path = "terraform-training/s3/"
           rev  = "refs/heads/main"
           url  = "https://github.com/nickhumanitec/humanitec-aws-examples.git"
         }
@@ -68,7 +68,7 @@ resource "humanitec_resource_definition" "postgres" {
     values = {
       "source" = jsonencode(
         {
-          path = "humanitec-aws-examples/terraform-training/postgres/"
+          path = "terraform-training/postgres/"
           rev  = "refs/heads/main"
           url  = "https://github.com/nickhumanitec/humanitec-aws-examples.git"
         }

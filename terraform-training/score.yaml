@@ -1,0 +1,20 @@
+---
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: backend
+
+containers:
+  backend:
+    image: ubuntu:latest
+    command: ["/bin/bash"]
+    args: ["-c", "while true; do printenv; sleep 120; done"]
+    variables:
+      ZZZ_BUCKET: ${externals.myterraformapp-s3-resource.bucket}
+      ZZZ_DB_NAME: ${externals.myterraformapp-postgres-resource.name}
+
+resources:
+  "myterraformapp-postgres-resource":
+    type: postgres
+  "myterraformapp-s3-resource":
+    type: s3
