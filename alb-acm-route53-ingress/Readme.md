@@ -7,7 +7,7 @@
   - Shared across all workloads `${app}-${env}.apps.mycompany.dev` or
   - Local, specific to a workload `${app}-${workload}-${env}.apps.mycompany.dev`
 - Use a public or private facing ALB
-- Create a Shared ALB for use in multiple workloads
+- Create a Shared ALB for use in multiple workloads and kubernetes services
 
 ### Architecture
 
