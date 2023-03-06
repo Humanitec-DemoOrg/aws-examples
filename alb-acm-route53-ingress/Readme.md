@@ -124,11 +124,11 @@ score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_N
 
 Frontend:
 - `test-alb-development.apps.mycompany.dev/frontend` or
-- `test-alb-development-frontend.apps.mycompany.dev/backend`
+- `test-alb-development-frontend.apps.mycompany.dev/`
 
 Backend:
 - `test-alb-development.apps.mycompany.dev/backend` or
-- `test-alb-development-backend.apps.mycompany.dev/backend`
+- `test-alb-development-backend.apps.mycompany.dev/`
 
 ### TODO:
 - Terraform examples for ACM/Route53
