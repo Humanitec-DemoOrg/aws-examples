@@ -29,6 +29,9 @@ resource "humanitec_resource_definition" "s3" {
 
   driver_inputs = {
     secrets = {
+      variables = jsonencode({
+
+      })
     },
     values = {
       "source" = jsonencode(
@@ -64,6 +67,9 @@ resource "humanitec_resource_definition" "postgres" {
 
   driver_inputs = {
     secrets = {
+      variables = jsonencode({
+
+      })
     },
     values = {
       "source" = jsonencode(
