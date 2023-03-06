@@ -1,9 +1,10 @@
-variable "humanitec_organization" { default = "HUMANITEC_ORGANIZATION" }
-variable "humanitec_token" { default = "HUMANITEC_TOKEN" }
-variable "region" { default = "ca-central-1" }
-variable "access_key" { default = "AKIAIOSFODNN7EXAMPLE" }
-variable "secret_key" { default = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" }
-
+variable "humanitec_organization" {}
+variable "humanitec_token" {}
+variable "region" {}
+variable "access_key" {}
+variable "secret_key" {}
+variable "assume_role_arn" {}
+variable "app_name" {}
 
 terraform {
   required_providers {
@@ -18,15 +19,20 @@ provider "humanitec" {
   token  = var.humanitec_token
 }
 
+resource "humanitec_application" "app" {
+  id   = var.app_name
+  name = var.app_name
+}
+
 resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
   driver_type = "${var.humanitec_organization}/terraform"
-  id          = "aws-terrafom-s3-bucket"
-  name        = "aws-terrafom-s3-bucket"
+  id          = "${var.app_name}-aws-terrafom-s3-bucket"
+  name        = "${var.app_name}-aws-terrafom-s3-bucket"
   type        = "s3"
 
   criteria = [
     {
-      res_id = null
+      app_id = humanitec_application.app.id
     }
   ]
 
@@ -49,7 +55,7 @@ resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
         {
           region          = var.region,
           bucket          = "my-company-my-app-$${context.app.id}-$${context.env.id}",
-          assume_role_arn = "arn:aws:iam::ACCOUNT_ID:role/<<HUMANITEC-ROLE-NAME-FOR-S3>>"
+          assume_role_arn = var.assume_role_arn
         }
       )
     }
