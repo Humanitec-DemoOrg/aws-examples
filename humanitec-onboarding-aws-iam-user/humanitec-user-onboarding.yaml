@@ -1,0 +1,82 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Humanitec SaaS access - v0.0.5
+Parameters:
+  UserName:
+    Type: String
+    Description: IAM User Name
+    Default: humanitec
+  PolicyName:
+    Type: String
+    Description: Policy Name
+    Default: HumanitecSaaS
+Resources:
+  HumanitecSaaSUser:
+    Type: AWS::IAM::User
+    Properties:
+        UserName: !Ref UserName
+        ManagedPolicyArns:
+            - !Ref HumanitecSaaSPolicy
+        PermissionsBoundary: !Ref HumanitecSaaSPolicy
+  HumanitecSaaSPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: "Humanitec SaaS access to EKS and assume roles to this AWS account"
+      ManagedPolicyName: !Ref PolicyName
+      PolicyDocument: !Sub |
+        {
+        "Version" : "2012-10-17",
+        "Statement" : [
+            {
+            "Sid" : "EKSAccess",
+            "Effect" : "Allow",
+            "Action" : [
+                "eks:DescribeNodegroup",
+                "eks:ListNodegroups",
+                "eks:AccessKubernetesApi",
+                "eks:DescribeCluster",
+                "eks:ListClusters"
+            ],
+            "Resource" : "*",
+            "Condition" : {
+                "StringLike" : {
+                "aws:ResourceTag/Humanitec" : "true"
+                }
+            }
+            },
+            {
+            "Sid" : "AssumeRole",
+            "Effect" : "Allow",
+            "Action" : "sts:AssumeRole",
+            "Resource" : "arn:aws:iam::*:role/humanitec*"
+            },
+            {
+            "Sid" : "HumanitecSaaSAccessOnly",
+            "Effect" : "Deny",
+            "Action" : "*",
+            "Resource" : "*",
+            "Condition" : {
+                "NotIpAddress" : {
+                "aws:SourceIp" : [
+                    "34.159.97.57/32",
+                    "35.198.74.96/32",
+                    "34.141.77.162/32",
+                    "34.89.188.214/32",
+                    "34.159.140.35/32",
+                    "34.89.165.141/32"
+                ]
+                },
+                "Bool" : {
+                "aws:ViaAWSService" : "false"
+                }
+            }
+            }
+        ]
+        }
+Outputs:
+  HumanitecSaaSUser:
+    Description: IAM User
+    Value: !Ref HumanitecSaaSUser
+  HumanitecSaaSPolicy:
+    Description: IAM Policy and Boundary
+    Value: !Ref HumanitecSaaSPolicy
