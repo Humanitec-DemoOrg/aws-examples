@@ -1,0 +1,8 @@
+humanitec_organization = ""
+humanitec_token        = ""
+region                 = "ca-central-1"
+app_name               = "test-s3-tf"
+
+access_key      = "AKIAIOSFODNN7EXAMPLE"
+secret_key      = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+assume_role_arn = "arn:aws:iam::XXX:role/humanitec-terraform-s3-admin"
