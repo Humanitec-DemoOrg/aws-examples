@@ -1,0 +1,5 @@
+humanitec_organization = ""
+humanitec_token        = ""
+
+app_name = "myterraformapp"
+workload = "backend"
