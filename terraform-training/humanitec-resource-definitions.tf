@@ -95,3 +95,40 @@ resource "humanitec_resource_definition" "postgres" {
   ]
 
 }
+
+resource "humanitec_resource_definition" "mariadb" {
+  driver_type = "${var.humanitec_organization}/terraform"
+  id          = "${var.app_name}-mariadb"
+  name        = "${var.app_name}-mariadb"
+  type        = "mariadb"
+
+  driver_inputs = {
+    secrets = {
+      variables = jsonencode({
+
+      })
+    },
+    values = {
+      "source" = jsonencode(
+        {
+          path = "terraform-training/mariadb/"
+          rev  = "refs/heads/main"
+          url  = "https://github.com/nickhumanitec/humanitec-aws-examples.git"
+        }
+      )
+      "variables" = jsonencode(
+        {
+          name = "mymariadb"
+        }
+      )
+    }
+  }
+
+  criteria = [
+    {
+      res_id = "modules.${var.workload}.externals.${var.app_name}-mariadb-resource"
+      app_id = humanitec_application.app.id
+    }
+  ]
+
+}
