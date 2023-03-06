@@ -1,0 +1,3 @@
+source_account = ""
+external_id    = ""
+role_name      = "humanitec-terraform-s3-admin"
