@@ -10,11 +10,14 @@ containers:
     command: ["/bin/bash"]
     args: ["-c", "while true; do printenv; sleep 120; done"]
     variables:
-      ZZZ_BUCKET: ${externals.myterraformapp-s3-resource.bucket}
-      ZZZ_DB_NAME: ${externals.myterraformapp-postgres-resource.name}
+      ZZZ_BUCKET_NAME: ${externals.myterraformapp-s3-resource.bucket}
+      ZZZ_PGDB_NAME: ${externals.myterraformapp-postgres-resource.name}
+      ZZZ_MARIABD_NAME: ${externals.myterraformapp-mariadb-resource.name}
 
 resources:
   "myterraformapp-postgres-resource":
     type: postgres
   "myterraformapp-s3-resource":
     type: s3
+  "myterraformapp-mariadb-resource":
+    type: mariadb
