@@ -77,7 +77,7 @@ provider "aws" {
   }
 }
 ```
-- Configure a Humanitec Resource Definition with the AWS IAM information, [see a complete example](https://github.com/nickhumanitec/humanitec-aws-examples/blob/main/s3/main.tf).
+- Configure a Humanitec Resource Definition with the AWS IAM information, [see a complete example](../s3/main.tf).
 
 ```
 resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
