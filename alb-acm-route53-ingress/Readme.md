@@ -3,7 +3,9 @@
 ## How to configure a Shared ALB within Humanitec
 
 ### Objectives
-- Generate DNS names such as a shared `${app}-${env}.apps.mycompany.dev` or local `${app}-${workload}-${env}.apps.mycompany.dev`
+- Generate hostnames such as:
+  - Shared across all workloads `${app}-${env}.apps.mycompany.dev` or
+  - Local, specific to a workload `${app}-${workload}-${env}.apps.mycompany.dev`
 - Use a public or private facing ALB
 - Create a Shared ALB for use in multiple workloads
 
