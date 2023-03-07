@@ -4,9 +4,9 @@
 The following example shows how to configure a custom Terraform S3 State. We recommend a different role for state management than for resource management.
 
 ### Steps
-- Configure an IAM user as described in [https://github.com/nickhumanitec/humanitec-onboarding-aws-iam-user](https://github.com/nickhumanitec/humanitec-onboarding-aws-iam-user)
+- Configure an IAM user as described in [../humanitec-onboarding-aws-iam-user](../humanitec-onboarding-aws-iam-user)
 - Terraform Role:
-    - Configure a role for Terraform to assume as described in [https://github.com/nickhumanitec/humanitec-onboarding-aws-iam-user](https://github.com/nickhumanitec/humanitec-onboarding-aws-iam-user)
+    - Configure a role for Terraform to assume as described in [../humanitec-onboarding-aws-iam-user](../humanitec-onboarding-aws-iam-user)
 - Terraform State: Create a S3 bucket, DynamoDB table, policy and role as described in [terraform/main.tf](terraform/main.tf)
     - The role is a cross-account like role that trusts the same account, and can be assumed if an user has a policy to assume roles with prefix `humanitec`.
     - Identity the S3, DynamoDB table and Role ARN

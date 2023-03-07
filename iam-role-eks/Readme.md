@@ -60,7 +60,7 @@ You can provide keys from an AWS User with permissions to only assume a role (an
 Please note that for some resources that have longer creation/update times (such as RDS), the use of chained roles means these have an expiration of at most 1 hour, the Terraform runner might crash in such cases.
 
 ### Terraform IAM Roles and AWS Temporary Credentials
-Documentation is available [here](https://github.com/nickhumanitec/humanitec-onboarding-aws-iam-user) on how to setup cross account roles.
+Documentation is available [here](../humanitec-onboarding-aws-iam-user) on how to setup cross account roles.
 
 ## Example Humanitec Architecture
 Our examples use the  Humanitec Terraform Provider, documentation can be found [here](https://registry.terraform.io/providers/humanitec/humanitec/latest/docs). Within `main.tf` you will find context variables at the beginning.
