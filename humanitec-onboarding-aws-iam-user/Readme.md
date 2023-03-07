@@ -61,7 +61,7 @@ kubectl describe -n kube-system configmap/aws-auth
 
 ![Humanitec Terraform Roles](images/humanitec-terraform-roles.png)
 
-- Our examples use the  Humanitec Terraform Provider,  documentation can be found [here](https://registry.terraform.io/providers/humanitec/humanitec/latest/docs)
+- Our examples use the  Humanitec Terraform Provider,  documentation can be found [here](https://registry.terraform.io/providers/humanitec/humanitec/latest/docs).
 - **Create IAM AWS** Roles with AWS IAM policies as needed, see [../s3/terraform/example-s3-admin-role/main.tf](../s3/terraform/example-s3-admin-role/main.tf) for a complete example.
     - Make sure your AWS IAM role name starts with the prefix `humanitec`, for example `humanitec-s3-admin-role`.
 - Configure your Terraform to support AWS IAM roles, [see a complete example](../s3/terraform/bucket/main.tf).
@@ -121,6 +121,42 @@ resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
 
 }
 ```
+
+### Git Credentials
+The example above goes to public Github, to configure a private git repository, you could adjust credentials like the example below:
+
+```
+  driver_inputs = {
+    secrets = {
+      variables = jsonencode({
+        access_key = var.access_key
+        secret_key = var.secret_key
+
+      })
+      source = jsonencode({
+        ssh_key  = var.ssh_key # SSH Private Key (for connections over SSH). (Optional)
+        password = var.password # Password or Personal Account Token. (Optional)
+      })
+
+    },
+    values = {
+      "source" = jsonencode(
+        {
+          path     = "iam-role-eks/terraform/parameter/"
+          rev      = "refs/heads/main"
+          url      = "https://github.com/MYPRIVATEORG/my-app-resources.git"
+          username = var.username # User Name to authenticate. Default is `git`. 
+        }
+      )
+      "variables" = jsonencode(
+        {
+          region                    = var.region
+          terraform_assume_role_arn = var.terraform_role
+        }
+      )
+    }
+  }
+  ```
 
 ### Humanitec native S3 and SQS driver
 - The AWS IAM User policies in this repository do not allow the use of Humanitec native resource types such as AWS S3 and AWS SQS, they must be deployed with a custom Terraform driver. See a complete example [here](../s3).
