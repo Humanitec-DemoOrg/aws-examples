@@ -122,5 +122,41 @@ resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
 }
 ```
 
+### Git Credentials
+The example above goes to public Github, to configure a private git repository, you could adjust credentials like the example below:
+
+```
+  driver_inputs = {
+    secrets = {
+      variables = jsonencode({
+        access_key = var.access_key
+        secret_key = var.secret_key
+
+      })
+      source = jsonencode({
+        ssh_key  = var.ssh_key # SSH Private Key (for connections over SSH). (Optional)
+        password = var.password # Password or Personal Account Token. (Optional)
+      })
+
+    },
+    values = {
+      "source" = jsonencode(
+        {
+          path     = "iam-role-eks/terraform/parameter/"
+          rev      = "refs/heads/main"
+          url      = "https://github.com/MYPRIVATEORG/my-app-resources.git"
+          username = var.username # User Name to authenticate. Default is `git`. 
+        }
+      )
+      "variables" = jsonencode(
+        {
+          region                    = var.region
+          terraform_assume_role_arn = var.terraform_role
+        }
+      )
+    }
+  }
+  ```
+
 ### Humanitec native S3 and SQS driver
 - The AWS IAM User policies in this repository do not allow the use of Humanitec native resource types such as AWS S3 and AWS SQS, they must be deployed with a custom Terraform driver. See a complete example [here](../s3).
