@@ -1,30 +1,7 @@
-variable "humanitec_organization" {}
-variable "humanitec_token" {}
-variable "app_name" {}
-variable "workload" {}
-
-terraform {
-  required_providers {
-    humanitec = {
-      source = "humanitec/humanitec"
-    }
-  }
-}
-
-provider "humanitec" {
-  org_id = var.humanitec_organization
-  token  = var.humanitec_token
-}
-
-resource "humanitec_application" "app" {
-  id   = var.app_name
-  name = var.app_name
-}
-
-resource "humanitec_resource_definition" "s3" {
+resource "humanitec_resource_definition" "s3_stg" {
   driver_type = "${var.humanitec_organization}/terraform"
-  id          = "${var.app_name}-s3"
-  name        = "${var.app_name}-s3"
+  id          = "${var.app_name}-s3-stg"
+  name        = "${var.app_name}-s3-stg"
   type        = "s3"
 
   driver_inputs = {
@@ -52,17 +29,17 @@ resource "humanitec_resource_definition" "s3" {
 
   criteria = [
     {
-      res_id = "modules.${var.workload}.externals.${var.app_name}-s3-resource"
       app_id = humanitec_application.app.id
+      env_id = var.stg_env
     }
   ]
 
 }
 
-resource "humanitec_resource_definition" "postgres" {
+resource "humanitec_resource_definition" "postgres_stg" {
   driver_type = "${var.humanitec_organization}/terraform"
-  id          = "${var.app_name}-postgres"
-  name        = "${var.app_name}-postgres"
+  id          = "${var.app_name}-postgres-stg"
+  name        = "${var.app_name}-postgres-stg"
   type        = "postgres"
 
   driver_inputs = {
@@ -82,6 +59,7 @@ resource "humanitec_resource_definition" "postgres" {
       "variables" = jsonencode(
         {
           name = "mydb"
+          size = "xl"
         }
       )
     }
@@ -89,17 +67,17 @@ resource "humanitec_resource_definition" "postgres" {
 
   criteria = [
     {
-      res_id = "modules.${var.workload}.externals.${var.app_name}-postgres-resource"
       app_id = humanitec_application.app.id
+      env_id = var.stg_env
     }
   ]
 
 }
 
-resource "humanitec_resource_definition" "mariadb" {
+resource "humanitec_resource_definition" "mariadb_stg" {
   driver_type = "${var.humanitec_organization}/terraform"
-  id          = "${var.app_name}-mariadb"
-  name        = "${var.app_name}-mariadb"
+  id          = "${var.app_name}-mariadb-stg"
+  name        = "${var.app_name}-mariadb-stg"
   type        = "mariadb"
 
   driver_inputs = {
@@ -119,6 +97,7 @@ resource "humanitec_resource_definition" "mariadb" {
       "variables" = jsonencode(
         {
           name = "mymariadb"
+          size = "xl"
         }
       )
     }
@@ -126,8 +105,8 @@ resource "humanitec_resource_definition" "mariadb" {
 
   criteria = [
     {
-      res_id = "modules.${var.workload}.externals.${var.app_name}-mariadb-resource"
       app_id = humanitec_application.app.id
+      env_id = var.stg_env
     }
   ]
 
