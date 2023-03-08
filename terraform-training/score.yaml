@@ -8,16 +8,16 @@ containers:
   backend:
     image: ubuntu:latest
     command: ["/bin/bash"]
-    args: ["-c", "while true; do printenv; sleep 120; done"]
+    args: ["-c", "while true; do printenv && echo \"***\"; sleep 120; done"]
     variables:
-      ZZZ_BUCKET_NAME: ${externals.myterraformapp-s3-resource.bucket}
-      ZZZ_PGDB_NAME: ${externals.myterraformapp-postgres-resource.name}
-      ZZZ_MARIABD_NAME: ${externals.myterraformapp-mariadb-resource.name}
+      ZZZ_BUCKET_NAME: ${externals.mys3.bucket}
+      ZZZ_PGDB_NAME: ${externals.mypostgres.name}
+      ZZZ_MARIABD_NAME: ${externals.mymariadb.name}
 
 resources:
-  "myterraformapp-postgres-resource":
+  "mypostgres":
     type: postgres
-  "myterraformapp-s3-resource":
+  "mys3":
     type: s3
-  "myterraformapp-mariadb-resource":
+  "mymariadb":
     type: mariadb
