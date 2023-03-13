@@ -9,3 +9,4 @@ In this repository you will find a collection of examples on how to integrate yo
 - How to configure your own Terraform Backend, and use it from within Humanitec [terraform-backend](terraform-backend)
 - Example of Humanitec-Terraform Compatible Resource definitions for training [terraform-training](terraform-training)
 - GitHub end-to-end Dev to Prod pipeline example [https://github.com/nickhumanitec/humanitec-pipeline-example](https://github.com/nickhumanitec/humanitec-pipeline-example)
+- Firewall Access: How Humanitec can access your infrastructure, how your infrastructure can communicate with Humanitec [humanitec-firewall-access](humanitec-firewall-access)
