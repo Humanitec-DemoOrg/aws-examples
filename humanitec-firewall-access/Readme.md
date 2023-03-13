@@ -3,7 +3,7 @@
 ## Humanitec IPs
 Humanitec might need to access your infrastructure from the following IP addresess: [https://docs.humanitec.com/getting-started/technical-requirements#allow-humanitec-source-ips](https://docs.humanitec.com/getting-started/technical-requirements#allow-humanitec-source-ips)
 
-Humanitec communicates mostly over HTTPS/443/TCP, in some cases it might communicate over SSH/22 (for instance, when accessing your GitHub or GitLab on prem over SSH to clone a repository)
+Humanitec communicates mostly over HTTPS/443/TCP, in some cases it might communicate over SSH/22/TCP (for instance, when accessing your GitHub or GitLab on prem over SSH to clone a repository)
 
 ## Humanitec on prem
 Outbound access:
