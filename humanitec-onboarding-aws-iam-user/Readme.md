@@ -62,10 +62,10 @@ kubectl describe -n kube-system configmap/aws-auth
 ![Humanitec Terraform Roles](images/humanitec-terraform-roles.png)
 
 - Our examples use the  Humanitec Terraform Provider,  documentation can be found [here](https://registry.terraform.io/providers/humanitec/humanitec/latest/docs).
-- **Create IAM AWS** Roles with AWS IAM policies as needed, see [../s3/terraform/example-s3-admin-role/main.tf](../s3/terraform/example-s3-admin-role/main.tf) for a complete example.
+- **Create IAM AWS Roles with AWS IAM policies as needed**, see [../s3/terraform/example-s3-admin-role/main.tf](../s3/terraform/example-s3-admin-role/main.tf) for a complete example.
     - Make sure your AWS IAM role name starts with the prefix `humanitec`, for example `humanitec-s3-admin-role`.
 - Configure your Terraform to support AWS IAM roles, [see a complete example](../s3/terraform/bucket/main.tf).
-- *Humanitec does not provide examples on how to configure your AWS IAM Policies, please contact your CIO/DevSecOps team or your nearest AWS Professional or AWS Partner for assistance*
+- **_Humanitec does not provide examples on how to configure your AWS IAM Policies, please contact your CIO/DevSecOps team or your nearest AWS Professional or AWS Partner for assistance_**
 ```
 provider "aws" {
   region     = var.region
