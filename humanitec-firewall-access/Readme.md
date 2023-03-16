@@ -16,3 +16,21 @@ Humanitec can be configured within your cluster using an agent, it communicates 
 ```
 ssh-keygen -t ed25519 -f key_file_name -C "company-environment-teamp"
 ```
+### To verify your connectivity
+```
+kubectl run humanitec-agent --rm -i --tty -n humanitec-agent --image ubuntu -- bash
+apt-get update && apt-get install ssh netcat iputils-ping
+```
+Run the following commands and verify the expected output
+```
+root@my-shell:/# ssh agent@agent.humanitec.io
+...
+agent@agent.humanitec.io: Permission denied (publickey).
+
+root@my-shell:/# nc agent.humanitec.io 22
+SSH-2.0-OpenSSH_9.1
+^C
+root@my-shell:/# ping agent.humanitec.io -c 4
+....
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+```
