@@ -19,6 +19,9 @@ ssh-keygen -t ed25519 -f key_file_name -C "company-environment-teamp"
 ### To verify your connectivity
 ```
 kubectl run humanitec-agent --rm -i --tty -n humanitec-agent --image ubuntu -- bash
+```
+Install the following packages:
+```
 apt-get update && apt-get install ssh netcat iputils-ping
 ```
 Run the following commands and verify the expected output
