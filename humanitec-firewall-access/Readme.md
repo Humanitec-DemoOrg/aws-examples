@@ -11,10 +11,10 @@ Outbound access:
   - logs.humanitec.io HTTPS 443 TCP
 
 ## Humanitec agent for private-only AWS EKS clusters
-Humanitec can be configured within your cluster using an agent, it communicates with our platform over SSH/22/TCP, to configure please provide a public key per cluster, and Humanitec will provide a Kubernetes manifest and instructions how to configure your cluster.
+Humanitec can be configured within your cluster using an agent, it communicates with our platform over SSH/22/TCP, to configure please provide a public key per cluster, and Humanitec will provide a Kubernetes manifest and instructions how to configure your cluster. Do not set a passphrase.
 
 ```
-ssh-keygen -t ed25519 -f key_file_name -C "company-environment-team"
+ssh-keygen -t ed25519 -f key_file_name -C "company-environment-team" -N ""
 ```
 
 ### Encoding your private key
