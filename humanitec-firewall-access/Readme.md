@@ -14,8 +14,15 @@ Outbound access:
 Humanitec can be configured within your cluster using an agent, it communicates with our platform over SSH/22/TCP, to configure please provide a public key per cluster, and Humanitec will provide a Kubernetes manifest and instructions how to configure your cluster.
 
 ```
-ssh-keygen -t ed25519 -f key_file_name -C "company-environment-teamp"
+ssh-keygen -t ed25519 -f key_file_name -C "company-environment-team"
 ```
+
+### Encoding your private key
+Make sure you don't lose the file ending, and it is encoded in one line.
+```
+cat key_file_name | base64 -w 0 > private-encoded.txt
+```
+
 ### To verify your connectivity
 ```
 kubectl run humanitec-agent --rm -i --tty -n humanitec-agent --image ubuntu -- bash
@@ -24,7 +31,7 @@ Install the following packages:
 ```
 apt-get update && apt-get install ssh netcat iputils-ping
 ```
-Run the following commands and verify the expected output
+Run the following commands and verify the expected output, if you get timeout or no output, chances are there's a networking issue
 ```
 root@my-shell:/# ssh agent@agent.humanitec.io
 ...
