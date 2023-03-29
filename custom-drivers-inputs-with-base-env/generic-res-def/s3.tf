@@ -1,7 +1,7 @@
 resource "humanitec_resource_definition" "s3" {
   driver_type = "${var.humanitec_organization}/terraform"
-  id          = "${var.app_id}-generic-s3"
-  name        = "${var.app_id}-generic-s3"
+  id          = "generic-res-s3"
+  name        = "generic-res-s3"
   type        = "s3"
 
   driver_inputs = {
@@ -20,8 +20,9 @@ resource "humanitec_resource_definition" "s3" {
       )
       "variables" = jsonencode(
         {
-          aws_role = "$${resources.base-env.outputs.aws_role}"
-          bucket   = "$${resources.base-env.outputs.bucket_prefix}-$${context.app.id}-$${context.env.id}"
+          aws_role       = "$${resources.base-env.outputs.aws_role}"
+          aws_account_id = "$${resources.base-env.outputs.aws_account_id}"
+          bucket         = "$${resources.base-env.outputs.bucket_prefix}-$${context.app.id}-$${context.env.id}"
         }
       )
     }

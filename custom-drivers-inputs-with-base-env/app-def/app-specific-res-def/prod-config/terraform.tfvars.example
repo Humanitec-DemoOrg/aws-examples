@@ -1,9 +1,10 @@
 aws_account_id = 123456789013
 aws_role       = "arn:aws:iam::123456789013:role/example-role"
 
-db_username      = "userprod"
-db_instance_size = "large"
-bucket_prefix    = "my-prod-prefix"
+db_username         = "userprod"
+db_instance_size    = "large"
+bucket_prefix       = "my-prod-prefix"
+db_username_mariadb = "mariadbprod"
 
 environment = "production"
 app_id      = "custom-app"

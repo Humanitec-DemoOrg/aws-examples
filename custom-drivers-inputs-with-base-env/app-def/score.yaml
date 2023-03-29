@@ -10,11 +10,14 @@ containers:
     command: ["/bin/bash"]
     args: ["-c", 'while true; do printenv && echo "***"; sleep 120; done']
     variables:
-      ___BUCKET: ${externals.mybucket.bucket}
-      ___DB: ${externals.mydb.username}
+      ___BUCKET: ${externals.mys3bucket.bucket}
+      ___POSTGRES: ${externals.mypostgresdb.username}
+      ___MARIA: ${externals.mymariadb.username}
 
 resources:
-  "mydb":
+  "mypostgresdb":
     type: postgres
-  "mybucket":
+  "mys3bucket":
     type: s3
+  "mymariadb":
+    type: mariadb
