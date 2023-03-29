@@ -31,8 +31,8 @@ Requeriments:
 │   │   └── provider.tf
 │   ├── app.tf
 │   ├── provider.tf
-│   ├── score.yaml                          // Score Application
-│   ├── terraform.tfstate                   // State for the app
+│   ├── score.yaml                          //Score Application
+│   ├── terraform.tfstate                   //State for the app
 │   └── terraform.tfvars.example
 └── generic-res-def                         //Generic S3 and RDS resources. Criteria for these can be `*`, in this example they are specific for an app.
     ├── provider.tf
