@@ -16,6 +16,9 @@ variable "db_instance_size" {
 variable "db_username_mariadb" {
   default = ""
 }
+variable "db_password_mariadb" {
+  default = ""
+}
 
 variable "environment" {}
 variable "app_id" {}
@@ -36,7 +39,6 @@ resource "humanitec_resource_definition" "base-env" {
 
   driver_inputs = {
     values = {
-
       templates = jsonencode({
         init      = ""
         manifests = ""
@@ -52,6 +54,11 @@ EOL
       })
     }
     secrets = {
+      templates = jsonencode({
+        outputs = <<EOL
+db_password_mariadb: "${var.db_password_mariadb}"
+EOL
+      })
     }
   }
 }

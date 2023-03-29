@@ -12,7 +12,7 @@ containers:
     variables:
       ___BUCKET: ${externals.mys3bucket.bucket}
       ___POSTGRES: ${externals.mypostgresdb.username}
-      ___MARIA: ${externals.mymariadb.username}
+      ___MARIA: ${externals.mymariadb.username}@${externals.mymariadb.password}
 
 resources:
   "mypostgresdb":
