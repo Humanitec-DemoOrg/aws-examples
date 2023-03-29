@@ -31,24 +31,6 @@ resource "humanitec_resource_definition" "base-env" {
     }
   ]
 
-  # driver_inputs = {
-  #   values = {
-  #     templates = jsonencode({
-  #       outputs = {
-  #         templates = jsonencode(
-  #           {
-  #             aws_account_id   = "${var.aws_account_id}"
-  #             db_username      = "${var.db_username}"
-  #             db_instance_size = "${var.db_instance_size}"
-  #             aws_role         = "${var.aws_role}"
-  #             bucket_prefix    = "${var.bucket_prefix}"
-  #           }
-  #         )
-  #       }
-  #     })
-  #   }
-  # }
-
   driver_inputs = {
     values = {
 
