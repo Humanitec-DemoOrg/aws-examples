@@ -12,6 +12,7 @@ A Humanitec Resource Definition is a logical construct that contains information
 ![Base env configuration](images/base-env.png) 
 
 **You are responsible for the Terraform State, either Terraform Cloud, S3, or similar location.**
+
 **Secrets are in `terraform.tfvars.example` as an example. You are required to provide them using secure means within your pipeline.**
 
 Requeriments:
