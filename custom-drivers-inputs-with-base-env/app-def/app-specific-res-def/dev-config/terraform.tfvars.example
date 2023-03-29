@@ -1,0 +1,12 @@
+aws_account_id = 123456789012
+aws_role       = "arn:aws:iam::123456789012:role/example-role"
+
+db_username      = "userdev"
+db_instance_size = "small"
+bucket_prefix    = "my-dev-prefix"
+
+environment = "development"
+app_id      = "custom-app"
+
+humanitec_organization = ""
+humanitec_token        = ""
