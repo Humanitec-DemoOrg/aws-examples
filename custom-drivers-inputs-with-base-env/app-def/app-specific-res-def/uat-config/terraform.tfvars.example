@@ -1,0 +1,13 @@
+aws_account_id = 123456789014
+aws_role       = "arn:aws:iam::123456789014:role/example-role"
+
+db_username         = "useruat"
+db_instance_size    = "large"
+bucket_prefix       = "my-uat-prefix"
+db_username_mariadb = "mariadbuat"
+
+environment = "uat"
+app_id      = "custom-app"
+
+humanitec_organization = ""
+humanitec_token        = ""

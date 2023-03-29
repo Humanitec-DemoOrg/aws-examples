@@ -13,6 +13,9 @@ variable "bucket_prefix" {
 variable "db_instance_size" {
   default = ""
 }
+variable "db_username_mariadb" {
+  default = ""
+}
 
 variable "environment" {}
 variable "app_id" {}
@@ -43,6 +46,7 @@ db_username:       "${var.db_username}"
 db_instance_size:  "${var.db_instance_size}"
 aws_role:          "${var.aws_role}"
 bucket_prefix:     "${var.bucket_prefix}"
+db_username_mariadb:  "${var.db_username_mariadb}"
 EOL
         cookie    = ""
       })
