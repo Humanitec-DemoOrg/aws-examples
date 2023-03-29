@@ -28,22 +28,22 @@ Requeriments:
 │   ├── app-specific-res-def                //Create a custom base-env, with custom parameters for each environment type
 │   │   ├── base-env.tf
 │   │   ├── dev-config
-│   │   │   ├── terraform.tfstate           //State for dev config.
+│   │   │   ├── terraform.tfstate           //Terraform State for the dev config
 │   │   │   └── terraform.tfvars.example    //Dev env specific config
 │   │   ├── prod-config
-│   │   │   ├── terraform.tfstate           //State for prod config.
+│   │   │   ├── terraform.tfstate           //Terraform State for the prod config
 │   │   │   └── terraform.tfvars.example    //Prod env specific config
 │   │   └── provider.tf
 │   ├── app.tf
 │   ├── provider.tf
 │   ├── score.yaml                          //Score Application
-│   ├── terraform.tfstate                   //State for the app
+│   ├── terraform.tfstate                   //Terraform State for the app
 │   └── terraform.tfvars.example
 └── generic-res-def                         //Generic S3 and RDS resources. Criteria for these can be `*`, in this example they are specific for an app.
     ├── provider.tf
     ├── rds.tf
     ├── s3.tf
-    ├── terraform.tfstate                   // State for resource definitions.
+    ├── terraform.tfstate                   //Terraform State for the Generic Resource Definitions
     ├── terraform.tfvars.example
     └── variables.tf
 ```
