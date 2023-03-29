@@ -8,6 +8,8 @@ In this example, the resource definitions are for the Terraform Driver, but it d
 
 Note: A Humanitec Resource Definition is a logical construct that contains information on how to provision actual resources (AWS S3 buckets, DNS settings, etc). When an application requests a specific end resource (say an S3 bucket), the Resource Definition (for an S3 bucket) is then matched, and with the information provided within it, an actual S3 resource is then provisioned within the Cloud Provider.
 
+![Base env configuration](images/base-env.png) 
+
 **You are responsible for the Terraform State, either Terraform Cloud, S3, or similar location.**
 
 Requeriments:
