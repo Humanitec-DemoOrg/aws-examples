@@ -7,6 +7,7 @@ resource "humanitec_resource_definition" "mariadb" {
   driver_inputs = {
     secrets = {
       variables = jsonencode({
+        password = "$${resources.base-env.outputs.db_password_mariadb}"
       })
     },
     values = {

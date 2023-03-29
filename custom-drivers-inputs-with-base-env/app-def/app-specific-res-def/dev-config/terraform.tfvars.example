@@ -5,6 +5,7 @@ db_username         = "userdev"
 db_instance_size    = "small"
 bucket_prefix       = "my-dev-prefix"
 db_username_mariadb = "mariadbdev"
+db_password_mariadb = "secret"
 
 environment = "development"
 app_id      = "custom-app"

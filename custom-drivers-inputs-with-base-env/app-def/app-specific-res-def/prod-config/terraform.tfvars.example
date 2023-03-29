@@ -5,6 +5,7 @@ db_username         = "userprod"
 db_instance_size    = "large"
 bucket_prefix       = "my-prod-prefix"
 db_username_mariadb = "mariadbprod"
+db_password_mariadb = "secret"
 
 environment = "production"
 app_id      = "custom-app"

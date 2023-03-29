@@ -6,11 +6,13 @@ This allows us to create generic Humanitec Resource Definitions, still allowing 
 
 In this example, the resource definitions are for the Terraform Driver, but it does not deploy anything to your AWS accounts, it's an echo example. You must customize them appropriately, with roles and actual resources.
 
-Note: A Humanitec Resource Definition is a logical construct that contains information on how to provision actual resources (AWS S3 buckets, DNS settings, etc). When an application requests a specific end resource (say an S3 bucket), the Resource Definition (for an S3 bucket) is then matched, and with the information provided within it, an actual S3 resource is then provisioned within the Cloud Provider.
+Note: 
+A Humanitec Resource Definition is a logical construct that contains information on how to provision actual resources (AWS S3 buckets, DNS settings, etc). When an application requests a specific end resource (say an S3 bucket), the Resource Definition (for an S3 bucket) is then matched, and with the information provided within it, an actual S3 resource is then provisioned within the Cloud Provider.
 
 ![Base env configuration](images/base-env.png) 
 
 **You are responsible for the Terraform State, either Terraform Cloud, S3, or similar location.**
+**Secrets are in `terraform.tfvars.example` as an example. You are required to provide them using secure means within your pipeline.**
 
 Requeriments:
 - Configure 2 environment types "development" and "production" [https://app.humanitec.io/orgs/$HUMANITEC_ORGANIZATION/org-settings/environment-types](https://docs.humanitec.com/guides/orchestrate-infrastructure/manage-environment-types).

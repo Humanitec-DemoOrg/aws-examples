@@ -5,6 +5,7 @@ db_username         = "useruat"
 db_instance_size    = "large"
 bucket_prefix       = "my-uat-prefix"
 db_username_mariadb = "mariadbuat"
+db_password_mariadb = "secret"
 
 environment = "uat"
 app_id      = "custom-app"
