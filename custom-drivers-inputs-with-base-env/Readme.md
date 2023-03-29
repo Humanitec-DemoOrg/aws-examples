@@ -46,12 +46,12 @@ Requeriments:
 Deployment
 
 ```
-# Deploy generic resources. Verify the `drivers inputs`, they make a reference to a `base-env` (platform engineer's responsibility to define and customize)
+# Deploy generic resources. Verify the `drivers inputs`, they have a reference to a `base-env` (platform engineer's responsibility to define and customize)
 cd generic-res-def/
 terraform init && terraform apply
 cd..
 
-# Deploy base application (platform engineer responsibility
+# Deploy base application (platform engineer's responsibility to define and customize)
 cd app-def/
 terraform init && terraform apply
 
