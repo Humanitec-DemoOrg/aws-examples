@@ -1,0 +1,6 @@
+humanitec_organization = ""
+humanitec_token        = ""
+humanitec_host         = "https://api.humanitec.io"
+
+app_name = "mysaapp"
+workload = "backend"
