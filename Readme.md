@@ -11,4 +11,5 @@ In this repository you will find a collection of examples on how to integrate yo
 - GitHub end-to-end Dev to Prod pipeline example [https://github.com/nickhumanitec/humanitec-pipeline-example](https://github.com/nickhumanitec/humanitec-pipeline-example)
 - Firewall Access: How Humanitec can access your infrastructure, how your infrastructure can communicate with Humanitec [humanitec-firewall-access](humanitec-firewall-access)
 - Customize drivers inputs with a `base-env` [custom-drivers-inputs-with-base-env](custom-drivers-inputs-with-base-env)
+- Service Account example [service-account](service-account)
 
