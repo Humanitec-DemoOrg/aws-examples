@@ -33,6 +33,7 @@ Customer's:
 - Create and maintain AWS IAM roles within their AWS accounts to manage the infrastructure.
 - Create and maintain AWS IAM policies allowing and denying access to actions based on their specific needs.
 
+**Humanitec strongly recommends following [Security best practices in IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html), in paricular [Apply least-privilege permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege), avoiding the creation of users and/or roles with the [`arn:aws:iam::aws:policy/AdministratorAccess`](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions.html#jf_administrator) policy, or similar full privileged permissions.**
 ## How to allow Humanitec to access your AWS EKS Clusters
 - For _each_ of your AWS Accounts:
     - Create the Humanitec AWS IAM User
