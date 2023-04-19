@@ -12,4 +12,4 @@ In this repository you will find a collection of examples on how to integrate yo
 - Firewall Access: How Humanitec can access your infrastructure, how your infrastructure can communicate with Humanitec [humanitec-firewall-access](humanitec-firewall-access)
 - Customize drivers inputs with a `base-env` [custom-drivers-inputs-with-base-env](custom-drivers-inputs-with-base-env)
 - Service Account example [service-account](service-account)
-
+- General Scripts to interact with the api [scripts](scripts)
