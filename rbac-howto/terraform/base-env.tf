@@ -4,12 +4,6 @@ resource "humanitec_resource_definition" "base-env" {
   name        = "${var.app_id}-base-env"
   type        = "base-env"
 
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-    }
-  ]
-
   driver_inputs = {
     values = {
       templates = jsonencode({
@@ -54,4 +48,15 @@ EOL
       })
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      criteria
+    ]
+  }
+}
+
+resource "humanitec_resource_definition_criteria" "base-env" {
+  resource_definition_id = humanitec_resource_definition.base-env.id
+  app_id                 = humanitec_application.app.id
 }

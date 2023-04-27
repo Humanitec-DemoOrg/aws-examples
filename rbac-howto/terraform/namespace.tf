@@ -31,11 +31,14 @@ EOL
     secrets = {
     }
   }
+  lifecycle {
+    ignore_changes = [
+      criteria
+    ]
+  }
+}
 
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-      res_id = "k8s-namespace"
-    }
-  ]
+resource "humanitec_resource_definition_criteria" "namespace" {
+  resource_definition_id = humanitec_resource_definition.namespace.id
+  app_id                 = humanitec_application.app.id
 }
