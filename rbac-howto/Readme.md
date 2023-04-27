@@ -3,7 +3,7 @@
 ## Use cases
 1. Allow developers to deploy to the development environment, do not allow developers to create apps, lock down every other environment.
 1. Create Admin or Scoped token for CI/CD.
-1. Create a custom namespace and add dynamic RBAC access within Kubernetes.
+1. Create a custom namespace and add dynamic RBAC access within Kubernetes with Terraform.
 
 ### 1. Allow developers to deploy to the development environment, do not allow developers to create apps, lock down every other environment.
 
@@ -23,7 +23,7 @@ export HUMANITEC_SERVICE_ACCOUNT_ID=`curl -s -X \
 POST -H "Authorization: Bearer ${HUMANITEC_TOKEN}" \
  -H \
  "Content-type: application/json" -d '{
-"name": "admin sa",
+"name": "admin sa for admin1@example.com",
 "email": "admin1@example.com",
 "role": "administrator"
 }' "https://api.humanitec.io/orgs/${HUMANITEC_ORG}/users" | jq -r .id`
@@ -43,7 +43,7 @@ POST -H "Authorization: Bearer ${HUMANITEC_TOKEN}" \
 echo $HUMANITEC_SERVICE_ACCOUNT_TOKEN
 ```
 
-### 3. Create a custom namespace and add dynamic RBAC access within Kubernetes.
+### 3. Create a custom namespace and add dynamic RBAC access within Kubernetes with Terraform.
 - Install [https://rbac-manager.docs.fairwinds.com/introduction/#getting-started](https://rbac-manager.docs.fairwinds.com/introduction/#getting-started) or an alternative. Humanitec does not provide support to specific operators, nor recommends specific configurations. Please contact your DevSecOps team for more information on how to configure your RBAC and/or the right approach to do so.
 - Configure your groups and users as usual.
 - Configure a `base-env` as [terraform/base-env.tf](terraform/base-env.tf) with a manifest. In the example, we added a `development` group with different access than the `administrator` group.
