@@ -1,0 +1,18 @@
+---
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: backend
+
+containers:
+  backend:
+    image: ubuntu:latest
+    command: ["/bin/bash"]
+    args: ["-c", 'while true; do printenv && echo "***"; sleep 120; done']
+    variables:
+      BUCKET: ${resources.mys3bucket.bucket}
+resources:
+  "mys3bucket":
+    type: s3
+  # "<local resource name>":
+  #   type: <resource type>

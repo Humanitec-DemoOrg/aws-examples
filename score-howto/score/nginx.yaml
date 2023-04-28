@@ -1,0 +1,26 @@
+---
+#
+# This example shows 2 DNS (DNS will implicitily add the ingress)
+# The DNS must be matched via res_id as specified in https://github.com/nickhumanitec/humanitec-aws-examples/tree/main/alb-acm-route53-ingress
+# The Shared DNS (to the app) shows how to implement path based routing.
+# The Local DNS (to the workload) shows how to setup the routing at the root level.
+#
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: backend
+
+service:
+  ports:
+    p80:
+      port: 80
+      targetPort: 80
+
+containers:
+  backend:
+    image: nginxdemos/hello:latest
+resources:
+  "alb-shared-dns":
+    type: dns
+  "alb-local-dns":
+    type: dns

@@ -1,0 +1,15 @@
+---
+apiVersion: humanitec.org/v1b1
+profile: "humanitec/default-cronjob"
+
+spec:
+  schedules:
+    myschedule:
+      containers:
+        ubuntu:
+          args:
+            - "-c"
+            - sleep 10
+          command:
+            - /bin/bash
+      schedule: "* * * * *"
