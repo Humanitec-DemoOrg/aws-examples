@@ -18,6 +18,6 @@ export HUMANITEC_TOKEN="mytoken"
 export APP_NAME="app"
 export APP_ENV="development"
 score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_NAME --env $APP_ENV -f score.yaml --deploy
-#or
+#or, if an extension is needed
 score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_NAME --env $APP_ENV -f score.yaml --extensions extension.yaml --deploy
 ```
