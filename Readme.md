@@ -14,3 +14,4 @@ In this repository you will find a collection of examples on how to integrate yo
 - Service Account example [service-account](service-account)
 - General Scripts to interact with the api [scripts](scripts)
 - RBAC Configurations: CI/CD Service Account and dynamic namespace roleBindings [rbac-howto](rbac-howto)
+- Score Howto: Examples of the most common patterns to deploy with score [score-howto](score-howto)
