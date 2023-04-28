@@ -1,7 +1,7 @@
 # score-howto
 
 ## Install Score
-Please follow the instructions here (https://docs.score.dev/docs/get-started/install/)
+Please follow the instructions here [https://docs.score.dev/docs/get-started/install/](https://docs.score.dev/docs/get-started/install/)
 
 ## Use Cases
 1. Simple workload: Image, custom command, args and environment variables: [score/basic.yaml](score/basic.yaml)
