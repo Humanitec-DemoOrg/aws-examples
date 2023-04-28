@@ -1,0 +1,21 @@
+---
+apiVersion: humanitec.org/v1b1
+profile: "humanitec/default-module"
+
+resources:
+  "alb-shared-dns":
+    scope: shared
+
+spec:
+  "ingress":
+    rules:
+      "${resources.alb-shared-dns}":
+        http:
+          "/backend":
+            type: prefix
+            port: 80
+      "${resources.alb-local-dns}":
+        http:
+          "/":
+            type: prefix
+            port: 80
