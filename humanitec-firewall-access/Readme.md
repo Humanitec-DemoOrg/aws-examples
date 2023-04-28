@@ -23,7 +23,7 @@ Make sure you don't lose the file ending, and it is encoded in one line.
 cat key_file_name | base64 -w 0 > private-encoded.txt
 ```
 
-### To verify your connectivity
+## Verify connectivity
 ```
 kubectl run humanitec-agent --rm -i --tty -n humanitec-agent --image ubuntu -- bash
 ```
