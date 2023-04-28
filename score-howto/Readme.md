@@ -9,7 +9,7 @@ Please follow the instructions here (https://docs.score.dev/docs/get-started/ins
 1. Configure resource limits such as CPU and memory: (score/limits.yaml)
 1. Configure annotations and labels: (score/basic.yaml) and (score/extension-label-annotation.yaml)
 1. Configure a cronjob: (score/basic.yaml) and (score/extension-cronjob.yaml)
-1. Configure ingress and services: [score/nginx.yaml] and (score/extension-ingress.yaml)
+1. Configure ingress and services: [score/nginx.yaml](score/nginx.yaml) and (score/extension-ingress.yaml)
 
 ### Deployment
 ```
