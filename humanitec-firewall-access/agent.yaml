@@ -1,0 +1,82 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: humanitec-agent
+  labels:
+    app.kubernetes.io/name: "humanitec-agent"
+    app.kubernetes.io/instance: "humanitec-agent"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: humanitec-agent
+  name: humanitec-agent
+  labels:
+    app.kubernetes.io/name: "humanitec-agent"
+    app.kubernetes.io/instance: "humanitec-agent"
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "humanitec-agent"
+      app.kubernetes.io/instance: "humanitec-agent"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: "humanitec-agent"
+        app.kubernetes.io/instance: "humanitec-agent"
+    spec:
+      securityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        runAsGroup: 1000
+        runAsUser: 1000
+      containers:
+        - name: humanitec-agent
+          image: "registry.humanitec.io/public/humanitec-agent:1.0.1"
+          resources:
+            limits:
+              cpu: "0.250"
+              memory: 256Mi
+            requests:
+              cpu: "0.025"
+              memory: 64Mi
+          envFrom:
+            - configMapRef:
+                name: humanitec-agent-configmap-env
+          volumeMounts:
+            - name: agentmount
+              mountPath: "/keys"
+              readOnly: true
+      volumes:
+        - name: agentmount
+          projected:
+            sources:
+              - secret:
+                  name: humanitec-agent-secret-private-key
+                  items:
+                    - key: private_key
+                      path: id.key
+                      mode: 384 #equivalent of 0600
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: humanitec-agent
+  name: humanitec-agent-configmap-env
+  labels:
+    app.kubernetes.io/name: "humanitec-agent"
+    app.kubernetes.io/instance: "humanitec-agent"
+data:
+  REMOTE_PORT: "8002" #Adjust with Humanitec's provider port
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: humanitec-agent-secret-private-key
+  namespace: humanitec-agent
+  labels:
+    app.kubernetes.io/name: "humanitec-agent"
+    app.kubernetes.io/instance: "humanitec-agent"
+data:
+  private_key: LS0tLS... # Private key, base 64 encoded with new line at the end
