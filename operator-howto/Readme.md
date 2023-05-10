@@ -1,6 +1,6 @@
 # operator-howto
 
-## How to
+## Steps to run the Operator
 Please read the Official Humanitec Operator Beta Documentation. This page is a reference to common configuration issues.
 
 
