@@ -51,6 +51,6 @@ spec:
 - Describe resources within your namespace `kubectl describe resources -n namespace`
 
 ## Known Issues
-- Currently vaults should be configured per environments, and not per cluster
+- Currently vaults should be configured centrally across environments. A vault per cluster is not currently supported.
 - Vaults are shared across multiple clusters, access to the vaults (security groups) should be configured accordingly
 - Vaults will need to have their own Private Agent
