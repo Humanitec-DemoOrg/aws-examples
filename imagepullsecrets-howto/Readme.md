@@ -18,8 +18,10 @@ To configure private registries https://kubernetes.io/docs/tasks/configure-pod-c
 
 ```
 kubectl get secret -n <namespace>  | grep regcred
-regcred-667740703053 
-                                                    kubernetes.io/dockerconfigjson   1      41m
+regcred-667740703053                                                     kubernetes.io/dockerconfigjson   1      41m
+```
+
+```
 kubectl describe secret regcred-667740703053 -n <namespace>
 Name:         regcred-667740703053
 Namespace:    79454520-3b37-4e20-94c6-7def369f3488
@@ -40,5 +42,40 @@ export HUMANITEC_ORG="myorg"
 export HUMANITEC_TOKEN="mytoken"
 curl "https://api.humanitec.io/orgs/${HUMANITEC_ORG}/registries" \
   -X POST -H "Authorization: Bearer ${HUMANITEC_TOKEN}" \
-  --data '{"id":"myecrregistry","registry":"667740703051.dkr.ecr.ca-central-1.amazonaws.com","type":"amazon_ecr","enable_ci":true,"creds":{"username":"AKIAIOSFODNN7EXAMPLE","password":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"}}'
+  --data '{
+   "id":"myecrregistry",
+   "registry":"667740703053.dkr.ecr.ca-central-1.amazonaws.com",
+   "type":"amazon_ecr",
+   "enable_ci":false,
+   "creds":{
+      "username":"AKIAIOSFODNN7EXAMPLE",
+      "password":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+   }
+}'
+```
+
+### Copy credentials from a specific namespace
+If you have a namespace with credentials alreadu set (if you decide to manage them centrally with an external tool), upon deployment, Humanitec will identify the proper credentials based on the registry (looking at the most specific ones) and copy the secret from the central namespace to the namespace being deployed to.
+
+- `cluster` can be a specific cluster name from the `Resource Management` section, or `*` to apply to every cluster in scope.
+
+```
+export HUMANITEC_ORG="myorg"
+export HUMANITEC_TOKEN="mytoken"
+curl "https://api.humanitec.io/orgs/${HUMANITEC_ORG}/registries" \
+  -X POST -H "Authorization: Bearer ${HUMANITEC_TOKEN}" \
+  --data '{
+   "id":"registrycopy",
+   "registry":"667740703053.dkr.ecr.ca-central-1.amazonaws.com/project",
+   "type":"secret_ref",
+   "enable_ci":false,
+   "secrets":{
+      "clustername":{
+         "namespace":"somenamespace",
+         "secret":"secretname"
+      }
+   }
+}
+}'
+
 ```
