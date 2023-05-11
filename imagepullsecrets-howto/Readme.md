@@ -34,3 +34,11 @@ Data
 ====
 .dockerconfigjson:  4396 bytes
 ```
+- Using the API https://api-docs.humanitec.com/#tag/Registry/paths/~1orgs~1%7BorgId%7D~1registries/post
+```
+export HUMANITEC_ORG="myorg"
+export HUMANITEC_TOKEN="mytoken"
+curl "https://api.humanitec.io/orgs/${HUMANITEC_ORG}/registries" \
+  -X POST -H "Authorization: Bearer ${HUMANITEC_TOKEN}" \
+  --data '{"id":"myecrregistry","registry":"667740703051.dkr.ecr.ca-central-1.amazonaws.com","type":"amazon_ecr","enable_ci":true,"creds":{"username":"AKIAIOSFODNN7EXAMPLE","password":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"}}'
+```
