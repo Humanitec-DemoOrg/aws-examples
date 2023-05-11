@@ -3,8 +3,8 @@
 To configure private registries https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 
 - Identify your ECR URL: `667740703053.dkr.ecr.ca-central-1.amazonaws.com`
-- Configure an IAM user with a policy to access to the repository
-- Configure your registry, and allow credentails to be availanle to the CI.
+- Configure an IAM user with a policy to access to the repository, create Access keys: an access key ID (for example, AKIAIOSFODNN7EXAMPLE) and a secret access key (for example, wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY).
+- Configure your registry, and allow credentails to be available to the CI
 ![Registries](images/registries.png)
 - On deployment, when the Orchestrator detects an image from this repository, the secret will be injected automatically
 ```
