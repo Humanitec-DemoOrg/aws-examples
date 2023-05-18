@@ -48,10 +48,15 @@ root@my-shell:/# ping agent.humanitec.io -c 4
 ## Verify Logs
 Upon installing your agent, please verify logs, this will indicate if there's an issue with your key or port. Below is an example of a properly running agent:
 ```
-kubectl get pods -n humanitec-agent                              
+kubectl get pods -n humanitec-agent
+
 NAME                               READY   STATUS    RESTARTS   AGE
 humanitec-agent-5b5d6f4f58-t2lpq   1/1     Running   0          36s
-kube logs humanitec-agent-5b5d6f4f58-t2lpq  -n humanitec-agent   
+```
+
+```
+kube logs humanitec-agent-5b5d6f4f58-t2lpq  -n humanitec-agent
+
 DEBUG     May 18 16:55:43.053 [10]: sending stored logs
 NOTICE    May 18 16:55:43.053 [10]: Initializing tinyproxy ...
 NOTICE    May 18 16:55:43.053 [10]: Reloading config file
