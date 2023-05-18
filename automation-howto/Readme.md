@@ -1,19 +1,22 @@
 # automation-howto
 
-The following howto will show you how to swap images on your workloads with an automated fashion.
-Image Automation is the recommended approach to allow multiple teams working along the same application, each updating one workload. This process avoids running score files and speeding up the deployment.
+The following howto will show you how to swap images and deploy your workloads automatically after build.
+
+Image Automation is the recommended approach to allow multiple teams working along the same application, each updating one workload. 
+
+This process avoids running a `score` deployment if not needed, while speeding up the deployment.
 
 ## General Idea
 - One application with multiple workloads
-- Two container registries
-- One webhook target
+- Multiple container registries
+- A webhook target
 
 ## Humanitec Workflow
 ![Automation Workflow](images/automation-webhook.png)
 
 ## Steps
-- Create 2 Amazon ECR Repositories Humanitec does not provide guidance on how to configure your AWS services.
-- Push two default images
+- Create 2 Amazon ECR Repositories
+- Push two default images, as example, we will push Apache `httpd`
 ```
 docker pull --platform=linux/amd64 httpd:latest 
 
@@ -23,7 +26,7 @@ docker tag httpd:latest 667740703053.dkr.ecr.ca-central-1.amazonaws.com/app2:902
 docker push 667740703053.dkr.ecr.ca-central-1.amazonaws.com/app1:90254ccc7352e1a5c8d1e4cdab2a032cefac9fd5d4d632ca003a2943c9a9b0a3
 docker push 667740703053.dkr.ecr.ca-central-1.amazonaws.com/app2:90254ccc7352e1a5c8d1e4cdab2a032cefac9fd5d4d632ca003a2943c9a9b0a3
 ```
-- Push the images metadata to Humanitec Artefacts Repository, you can use [Terraform](https://registry.terraform.io/providers/humanitec/humanitec/latest/docs/resources/artefact_version) or the following API call.
+- Push the images metadata to the Orchestrator [Artefacts Repository - Artefact versions](https://api-docs.humanitec.com/#tag/ArtefactVersion/paths/~1orgs~1%7BorgId%7D~1artefact-versions/post), you can use [Terraform](https://registry.terraform.io/providers/humanitec/humanitec/latest/docs/resources/artefact_version) or the following API call. *DO NOT INCLUDE the digest: sha:xxx...*
 ```
 export HUMANITEC_TOKEN="mytoken"
 export HUMANITEC_ORG="myorg"
@@ -65,8 +68,8 @@ curl \
             }
         ```
     - Configure your Lambda function with a [Function URL](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html)
-    - Configure the IAM Role for your function, make sure your role includes the `arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole` policy.
-    - Example of payload
+    - Configure the IAM Role for your function, make sure your role includes the `arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole` policy
+    - Payload example:
         ```
         {
         "app_id":"automation",
@@ -82,8 +85,8 @@ curl \
         "triggered_by":"UNKNOWN"
         }
         ```
-    - The payloads will be available in your CloudWatch Logs
-- Create one application, with 2 workloads `app1` and `app2` [Application and workloads](images/workloads.png)
+    - The payloads will be available in your CloudWatch Logs, we recommend pushing this payload to an SQS queue for further processing. The webhook should return an http code as quickly as possible to avoid retries from Humanitec.
+- Create one application, with 2 workloads `app1` and `app2`, See how it looks [Application and workloads](images/workloads.png). You can use [Terraform](https://registry.terraform.io/providers/humanitec/humanitec/latest/docs/resources/application) and (score)[../score-howto] for this.
 - Configure the [webhook](images/webhook.png) under the *application* settings, for the event/trigger select "Finished", use the AWS Lambda function URL and the following payload:
     ```
     {
@@ -100,10 +103,10 @@ curl \
     "status": "${status}"
     }
     ```
-- Configure each workload with the default image configured on step 1) and deploy (you can and should use Score for this)
-- Configure the Automation under the *environment* settings. The Orchestrator will match the proper values from the `Artefacts Versions`, for instance, for each environment you can configure specific branches.
+- Configure each workload with the default image configured on step 1) and deploy (you can use `score` for this)
+- Configure the Automation under the *environment* settings. The Orchestrator will match the proper values from the `Artefacts Versions`, for instance, mmatchign environments, repositories and image name to the environment accordingly.
 ![Automation](images/automation.png)
-- Push new images to your ECR repositories (for this example, we will replace the initial Apache `httpd` image for `nginx`)
+- Push new images to your ECR repositories (in this example, we will replace the initial Apache `httpd` image for `nginx`)
     ```
     docker pull --platform=linux/amd64 nginxdemos/nginx-hello:latest
 
@@ -113,7 +116,6 @@ curl \
     docker push 667740703053.dkr.ecr.ca-central-1.amazonaws.com/app1:336b803b83d080df05a37160a9d5d908f86689ec2205a6e4317b7ac58d2c8f82
     docker push 667740703053.dkr.ecr.ca-central-1.amazonaws.com/app2:336b803b83d080df05a37160a9d5d908f86689ec2205a6e4317b7ac58d2c8f82
     ```
-```
 - Push the images metadata to Humanitec Artefacts Repository, you can use [Terraform](https://registry.terraform.io/providers/humanitec/humanitec/latest/docs/resources/artefact_version) or the following API call.
     ```
     export HUMANITEC_TOKEN="mytoken"
