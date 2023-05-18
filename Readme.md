@@ -17,3 +17,4 @@ In this repository you will find a collection of examples on how to integrate yo
 - Score Howto: Examples of the most common patterns to deploy with score [score-howto](score-howto)
 - Operator Howto: Common configuration questions [operator-howto](operator-howto)
 - Pull an Image from a Private Registry: [imagepullsecrets-howto](imagepullsecrets-howto)
+- Paralell deployments, Automations and Webhook howto: [automation-howto](automation-howto)
