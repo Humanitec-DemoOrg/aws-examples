@@ -86,7 +86,7 @@ curl \
         }
         ```
     - The payloads will be available in your CloudWatch Logs, we recommend pushing this payload to an SQS queue for further processing. The webhook should return an http code as quickly as possible to avoid retries from Humanitec.
-- Create one application, with 2 workloads `app1` and `app2`, See how it looks [Application and workloads](images/workloads.png). You can use [Terraform](https://registry.terraform.io/providers/humanitec/humanitec/latest/docs/resources/application) and (score)[../score-howto] for this.
+- Create one application, with 2 workloads `app1` and `app2`, See how it looks [Application and workloads](images/workloads.png). You can use [Terraform](https://registry.terraform.io/providers/humanitec/humanitec/latest/docs/resources/application) and [score](../score-howto) for this.
 - Configure the [webhook](images/webhook.png) under the *application* settings, for the event/trigger select "Finished", use the AWS Lambda function URL and the following payload:
     ```
     {
