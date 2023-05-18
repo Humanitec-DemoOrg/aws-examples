@@ -5,10 +5,9 @@ Humanitec might need to access your infrastructure from the following IP addrese
 
 Humanitec communicates mostly over HTTPS/443/TCP, in some cases it might communicate over SSH/22/TCP (for instance, when accessing your GitHub or GitLab on prem over SSH to clone a repository)
 
-## Humanitec on prem
-Outbound access:
-  - agent.humanitec.io: SSH 22 TCP
-  - logs.humanitec.io HTTPS 443 TCP
+## Humanitec Outbound access (static IPs):
+  - agent.humanitec.io: SSH   22  TCP 34.159.99.194
+  - logs.humanitec.io   HTTPS 443 TCP 34.102.177.245
 
 ## Humanitec agent for private-only Amazon EKS clusters
 Humanitec can be configured within your cluster using an agent, it communicates with our platform over SSH/22/TCP, to configure please provide a public key per cluster, and Humanitec will provide a Kubernetes manifest and instructions how to configure your cluster. Do not set a passphrase.
