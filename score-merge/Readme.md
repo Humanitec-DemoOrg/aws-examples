@@ -30,7 +30,7 @@ export APP_ENV="development" #environment name, not environment type
 ```
 score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_NAME --env $APP_ENV -f multiple-workloads-frontend.yaml
 ```
-From the response, export the `delta` `id`:
+From the response, export the `delta id`:
 ```
 {
   "id": "4a6330d1c4df6aff308bc510494934eed9634168",
