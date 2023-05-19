@@ -28,7 +28,8 @@ export APP_ENV="development" #environment name, not environment type
 ```
 #### Create the initial delta
 ```
-score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_NAME --env $APP_ENV -f multiple-workloads-frontend.yaml
+score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_NAME \
+--env $APP_ENV -f multiple-workloads-frontend.yaml
 ```
 From the response, export the `delta id`:
 ```
@@ -42,7 +43,9 @@ From the response, export the `delta id`:
 ```
 #### For each subsequent workload, merge sequentially with the `--delta` flag
 ```
-score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_NAME --env $APP_ENV -f multiple-workloads-backend.yaml --delta 4a6330d1c4df6aff308bc510494934eed9634168
+score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $APP_NAME \
+--env $APP_ENV -f multiple-workloads-backend.yaml \
+--delta 4a6330d1c4df6aff308bc510494934eed9634168
 ```
 #### Once finalized, deploy
 Please note the `delta id` is consistent across each merge call.
