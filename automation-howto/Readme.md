@@ -6,6 +6,8 @@ Image Automation is the recommended approach to allow multiple teams working alo
 
 This process avoids running a `score` deployment if not needed, while speeding up the deployment.
 
+*When to use*: Use this when you only require to swap with new image versions. If you need to add/remove or modify infrastructure or add/remove variables. Please follow [score-merge](../score-merge).
+
 ## General Idea
 - One application with multiple workloads
 - Multiple container registries

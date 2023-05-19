@@ -1,0 +1,11 @@
+---
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: frontend
+
+containers:
+  backend:
+    image: httpd:latest
+    variables:
+      MY_ENV_VARIABLE: somevalue
