@@ -1,4 +1,4 @@
-# Score-merge
+# score-merge
 ## How to merge multiple workloads
 
 The following approach will allow to merge multiple `score` files and perform one deployment.
