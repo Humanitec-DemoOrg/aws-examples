@@ -15,7 +15,7 @@ In this repository you will find a collection of examples on how to integrate yo
 - General Scripts to interact with the Humanitec API [scripts](scripts)
 - RBAC Configurations: CI/CD Service Account and dynamic namespace roleBindings [rbac-howto](rbac-howto)
 - Score Howto: Examples of the most common patterns to deploy with score [score-howto](score-howto)
-- Operator Howto: Common configuration questions [operator-howto](operator-howto)
+- Operator Howto: Common configuration questions, Private Hashicorp Vault access [operator-howto](operator-howto)
 - Pull an Image from a Private Registry: [imagepullsecrets-howto](imagepullsecrets-howto)
 - Concurrent deployments: Automations and Webhook: [automation-howto](automation-howto)
 - Concurrent deployments: Score merge: [score-merge](score-merge)
