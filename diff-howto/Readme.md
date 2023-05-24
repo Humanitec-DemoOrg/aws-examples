@@ -11,7 +11,8 @@ export HUMANITEC_ENVIRONMENT="development" #environment name, not environment ty
 ```
 - Generate a delta from your Score file
 ```
-DELTA=`score-humanitec delta --api-url $HUMANITEC_URL --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $HUMANITEC_APP --env $HUMANITEC_ENVIRONMENT -f score.yaml | jq 'del(.metadata.url)'`
+DELTA=`score-humanitec delta --api-url $HUMANITEC_URL --token $HUMANITEC_TOKEN \
+    --org $HUMANITEC_ORG --app $HUMANITEC_APP --env $HUMANITEC_ENVIRONMENT -f score.yaml | jq 'del(.metadata.url)'`
 DELTA_ID=`echo $DELTA | jq -r .id`
 ```
 
@@ -27,12 +28,14 @@ CURRENT_DELTA_ID="$(curl -s \
 ```
 
 - Create a new Set ID, provide the raw delta as payload
+```
 NEW_SET_ID="$(curl -s \
   -X POST \
   "https://api.humanitec.io/orgs/${HUMANITEC_ORG}/apps/${HUMANITEC_APP}/sets/${CURRENT_SET_ID}" \
   -H "Authorization: Bearer ${HUMANITEC_TOKEN}" \
   -H "Content-Type: application/json" \
   -d "${DELTA}" | jq -r .)"
+  ```
 
 - Generate Diff
 ```
