@@ -19,3 +19,4 @@ In this repository you will find a collection of examples on how to integrate yo
 - Pull an Image from a Private Registry: [imagepullsecrets-howto](imagepullsecrets-howto)
 - Concurrent deployments: Automations and Webhook: [automation-howto](automation-howto)
 - Concurrent deployments: Score merge: [score-merge](score-merge)
+- Deployment diff: Difd howto [diff-howto](diff-howto)
