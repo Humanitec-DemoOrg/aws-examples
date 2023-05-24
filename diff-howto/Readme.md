@@ -37,7 +37,8 @@ NEW_SET_ID="$(curl -s \
   -d "${DELTA}" | jq -r .)"
   ```
 
-- Generate Diff
+- Generate Diff, use this to approve the deployment. 
+This is similar to a `terraform plan` as is just valid as long as there are no other concurrent deployments happening
 ```
 curl -s \
   "https://api.humanitec.io/orgs/${HUMANITEC_ORG}/apps/${HUMANITEC_APP}/sets/${NEW_SET_ID}/diff/${CURRENT_SET_ID}" \
