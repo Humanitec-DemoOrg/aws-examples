@@ -33,7 +33,7 @@ spec:
         runAsUser: 1000
       containers:
         - name: humanitec-agent
-          image: "registry.humanitec.io/public/humanitec-agent:1.0.1"
+          image: "registry.humanitec.io/public/humanitec-agent:1.0.2"
           resources:
             limits:
               cpu: "0.250"
