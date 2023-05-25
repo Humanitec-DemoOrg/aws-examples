@@ -23,6 +23,8 @@ cat key_file_name | base64 -w 0 > private-encoded.txt
 ```
 
 ## Verify connectivity
+Run these commands against the cluster where the agent is installed:
+
 ```
 kubectl run humanitec-agent --rm -i --tty -n humanitec-agent --image ubuntu -- bash
 ```
@@ -45,6 +47,8 @@ root@my-shell:/# ping agent.humanitec.io -c 4
 ```
 
 ## Verify Logs
+Run these commands against the cluster where the agent is installed:
+
 Upon installing your agent, please verify logs, this will indicate if there's an issue with your key or port. Below is an example of a properly running agent:
 ```
 kubectl get pods -n humanitec-agent
