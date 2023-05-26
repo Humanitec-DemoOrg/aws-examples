@@ -2,13 +2,14 @@
 set -e
 # Usage: Provide variables then `bash wait-for-delta.sh`
 
-HUMANITEC_ORG="nick"
-HUMANITEC_TOKEN="3ni5N4jlb4Z8QvpY_11fwqIIISdaAgMXnhiV75E5hNJg"
+HUMANITEC_ORG="myorg"
+HUMANITEC_TOKEN="mytoken"
 APP_ID="app"
 ENV_ID="development" #not env type, use the env name
 HUMANITEC_URL="https://api.humanitec.io"
 FAIL_ON_FAILED_DEPLOYMENT="true"
 FAIL_ON_EMPTY_DEPLOYMENT="true"
+#PROVIDE A DELTA TO VERIFY DEPLOYMENT Example: `score-humanitec delta .... --deploy | jq .delta_id -r`
 DELTA_ID="e87b70928e0a13a54d2fb461873eef8ee877eeb0"
 
 humanitec_wait_for_delta () {
