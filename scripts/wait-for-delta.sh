@@ -9,7 +9,7 @@ ENV_ID="development" #not env type, use the env name
 HUMANITEC_URL="https://api.humanitec.io"
 FAIL_ON_FAILED_DEPLOYMENT="true"
 FAIL_ON_EMPTY_DEPLOYMENT="true"
-#PROVIDE A DELTA TO VERIFY DEPLOYMENT Example: `score-humanitec delta .... --deploy | jq .delta_id -r`
+#PROVIDE A DELTA TO VERIFY DEPLOYMENT Example: `score-humanitec delta .... --deploy | jq .id -r`
 DELTA_ID="e87b70928e0a13a54d2fb461873eef8ee877eeb0"
 
 humanitec_wait_for_delta () {
