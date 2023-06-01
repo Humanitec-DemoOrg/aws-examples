@@ -10,7 +10,7 @@ Please follow the instructions here [https://docs.score.dev/docs/get-started/ins
 1. Configure annotations and labels: [score/basic.yaml](score/basic.yaml) and [score/extension-label-annotation.yaml](score/extension-label-annotation.yaml)
 1. Configure a cronjob: [score/basic.yaml](score/basic.yaml) and [score/extension-cronjob.yaml](score/extension-cronjob.yaml)
 1. Configure ingress and services: [score/nginx.yaml](score/nginx.yaml) and [score/extension-ingress.yaml](score/extension-ingress.yaml)
-2. COnfigure volumes: [score/volume.yaml](score/volume.yaml)
+2. Configure volumes: [score/volumes.yaml](score/volumes.yaml)
 
 ### Deployment
 ```
