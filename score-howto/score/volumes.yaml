@@ -1,0 +1,21 @@
+---
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: backend
+
+containers:
+  backend:
+    image: ubuntu:latest
+    command: ["/bin/bash"]
+    args: ["-c", 'while true; do printenv && echo "***"; sleep 120; done']
+    variables:
+      MY_ENV_VARIABLE: somevalue
+    volumes:
+      - source: ${resources.mypvc}
+        target: /mnt/data
+        read_only: true
+resources:
+  mypvc:
+    type: volume
+    properties:
