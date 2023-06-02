@@ -19,7 +19,7 @@ Requeriments:
 - Configure 2 environment types "development" and "production" [https://app.humanitec.io/orgs/$HUMANITEC_ORGANIZATION/org-settings/environment-types](https://docs.humanitec.com/guides/orchestrate-infrastructure/manage-environment-types).
 - Configure all your `terraform.tfvars` with the `terraform.tfvars.example` and backend configuration for your Terraform.
 - Deploy resources, deploy app with Score.
-- From the UI, create a new environment (within the App Details Screen), to target production. Or see a GitHub end-to-end Dev to Prod pipeline example [https://github.com/nickhumanitec/humanitec-pipeline-example](https://github.com/nickhumanitec/humanitec-pipeline-example) for how to configure them automatically.
+- From the UI, create a new environment (within the App Details Screen), to target production. Or see a GitHub end-to-end Dev to Prod pipeline example [https://github.com/Humanitec-DemoOrg/aws-examples](https://github.com/Humanitec-DemoOrg/aws-examples) for how to configure them automatically.
 
 ```
 .
