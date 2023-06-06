@@ -14,5 +14,9 @@ containers:
 resources:
   "mys3bucket":
     type: s3
+    properties:
+      bucket:
   # "<local resource name>":
   #   type: <resource type>
+  #   properties:
+  #     <property name>
