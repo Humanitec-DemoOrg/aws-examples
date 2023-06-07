@@ -49,7 +49,7 @@ resource "humanitec_resource_definition" "aws_terraform_resource_ssm_parameter" 
         {
           path = "iam-role-eks/terraform/parameter/"
           rev  = "refs/heads/main"
-          url  = "https://github.com/nickhumanitec/humanitec-aws-examples.git"
+          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
         }
       )
       "variables" = jsonencode(
@@ -89,7 +89,7 @@ resource "humanitec_resource_definition" "aws_terraform_resource_ssm_policy" {
         {
           path = "iam-role-eks/terraform/policy/"
           rev  = "refs/heads/main"
-          url  = "https://github.com/nickhumanitec/humanitec-aws-examples.git"
+          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
         }
       )
       "variables" = jsonencode(
@@ -129,7 +129,7 @@ resource "humanitec_resource_definition" "aws_terraform_resource_role" {
         {
           path = "iam-role-eks/terraform/role/"
           rev  = "refs/heads/main"
-          url  = "https://github.com/nickhumanitec/humanitec-aws-examples.git"
+          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
         }
       )
       "variables" = jsonencode(

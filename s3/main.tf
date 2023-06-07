@@ -48,7 +48,7 @@ resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
         {
           path = "s3/terraform/bucket/"
           rev  = "refs/heads/main"
-          url  = "https://github.com/nickhumanitec/humanitec-aws-examples.git"
+          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
         }
       )
       "variables" = jsonencode(

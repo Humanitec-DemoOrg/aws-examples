@@ -15,7 +15,7 @@ resource "humanitec_resource_definition" "s3" {
         {
           path = "terraform-training/s3/"
           rev  = "refs/heads/main"
-          url  = "https://github.com/nickhumanitec/humanitec-aws-examples.git"
+          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
         }
       )
       "variables" = jsonencode(

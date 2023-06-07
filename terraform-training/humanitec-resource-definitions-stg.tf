@@ -15,7 +15,7 @@ resource "humanitec_resource_definition" "s3_stg" {
         {
           path = "terraform-training/s3/"
           rev  = "refs/heads/main"
-          url  = "https://github.com/nickhumanitec/humanitec-aws-examples.git"
+          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
         }
       )
       "variables" = jsonencode(
@@ -53,7 +53,7 @@ resource "humanitec_resource_definition" "postgres_stg" {
         {
           path = "terraform-training/postgres/"
           rev  = "refs/heads/main"
-          url  = "https://github.com/nickhumanitec/humanitec-aws-examples.git"
+          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
         }
       )
       "variables" = jsonencode(
@@ -91,7 +91,7 @@ resource "humanitec_resource_definition" "mariadb_stg" {
         {
           path = "terraform-training/mariadb/"
           rev  = "refs/heads/main"
-          url  = "https://github.com/nickhumanitec/humanitec-aws-examples.git"
+          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
         }
       )
       "variables" = jsonencode(

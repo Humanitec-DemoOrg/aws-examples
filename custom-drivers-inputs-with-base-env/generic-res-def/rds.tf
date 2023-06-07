@@ -15,7 +15,7 @@ resource "humanitec_resource_definition" "postgres" {
         {
           path = "terraform-training/postgres/"
           rev  = "refs/heads/main"
-          url  = "https://github.com/nickhumanitec/humanitec-aws-examples.git"
+          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
         }
       )
       "variables" = jsonencode(
