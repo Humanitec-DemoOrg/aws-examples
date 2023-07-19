@@ -12,7 +12,7 @@ Please follow the instructions here [https://docs.score.dev/docs/get-started/ins
 1. Configure ingress and services: [score/nginx.yaml](score/nginx.yaml) and [score/extension-ingress.yaml](score/extension-ingress.yaml)
 1. Configure volumes: [score/volumes.yaml](score/volumes.yaml)
 1. Configure replicas: [score/extension-replicas.yaml](score/extension-replicas.yaml)
-1. Empty dir: [score/emptydir.yaml](score/emptydir.yaml]) and [score/emptydir-extension.yaml](score/emptydir-extension.yaml)
+1. Empty dir: [score/emptydir.yaml](score/emptydir.yaml) and [score/emptydir-extension.yaml](score/emptydir-extension.yaml)
 
 ### Deployment
 ```
