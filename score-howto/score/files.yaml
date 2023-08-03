@@ -1,0 +1,23 @@
+---
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: files
+
+containers:
+  mycontainer:
+    files:
+      - target: /configs/dashboards.yml
+        mode: "755"
+        content:
+          - |
+            apiVersion: 1
+
+            ...
+      - target: /configs/datasources.yml
+        mode: "755"
+        content:
+          - |
+            apiVersion: 1
+
+            ...
