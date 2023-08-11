@@ -2,8 +2,9 @@
 
 - Delete a specific workload from an app [delete-workload.sh](delete-workload)
 - Clone a deployment from another [clone-environment.sh](clone-environment.sh)
+- Rollback one set to another [rollback.sh](rollback.sh)
 
-# Deployment scripts
+# deployment scripts
 
 - Wait for the last deployment to complete: Before deploying with score. [wait-for-deployment.sh](wait-for-deployment.sh)
 - Wait for a specific delta/deployment to complete: After deployint with score [wait-for-delta.sh](wait-for-delta.sh)
