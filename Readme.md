@@ -21,3 +21,4 @@ In this repository you will find a collection of examples on how to integrate yo
 - Concurrent deployments: Score merge: [score-merge](score-merge)
 - Deployment diff: Diff howto [diff-howto](diff-howto) and Pipeline Diff [https://github.com/Humanitec-DemoOrg/github-pipeline-example/tree/diff](https://github.com/Humanitec-DemoOrg/github-pipeline-example/tree/diff)
 - PVC Example: [pvc](pvc)
+- HPA config: [hpa](hpa)
