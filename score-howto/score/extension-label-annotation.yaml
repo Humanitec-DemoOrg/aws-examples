@@ -1,9 +1,12 @@
 ---
 apiVersion: humanitec.org/v1b1
-profile: "humanitec/default-module"
+profile: humanitec/default-module
 
 spec:
-  "labels":
-    "labelkey": "value"
-  "annotations":
-    "annotationkey": "value"
+  labels:
+    labelkey: value
+  annotations:
+    annotationkey: value
+  service:
+    labels:
+      servicelabelkey: value
