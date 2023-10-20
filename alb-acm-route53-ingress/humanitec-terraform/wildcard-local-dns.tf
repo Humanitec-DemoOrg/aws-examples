@@ -7,6 +7,13 @@ resource "humanitec_resource_definition" "dns_local" {
   type        = "dns"
   driver_type = "humanitec/template"
 
+  provision = {
+    "ingress" = {
+      "is_dependent" : false,
+      "match_dependents" : false
+    }
+  }
+
   driver_inputs = {
     values = {
 
