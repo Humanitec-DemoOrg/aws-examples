@@ -6,6 +6,12 @@ resource "humanitec_resource_definition" "dns" {
   name        = var.dns_shared_resource_name
   type        = "dns"
   driver_type = "humanitec/dns-wildcard"
+  provision = {
+    "ingress" = {
+      "is_dependent" : false,
+      "match_dependents" : false
+    }
+  }
 
   driver_inputs = {
     values = {
