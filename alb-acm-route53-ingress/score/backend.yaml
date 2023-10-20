@@ -16,5 +16,21 @@ containers:
 resources:
   "test-alb-shared-dns":
     type: dns
+    metadata:
+      annotations:
+        score.humanitec.io/resId: shared.test-alb-shared-dns
+  "route-shared":
+    type: route
+    params:
+      host: ${resources.test-alb-shared-dns.host}
+      path: /frontend
+      port: 80
+
   "test-alb-local-dns":
     type: dns
+  "route-local":
+    type: route
+    params:
+      host: ${resources.test-alb-local-dns.host}
+      path: /
+      port: 80
