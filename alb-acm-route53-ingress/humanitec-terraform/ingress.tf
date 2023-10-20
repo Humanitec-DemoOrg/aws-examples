@@ -18,7 +18,6 @@ resource "humanitec_resource_definition" "ingress" {
         "alb.ingress.kubernetes.io/ssl-redirect" : "443",
         "alb.ingress.kubernetes.io/target-type" : "ip"
       }),
-      "api_version" : "v1",
       "class" : "alb",
       "no_tls" : true
     }
