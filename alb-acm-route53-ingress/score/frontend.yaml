@@ -23,7 +23,7 @@ resources:
     type: route
     params:
       host: ${resources.test-alb-shared-dns.host}
-      path: /frontend
+      path: /backend
       port: 80
 
   "test-alb-local-dns":
