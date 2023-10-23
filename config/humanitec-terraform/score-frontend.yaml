@@ -1,0 +1,17 @@
+---
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: frontend
+
+containers:
+  frontend:
+    image: ubuntu:latest
+    command: ["/bin/bash"]
+    args: ["-c", 'while true; do printenv; echo "****"; sleep 120; done']
+    variables:
+      BUCKET: ${externals.mys3.aws_access_key_id}-${externals.mys3.aws_secret_access_key}-${externals.mys3.bucket}-${externals.mys3.region}
+
+resources:
+  "mys3":
+    type: s3

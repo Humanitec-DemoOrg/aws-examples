@@ -22,3 +22,4 @@ In this repository you will find a collection of examples on how to integrate yo
 - Deployment diff: Diff howto [diff-howto](diff-howto) and Pipeline Diff [https://github.com/Humanitec-DemoOrg/github-pipeline-example/tree/diff](https://github.com/Humanitec-DemoOrg/github-pipeline-example/tree/diff)
 - PVC Example: [pvc](pvc)
 - HPA config: [hpa](hpa)
+- Use of Config resource [config/humanitec-terraform](config/humanitec-terraform)
