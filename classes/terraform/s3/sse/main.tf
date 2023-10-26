@@ -1,7 +1,14 @@
 variable "bucket" {}
 
+locals {
+  sanitized_name   = replace(replace(replace(replace(lower(var.bucket), "modules.", ""), ".externals.", "."), "/[^a-z\\-0-9]/", "-"), "/-*$/", "") #https://github.com/edgelaboratories/terraform-short-name/blob/main/main.tf
+  name_is_too_long = length(local.sanitized_name) > 63
+  truncated_name   = replace(substr(local.sanitized_name, 0, 63 - 1 - 0), "/-*$/", "")
+  name             = local.name_is_too_long ? local.truncated_name : local.sanitized_name
+}
+
 resource "aws_s3_bucket" "b" {
-  bucket = var.bucket
+  bucket = local.name
   tags = {
     Humanitec = true
   }
