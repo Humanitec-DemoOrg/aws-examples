@@ -9,3 +9,4 @@ resource "humanitec_resource_definition_criteria" "s3_kms" {
   app_id                 = humanitec_application.app.id
   class                  = "kms"
 }
+

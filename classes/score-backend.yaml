@@ -12,6 +12,7 @@ containers:
     variables:
       BUCKET_SSE: ${externals.my-s3-sse.bucket}
       BUCKET_KMS: ${externals.my-s3-kms.bucket}
+      BUCKET_CONFIG: ${externals.my-s3-from-hardcoded-config.bucket}
 
 resources:
   "my-s3-sse":
@@ -20,3 +21,6 @@ resources:
   "my-s3-kms":
     type: s3
     class: kms
+  "my-s3-from-hardcoded-config":
+    type: s3
+    class: s3-from-hardcoded-config
