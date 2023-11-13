@@ -23,7 +23,7 @@ resource "humanitec_resource_definition" "postgres" {
       # Create an AWS Secrets Manager Secret with the following settings /db/myrds
       # assumes an instance is running, if you need to create one from scratch, refer to the source above and adjust accordingly
       # {
-      #    "endpoint":"instancename.random-strinh.ca-central-1.rds.amazonaws.com",
+      #    "endpoint":"instancename.random-string.ca-central-1.rds.amazonaws.com",
       #    "password":"...",
       #    "username":"postgres",
       #    "database":"postgres"
