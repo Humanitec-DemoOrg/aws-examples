@@ -27,7 +27,7 @@ The following example will allow you to:
 - Verify the information is being displayed in your container
 - Verify your database `psql -W -h instancename.random-string.ca-central-1.rds.amazonaws.com -p 5432 -U postgres -c "\du"`
 
-## Creating a new RDS instance/cluster (instead of an existing one)
+## Creating a new RDS instance/cluster (instead of using an existing one)
 Please follow https://registry.terraform.io/modules/terraform-aws-modules/rds/aws/latest for more information. Replace the code under `exisitng/terraform` between lines 11 to 31, build your cluster with then `manage_master_user_password` option to automatically create the master password in AWS Secrets Manager. Everything else can be left as is.
 
 ## Multiple databases with multiples workloads within the same app
