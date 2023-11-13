@@ -4,7 +4,8 @@ The following example will allow you to:
 
 - Create a new database in an existing RDS instance/cluster
 - Connect to your existing RDS instance/cluster with secrets stored in AWS Secrets Manager
-- Create a new username and password, and store it in AWS Secrets Manager
+- Create a new RDS username and password, and store it in AWS Secrets Manager
+- Provide the outputs to your applications
 
 ## How to deploy the example
 - Configure `existing/resource-definition/terraform/resource-definition/terraform.tfvars.EXAMPLE` with your Humanitec organization, tokens and AWS Credentials
