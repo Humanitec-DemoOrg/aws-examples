@@ -24,14 +24,16 @@ The following example will allow you to:
     - Adjust your AWS crdentials/profile accordingly
     - Adjust `existing/resource-definition/terraform/resource-definition/db.tf` the input `postgres_master_secret` from `/db/myrds` to the location of your new secret
 - `tofu init && tofu apply`
-- Deploy with Score `score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app db-test-existing --env development -f existing/score.yaml --deploy`
+- Deploy with Score
+    `score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app db-test-existing --env development -f existing/score.yaml --deploy`
 - Verify the information is being displayed in your container
-- Verify your database `psql -W -h instancename.random-string.ca-central-1.rds.amazonaws.com -p 5432 -U postgres -c "\du"`
+- Verify your database
+    `psql -W -h instancename.random-string.ca-central-1.rds.amazonaws.com -p 5432 -U postgres -c "\du"`
 
 ## Creating a new RDS instance/cluster (instead of using an existing one)
-Please follow https://registry.terraform.io/modules/terraform-aws-modules/rds/aws/latest for more information. Replace the code under `exisitng/terraform` between lines 11 to 31, build your cluster with then `manage_master_user_password` option to automatically create the master password in AWS Secrets Manager. Everything else can be left as is.
+Please follow https://registry.terraform.io/modules/terraform-aws-modules/rds/aws/latest for more information. Replace the code under `exisitng/terraform` between lines 11 to 31, build your cluster with the `manage_master_user_password` option to automatically create the master password in AWS Secrets Manager. Everything else can be left as is.
 
-## Multiple databases with multiples workloads within the same app
+## Multiple databases with multiples workloads within the same App
 Adjust the database name/user inputs in your resource definition with the addition `$${context.res.id}` which produces a string similar to `modules.<workload name>.externals.<resource name>` or `shared.<resource name>`, this string needs to be cleaned up before you can use it within your scripts, split it accordingly and compute your new strings as needed in your Terraform.
 ```
 new_db_name            = "$${context.app.id}-$${context.env.id}"
