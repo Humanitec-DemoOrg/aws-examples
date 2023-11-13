@@ -32,8 +32,8 @@ resource "humanitec_resource_definition" "postgres" {
         {
           region                 = var.region
           postgres_master_secret = "/db/myrds"
-          new_db_name            = "$${context.app.id}_$${context.env.id}"
-          new_db_user            = "$${context.app.id}_$${context.env.id}"
+          new_db_name            = "$${context.app.id}-$${context.env.id}"
+          new_db_user            = "$${context.app.id}-$${context.env.id}"
           new_db_secret          = "/db/$${context.app.id}/$${context.env.id}"
         }
       )
