@@ -1,7 +1,7 @@
 humanitec_organization = ""
 humanitec_token        = ""
 
-app = "myapp1"
+app = "db-test-existing"
 
 access_key = ""
 secret_key = ""
