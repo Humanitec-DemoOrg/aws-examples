@@ -31,7 +31,7 @@ The following example will allow you to:
 Please follow https://registry.terraform.io/modules/terraform-aws-modules/rds/aws/latest for more information. Replace the code under `exisitng/terraform` between lines 11 to 31, build your cluster with then `manage_master_user_password` option to automatically create the master password in AWS Secrets Manager. Everything else can be left as is.
 
 ## Multiple databases with multiples workloads
-- You will need to adjust the database name/user with the addition `$${context.res.id}` which produces a string similar to `modules.<workload name>.externals.<resource name>` or `shated.<resource name>`, this string needs to be cleaned up before you can use it within your scripts, split it accordingly.
+- You will need to adjust the database name/user with the addition `$${context.res.id}` which produces a string similar to `modules.<workload name>.externals.<resource name>` or `shared.<resource name>`, this string needs to be cleaned up before you can use it within your scripts, split it accordingly.
     ```
     new_db_name            = "$${context.app.id}-$${context.env.id}"
     new_db_user            = "$${context.app.id}-$${context.env.id}"
