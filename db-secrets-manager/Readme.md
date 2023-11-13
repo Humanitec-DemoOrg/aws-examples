@@ -9,6 +9,7 @@ The following example will allow you to:
 ## How to deploy the example
 - Configure `existing/resource-definition/terraform/resource-definition/terraform.tfvars.EXAMPLE` with your Humanitec organization, tokens and AWS Credentials
 - Configure your existing RDS instance/cluster to be publicly accessible from the Humanitec IPs https://developer.humanitec.com/platform-orchestrator/security/overview/
+  - if your database is not publicly accessibly, you will need to run a proxy (HAProxy) or similar to expose it to Humanitec IPs. 
 - Configure an AWS Secrets Manager Secret with the following information:
     - Create a file `mycreds.json`
     ```
