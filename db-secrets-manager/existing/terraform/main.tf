@@ -67,7 +67,8 @@ resource "aws_secretsmanager_secret_version" "secret" {
 
 # https://developer.humanitec.com/platform-orchestrator/reference/resource-types/#postgres
 output "host" {
-  value = jsondecode(data.aws_secretsmanager_secret_version.postgres_password.secret_string).endpoint
+  value     = jsondecode(data.aws_secretsmanager_secret_version.postgres_password.secret_string).endpoint
+  sensitive = true // not really sensitive, but the chain comes from an aws secret so terraform believes this is a secret
 }
 output "name" {
   value = var.new_db_name
