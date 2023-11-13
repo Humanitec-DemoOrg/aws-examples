@@ -15,7 +15,7 @@ resource "humanitec_resource_definition" "postgres" {
     values = {
       "source" = jsonencode(
         {
-          path = "db-secrets-manager/existing/resource-definition"
+          path = "db-secrets-manager/existing/terraform"
           rev  = "refs/heads/main"
           url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
         }
@@ -30,11 +30,11 @@ resource "humanitec_resource_definition" "postgres" {
       # }
       "variables" = jsonencode(
         {
-          region                  = var.region
-          postgres_master_secrets = "/db/myrds"
-          new_db_name             = "$${context.app.id}_$${context.env.id}"
-          new_db_user             = "$${context.app.id}_$${context.env.id}"
-          new_db_secret           = "/db/$${context.app.id}/$${context.env.id}"
+          region                 = var.region
+          postgres_master_secret = "/db/myrds"
+          new_db_name            = "$${context.app.id}_$${context.env.id}"
+          new_db_user            = "$${context.app.id}_$${context.env.id}"
+          new_db_secret          = "/db/$${context.app.id}/$${context.env.id}"
         }
       )
     }
@@ -45,4 +45,10 @@ resource "humanitec_resource_definition" "postgres" {
       criteria
     ]
   }
+}
+
+resource "humanitec_resource_definition_criteria" "postgres" {
+  resource_definition_id = humanitec_resource_definition.postgres.id
+  app_id                 = humanitec_application.app.id
+  class                  = "default"
 }
