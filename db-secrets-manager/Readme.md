@@ -32,8 +32,8 @@ Please follow https://registry.terraform.io/modules/terraform-aws-modules/rds/aw
 
 ## Multiple databases with multiples workloads within the same app
 Adjust the database name/user with the addition `$${context.res.id}` which produces a string similar to `modules.<workload name>.externals.<resource name>` or `shared.<resource name>`, this string needs to be cleaned up before you can use it within your scripts, split it accordingly and compute your new strings as needed in your Terraform.
-    ```
-    new_db_name            = "$${context.app.id}-$${context.env.id}"
-    new_db_user            = "$${context.app.id}-$${context.env.id}"
-    new_db_secret          = "/db/$${context.app.id}/$${context.env.id}"
-    ```
+```
+new_db_name            = "$${context.app.id}-$${context.env.id}"
+new_db_user            = "$${context.app.id}-$${context.env.id}"
+new_db_secret          = "/db/$${context.app.id}/$${context.env.id}"
+```
