@@ -24,3 +24,4 @@ In this repository you will find a collection of examples on how to integrate yo
 - HPA config: [hpa](hpa)
 - Use of Config resource [config/humanitec-terraform](config/humanitec-terraform)
 - Use of Classes [classes](classes)
+- Using AWS Secrets Manager with RDS databases [db-secrets-manager](db-secrets-manager)
