@@ -1,0 +1,19 @@
+---
+apiVersion: humanitec.org/v1b1
+profile: "myorg/myinitcontainers"
+
+spec:
+  initContainers:
+    # containers will be sorted alphabetically by name, below shows c, a and b. Deployment will be A, B, C
+    ubuntu-c:
+      image: ubuntu:latest
+      command: ["/bin/bash"]
+      args: ["-c", 'echo "******"; exit 0']
+    ubuntu-a:
+      image: ubuntu:latest
+      command: ["/bin/bash"]
+      args: ["-c", 'echo "******"; exit 0']
+    ubuntu-b:
+      image: ubuntu:latest
+      command: ["/bin/bash"]
+      args: ["-c", 'echo "******"; exit 0']

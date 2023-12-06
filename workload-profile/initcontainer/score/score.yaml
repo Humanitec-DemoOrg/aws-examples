@@ -1,0 +1,11 @@
+---
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: backend
+
+containers:
+  ubuntu:
+    image: ubuntu:latest
+    command: ["/bin/bash"]
+    args: ["-c", 'while true; do printenv && echo "****"; sleep 120; done']
