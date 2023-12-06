@@ -1,9 +1,9 @@
 apiVersion: v2
 
-name: default-module
+name: myinitcontainers
 description: A Default Helm chart for a workload deployed by Humanitec
 type: application
 
-version: 1.16.11
+version: 1.0.0
 
 appVersion: 0.0.0

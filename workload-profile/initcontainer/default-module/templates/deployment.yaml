@@ -134,6 +134,108 @@ spec:
       {{- if .Values.restartPolicy }}
       restartPolicy: {{ .Values.restartPolicy }}
       {{- end }}
+      initContainers:
+      {{ $initContainers := .Values.initContainers }}
+      {{- range $i, $name :=  keys .Values.initContainers | sortAlpha }}
+      {{ $data:= get $initContainers $name }}
+        - name: {{ $name }}
+          image: {{ $data.image | quote }}
+          {{- if $data.imagePullPolicy }}
+          imagePullPolicy: {{ $data.imagePullPolicy }} {{- /* From the docs: "One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise." */ -}}
+          {{- end }}
+          {{- if $data.liveness_probe }}
+          livenessProbe:
+            {{ include "default-module.containerProbe" $data.liveness_probe | nindent 12 }}
+          {{- end }}
+          {{- if $data.readiness_probe }}
+          readinessProbe:
+            {{ include "default-module.containerProbe" $data.readiness_probe | nindent 12 }}
+          {{- end }}
+          {{- if $data.startup_probe }}
+          startupProbe:
+            {{ include "default-module.containerProbe" $data.startup_probe | nindent 12 }}
+          {{- end }}
+          resources:
+          {{- if $data.resources }}
+            {{- toYaml $data.resources | nindent 12 }}
+          {{- else }}
+            {{- toYaml $root.Values.default_container_resources | nindent 12 }}
+          {{- end }}
+          {{- if $data.command }}
+          command:
+            {{- range $data.command }}
+            - {{ . | quote }}
+            {{- end }}
+          {{- end }}
+          {{- if $data.args }}
+          args:
+            {{- range $data.args }}
+            - {{ . | quote }}
+            {{- end }}
+          {{- end }}
+          {{- if $data.lifecycle }}
+          lifecycle:
+            {{- if $data.lifecycle.preStop }}
+            preStop:
+            {{ include "default-module.lifecycleHandler" $data.lifecycle.preStop | nindent 14 }}
+            {{- end }}
+            {{- if $data.lifecycle.postStart }}
+            postStart:
+            {{ include "default-module.lifecycleHandler" $data.lifecycle.postStart | nindent 14 }}
+            {{- end }}
+          {{- end}}
+          envFrom:
+          - configMapRef:
+              name: {{ $fullName }}-configmap-{{ $name }}
+          {{- if $data.env }}
+          env:
+          {{- toYaml $data.env | nindent 10 }}
+          {{- end }}
+          {{- if $data.securityContext }}
+          securityContext:
+            {{- toYaml $data.securityContext | nindent 12 }}
+          {{- end }}
+          {{- if $data.stdin }}
+          stdin: {{ $data.stdin }}
+          {{- end }}
+          {{- if $data.stdinOnce }}
+          stdinOnce: {{ $data.stdinOnce }}
+          {{- end }}
+          {{- if $data.terminationMessagePath }}
+          terminationMessagePath: {{ $data.terminationMessagePath | quote }}
+          {{- end }}
+          {{- if $data.terminationMessagePolicy }}
+          terminationMessagePolicy: {{ $data.terminationMessagePolicy | quote }}
+          {{- end }}
+          {{- if $data.tty }}
+          tty: {{ $data.tty }}
+          {{- end }}
+          {{- if $data.volumeDevices }}
+          volumeDevices:
+            {{- toYaml $data.volumeDevices | nindent 12 }}
+          {{- end }}
+          {{- if or $data.volumeMounts $data.volume_mounts }}
+          volumeMounts:
+          {{- if $data.volumeMounts }}
+            {{- toYaml $data.volumeMounts | nindent 10 }}
+          {{- end }}
+          {{- if $data.volume_mounts }}
+          {{- range $path, $data := $data.volume_mounts }}
+          - name: {{ $data.id | quote }}
+            mountPath: {{ $path | quote }}
+            {{- if $data.sub_path }}
+            subPath: {{ $data.sub_path | quote }}
+            {{- end }}
+            {{- if $data.read_only }}
+            readOnly: {{ $data.read_only }}
+          {{- end }}
+          {{- end }}
+          {{- end }}
+          {{- end }}
+          {{- if $data.workingDir }}
+          workingDir: {{ $data.workingDir | quote }}
+          {{- end }}
+      {{- end }}
       containers:
       {{- range $name, $data := .Values.containers }}
         - name: {{ $name }}

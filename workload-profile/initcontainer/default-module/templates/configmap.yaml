@@ -18,6 +18,24 @@ data: {}
 ---
 {{ end }}
 
+{{- range $name, $data := .Values.initContainers }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $fullName }}-configmap-{{ $name }}
+  labels:
+    {{- include "default-module.labels" $root | indent 4 }}
+{{- if $data.variables }}
+data:
+  {{- with $data.variables }}
+{{ toYaml . | indent 2 }}
+  {{- end }}
+{{ else }}
+data: {}
+{{- end }}
+---
+{{ end }}
+
 {{- if .Values.variables -}}
 apiVersion: v1
 kind: ConfigMap
