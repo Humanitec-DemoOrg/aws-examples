@@ -3,8 +3,8 @@
 ## How to configure a custom Workload Profile
 - Documentation: https://developer.humanitec.com/integration-and-extensions/workload-profiles/overview/
 - Sorning: init containers will be sorted by name. Adjust accordingly.
-- Start with a default module (Humanitec Provided), see commit https://github.com/Humanitec-DemoOrg/aws-examples/commit/a29d09ab94d9fb49856b301d4cba2d057716872d [a29d09a]
-- Update `Chart.yaml` with the new custom profile name and version, along with the required changes, see commit https://github.com/Humanitec-DemoOrg/aws-examples/commit/93cd272c5d339ba764f1e4a136b0454af81c5deb [93cd272]
+- Start with a default module (Humanitec Provided), see commit [https://github.com/Humanitec-DemoOrg/aws-examples/commit/2fde311147663b8ddf7a6657a5d4ff34d70508e9](https://github.com/Humanitec-DemoOrg/aws-examples/commit/2fde311147663b8ddf7a6657a5d4ff34d70508e9)
+- Update `Chart.yaml` with the new custom profile name and version, along with the required changes, see commit [https://github.com/Humanitec-DemoOrg/aws-examples/commit/93cd272c5d339ba764f1e4a136b0454af81c5deb [93cd272]](https://github.com/Humanitec-DemoOrg/aws-examples/commit/012696a410ee0bccad61020640d5a11b57096b70)
 - The following arguments will be in use:
     - Chart name: myinitcontainers
     - Version: 1.0.0
