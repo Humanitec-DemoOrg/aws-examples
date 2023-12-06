@@ -1,0 +1,30 @@
+# Default values for default-module chart
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+containers: {}
+
+service:
+  ports: {}
+
+ingress:
+  enabled: false
+  hosts: []
+
+registry:
+  secret:
+    credentials: ""
+
+tls: {}
+
+default_container_resources:
+  limits:
+    cpu: 250m
+    memory: 256Mi
+  requests:
+    cpu: 25m
+    memory: 64Mi
+
+variables: {}
+
+imagePullSecrets: []

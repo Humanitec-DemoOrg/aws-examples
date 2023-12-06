@@ -1,0 +1,9 @@
+apiVersion: v2
+
+name: default-module
+description: A Default Helm chart for a workload deployed by Humanitec
+type: application
+
+version: 1.16.11
+
+appVersion: 0.0.0

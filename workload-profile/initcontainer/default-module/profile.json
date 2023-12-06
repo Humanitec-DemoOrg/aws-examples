@@ -1,0 +1,216 @@
+{
+    "features": {
+        "humanitec/annotations": {},
+        "humanitec/containers": {},
+        "humanitec/ingress": {},
+        "humanitec/labels": {},
+        "humanitec/pod-lifecycle": {},
+        "humanitec/replicas": {},
+        "humanitec/service": {},
+        "humanitec/service-account": {},
+        "humanitec/volumes": {}
+    },
+    "spec_definition": {
+        "properties": {
+            "annotations": {
+                "feature_name": "humanitec/annotations",
+                "type": "feature",
+                "ui_hints": {
+                    "order": 6
+                },
+                "version": "0.1"
+            },
+            "containers": {
+                "feature_name": "humanitec/containers",
+                "properties": {
+                    "args": {
+                        "feature_name": "humanitec/overrides",
+                        "title": "Argument overrides",
+                        "type": "feature",
+                        "ui_hints": {
+                            "order": 9
+                        },
+                        "version": "0.1"
+                    },
+                    "command": {
+                        "feature_name": "humanitec/overrides",
+                        "title": "Command overrides",
+                        "type": "feature",
+                        "ui_hints": {
+                            "order": 8
+                        },
+                        "version": "0.1"
+                    },
+                    "env": {
+                        "feature_name": "humanitec/envs",
+                        "type": "feature",
+                        "ui_hints": {
+                            "hidden": true
+                        },
+                        "version": "0.1"
+                    },
+                    "files": {
+                        "feature_name": "humanitec/files",
+                        "type": "feature",
+                        "ui_hints": {
+                            "order": 3
+                        },
+                        "version": "0.1"
+                    },
+                    "image": {
+                        "feature_name": "humanitec/image",
+                        "type": "feature",
+                        "ui_hints": {
+                            "order": 1
+                        },
+                        "version": "0.1"
+                    },
+                    "liveness_probe": {
+                        "feature_name": "humanitec/probe",
+                        "title": "Liveness Probe",
+                        "type": "feature",
+                        "ui_hints": {
+                            "order": 5
+                        },
+                        "version": "0.1"
+                    },
+                    "readiness_probe": {
+                        "feature_name": "humanitec/probe",
+                        "title": "Readiness Probe",
+                        "type": "feature",
+                        "ui_hints": {
+                            "order": 6
+                        },
+                        "version": "0.1"
+                    },
+                    "resources": {
+                        "feature_name": "humanitec/resources",
+                        "title": "Assign Resources",
+                        "type": "feature",
+                        "ui_hints": {
+                            "order": 7
+                        },
+                        "version": "0.1"
+                    },
+                    "variables": {
+                        "feature_name": "humanitec/variables",
+                        "type": "feature",
+                        "ui_hints": {
+                            "order": 2
+                        },
+                        "version": "0.1"
+                    },
+                    "volume_mounts": {
+                        "feature_name": "humanitec/volume-mounts",
+                        "title": "Volume mounts",
+                        "type": "feature",
+                        "ui_hints": {
+                            "order": 4
+                        },
+                        "version": "0.1"
+                    }
+                },
+                "runtime_properties": [
+                    {
+                        "feature_name": "humanitec/logs",
+                        "title": "Container logs",
+                        "type": "feature",
+                        "ui_hints": {
+                            "order": 0
+                        },
+                        "version": "0.1"
+                    }
+                ],
+                "title": "Containers",
+                "type": "collection",
+                "ui_hints": {
+                    "order": -1
+                },
+                "version": "0.1"
+            },
+            "extraContainers": {
+                "feature_name": "humanitec/extra-containers",
+                "type": "feature",
+                "ui_hints": {
+                    "hidden": true
+                },
+                "version": "0.1"
+            },
+            "extraVolumes": {
+                "feature_name": "humanitec/extra-volumes",
+                "type": "feature",
+                "ui_hints": {
+                    "hidden": true
+                },
+                "version": "0.1"
+            },
+            "imagePullSecrets": {
+                "feature_name": "humanitec/image-pull-secrets",
+                "type": "feature",
+                "ui_hints": {
+                    "hidden": true
+                },
+                "version": "0.1"
+            },
+            "ingress": {
+                "feature_name": "humanitec/ingress",
+                "type": "feature",
+                "ui_hints": {
+                    "order": 2
+                },
+                "version": "0.1"
+            },
+            "labels": {
+                "feature_name": "humanitec/labels",
+                "type": "feature",
+                "ui_hints": {
+                    "order": 5
+                },
+                "version": "0.1"
+            },
+            "service": {
+                "feature_name": "humanitec/service",
+                "type": "feature",
+                "ui_hints": {
+                    "order": 4
+                },
+                "version": "0.1"
+            },
+            "serviceAccountName": {
+                "feature_name": "humanitec/service-account",
+                "type": "feature",
+                "ui_hints": {
+                    "order": 3
+                },
+                "version": "0.1"
+            },
+            "variables": {
+                "feature_name": "humanitec/extra-variables",
+                "type": "feature",
+                "ui_hints": {
+                    "hidden": true
+                },
+                "version": "0.1"
+            },
+            "volumes": {
+                "feature_name": "humanitec/volumes",
+                "type": "feature",
+                "ui_hints": {
+                    "hidden": true,
+                    "order": 8
+                },
+                "version": "0.1"
+            }
+        },
+        "runtime_properties": [
+            {
+                "feature_name": "humanitec/replicas",
+                "type": "feature",
+                "ui_hints": {
+                    "order": -2
+                },
+                "version": "0.1"
+            }
+        ]
+    }
+}
