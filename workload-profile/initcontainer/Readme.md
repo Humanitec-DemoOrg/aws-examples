@@ -34,7 +34,7 @@ Output
 
 - Define the Workload Profile
 ```
-export SPEC_DEFINITION=`cat default-module/profile.json | jq .spec_definition`
+export SPEC_DEFINITION=`cat $PROFILE_PATHprofile.json | jq .spec_definition`
 
 curl -X POST "https://api.humanitec.io/orgs/${HUMANITEC_ORG}/workload-profiles" \
   -H "Content-Type: application/json" \
