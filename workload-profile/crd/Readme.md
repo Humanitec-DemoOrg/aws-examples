@@ -4,8 +4,7 @@
 - Documentation: https://developer.humanitec.com/integration-and-extensions/workload-profiles/overview/
 - Install the CRD definition `kubectl apply -f crd/crd.yaml`. This will create a dummy CRD for this example under the apiVersion `humanitec.com/v1alpha1`
 - Start with a default module (Humanitec Provided), see commit https://github.com/Humanitec-DemoOrg/aws-examples/commit/83c05332c072a86d20c5a9bad009528fecd32888
-- Update `Chart.yaml` with the new custom profile name and version, along with the required changes, see commit https://github.com/Humanitec-DemoOrg/aws-examples/commit/
-a252c1e58ef4487bdf22a7b4f19cdc41e4eee131
+- Update `Chart.yaml` with the new custom profile name and version, along with the required changes, see commit https://github.com/Humanitec-DemoOrg/aws-examples/commit/a252c1e58ef4487bdf22a7b4f19cdc41e4eee131
 - The following arguments will be in use:
     - Chart name: mycrdmodule
     - Version: 1.0.0
