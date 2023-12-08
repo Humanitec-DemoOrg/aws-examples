@@ -1,0 +1,6 @@
+apiVersion: humanitec.com/v1alpha1
+kind: MyCRD
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  customField: {{ .Values.myCustomField }}

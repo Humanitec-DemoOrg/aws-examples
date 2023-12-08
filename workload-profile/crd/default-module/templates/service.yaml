@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}
+  {{- if .Values.service.annotations }}
+  annotations:
+    {{- range $k, $v := .Values.service.annotations }}
+    {{ $k }}: {{ $v | quote }}
+    {{- end}}
+  {{- end}}
+  labels:
+    {{- include "default-module.labels" . | nindent 4 }}
+    {{- range $k, $v := .Values.service.labels }}
+    {{ $k }}: {{ $v | quote }}
+    {{- end}}
+spec:
+  type: ClusterIP
+  ports:
+  {{- range $i, $p := .Values.service.ports }}
+    - port: {{ $p.service_port }}
+      {{- if $p.container_port }}
+      targetPort: {{ $p.container_port }}
+      {{- end }}
+      protocol: {{ $p.protocol | default "TCP" }}
+      {{- if $p.name }}
+      name: {{ $p.name }}
+      {{- else }}
+      name: {{ printf "port-%v" $i }} {{- /* %v as the older schema had .Values.service.port this being a slice rather than map */ -}}
+      {{- end }}
+  {{- end }}
+  selector:
+    {{- include "default-module.selectorLabels" . | nindent 4 }}

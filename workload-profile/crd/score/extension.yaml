@@ -1,0 +1,6 @@
+---
+apiVersion: humanitec.org/v1b1
+profile: "myorg/mycrdmodule"
+
+spec:
+  myCustomField: mycustomvalue
