@@ -1,53 +1,59 @@
 #!/usr/bin/env bash
 
-# Usage: Provide variables then `NEW_ENVIRONMENT_TYPE=production NEW_ENVIRONMENT=prod COPY_FROM_ENVIRONMENT=development bash clone-environment.sh`
+export HUMANITEC_TOKEN=mytoken
+export HUMANITEC_API_PREFIX=https://api.humanitec.io
+export HUMANITEC_APP=myapp
+export HUMANITEC_ORG=myorg
 
-HUMANITEC_ORG=""
-HUMANITEC_TOKEN=""
-HUMANITEC_URL="https://api.humanitec.io"
-APP_ID="app"
-
-
-NEW_ENVIRONMENT_TYPE=production #actual env type
-NEW_ENVIRONMENT=prod  #not env type, env name
-COPY_FROM_ENVIRONMENT=development #not env type, env name
-
+NEW_ENVIRONMENT_TYPE=prod #actual env type https://app.humanitec.io/orgs/$HUMANITEC_ORG/environment-types
+NEW_ENVIRONMENT=production  # new env name, not env type
+COPY_FROM_ENVIRONMENT=development #env name, not env type
+FAIL_ON_DEPLOYMENT_FAILURE="false"
 
 
 humanitec_clone_environment () {
-    echo "Attempting to create a new environment: $NEW_ENVIRONMENT, $NEW_ENVIRONMENT_TYPE from $COPY_FROM_ENVIRONMENT"
+    echo "Attempting to create a new environment named: $NEW_ENVIRONMENT, of type: $NEW_ENVIRONMENT_TYPE from environment name: $COPY_FROM_ENVIRONMENT"
 
-    curl $HUMANITEC_URL/orgs/$HUMANITEC_ORG/apps/$APP_ID/envs/$COPY_FROM_ENVIRONMENT/deploys -H "Authorization: Bearer $HUMANITEC_TOKEN" -o /tmp/deploys.json -s -k
+    humctl get orgs 
 
-    DEPLOYMENT_ID=`cat /tmp/deploys.json | jq -c 'map( select( .status == "succeeded" ) ) | .[0]["id"]' -r`
-
-    if [[ $DEPLOYMENT_ID  == "null" ]]
-    then
-        DEPLOYMENT_ID=`cat /tmp/deploys.json | jq '.[0]["id"]' -r`;
-        echo "Could not found a successful deployment for the new environment, trying anything available: $DEPLOYMENT_ID"
-    else
-        echo "Found a successful deployment for the new environment: $DEPLOYMENT_ID"
-    fi
-
-
-cat <<-EOF > /tmp/new_environment.json
-    {
-    "from_deploy_id": "$DEPLOYMENT_ID",
-    "id": "$NEW_ENVIRONMENT",
-    "name": "$NEW_ENVIRONMENT",
-    "type": "$NEW_ENVIRONMENT_TYPE"
-    }
-EOF
-
-    STATUSCODE=$(curl -X POST -k --silent --output /dev/stderr --write-out "%{http_code}" $HUMANITEC_URL/orgs/$HUMANITEC_ORG/apps/$APP_ID/envs -H "Authorization: Bearer $HUMANITEC_TOKEN"  -d @/tmp/new_environment.json)
+    humctl create env $NEW_ENVIRONMENT --from $COPY_FROM_ENVIRONMENT --type $NEW_ENVIRONMENT_TYPE || true 
     
-    if [[ $STATUSCODE  == 200 ]] || [[ $STATUSCODE  == 201 ]] || [[ $STATUSCODE == 409 ]] ; then
-        echo "Environment creation OK: $STATUSCODE"
-    else
-        echo "Environment creation failure: $STATUSCODE"
-        exit 1
-    fi
+    DEPLOYMENT=`humctl deploy --env $COPY_FROM_ENVIRONMENT deploy . envs/$NEW_ENVIRONMENT -o json`
+    DEPLOYMENT_ID=`echo $DEPLOYMENT | jq -r .metadata.id`
 
+    echo $DEPLOYMENT_ID
+
+    while :
+    do
+        export HUMANITEC_ENV=$NEW_ENVIRONMENT
+
+        DEPLOYMENT_STATUS=`humctl get deploy $DEPLOYMENT_ID -o json | jq -r .status.status`
+        echo $DEPLOYMENT_STATUS
+        if [[ $DEPLOYMENT_STATUS == "failed" ]]
+        then
+            echo "DEPLOYMENT ERROR: $HUMANITEC_ORG/$HUMANITEC_APP/$HUMANITEC_ENV/$DEPLOYMENT_ID"
+            humctl get deploy $DEPLOYMENT_ID -o json
+            
+            if [[ $FAIL_ON_DEPLOYMENT_FAILURE == "true" ]]
+            then
+                exit 1
+            else
+                echo "Continuing with failure..."
+                break
+            fi
+
+        fi
+
+        if [[ $DEPLOYMENT_STATUS == "succeeded" ]]
+        then
+            echo "DEPLOYMENT OK: $HUMANITEC_ORG/$HUMANITEC_APP/$HUMANITEC_ENV/$DEPLOYMENT_ID"
+            humctl get deploy $DEPLOYMENT_ID -o json
+            break
+        fi
+
+        sleep 3
+
+    done
 }
 
 humanitec_clone_environment
