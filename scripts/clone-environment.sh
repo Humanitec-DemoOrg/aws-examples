@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Make sure to download humctl
+# https://developer.humanitec.com/platform-orchestrator/cli/
+# https://developer.humanitec.com/platform-orchestrator/reference/cli-references/
+
 export HUMANITEC_TOKEN=mytoken
 export HUMANITEC_API_PREFIX=https://api.humanitec.io
 export HUMANITEC_APP=myapp
