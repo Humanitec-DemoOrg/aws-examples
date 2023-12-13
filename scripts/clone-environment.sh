@@ -9,27 +9,27 @@ export HUMANITEC_API_PREFIX=https://api.humanitec.io
 export HUMANITEC_APP=myapp
 export HUMANITEC_ORG=myorg
 
-NEW_ENVIRONMENT_TYPE=prod #actual env type https://app.humanitec.io/orgs/$HUMANITEC_ORG/environment-types
-NEW_ENVIRONMENT=production  # new env name, not env type
-COPY_FROM_ENVIRONMENT=development #env name, not env type
+TARGET_ENVIRONMENT_TYPE=prod #actual env type https://app.humanitec.io/orgs/$HUMANITEC_ORG/environment-types
+TARGET_ENVIRONMENT=production  # new env name, not env type
+SOURCE_ENVIRONMENT=development #env name, not env type
 FAIL_ON_DEPLOYMENT_FAILURE="false"
 
 
 humanitec_clone_environment () {
-    echo "Attempting to create a new environment named: $NEW_ENVIRONMENT, of type: $NEW_ENVIRONMENT_TYPE from environment name: $COPY_FROM_ENVIRONMENT"
+    echo "Attempting to create a new environment named: $TARGET_ENVIRONMENT, of type: $TARGET_ENVIRONMENT_TYPE from environment name: $SOURCE_ENVIRONMENT"
 
     humctl get orgs 
 
-    humctl create env $NEW_ENVIRONMENT --from $COPY_FROM_ENVIRONMENT --type $NEW_ENVIRONMENT_TYPE || true 
+    humctl create env $TARGET_ENVIRONMENT --from $SOURCE_ENVIRONMENT --type $TARGET_ENVIRONMENT_TYPE || true 
     
-    DEPLOYMENT=`humctl deploy --env $COPY_FROM_ENVIRONMENT deploy . envs/$NEW_ENVIRONMENT -o json`
+    DEPLOYMENT=`humctl deploy --env $SOURCE_ENVIRONMENT deploy . envs/$TARGET_ENVIRONMENT -o json`
     DEPLOYMENT_ID=`echo $DEPLOYMENT | jq -r .metadata.id`
 
     echo $DEPLOYMENT_ID
 
     while :
     do
-        export HUMANITEC_ENV=$NEW_ENVIRONMENT
+        export HUMANITEC_ENV=$TARGET_ENVIRONMENT
 
         DEPLOYMENT_STATUS=`humctl get deploy $DEPLOYMENT_ID -o json | jq -r .status.status`
         echo $DEPLOYMENT_STATUS
