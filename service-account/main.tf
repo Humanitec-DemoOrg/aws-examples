@@ -5,13 +5,6 @@ resource "humanitec_resource_definition" "aws_terraform_resource_workload1_sa1" 
   name        = "${var.app_name}-${var.workload}-sa"
   type        = "k8s-service-account"
 
-  // use new https://registry.terraform.io/providers/humanitec/humanitec/latest/docs/resources/resource_definition_criteria
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-      res_id = "modules.${var.workload}"
-    }
-  ]
 
   driver_inputs = {
     values = {
@@ -39,7 +32,21 @@ EOL
     secrets = {
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      criteria
+    ]
+  }
 }
+
+
+resource "humanitec_resource_definition_criteria" "aws_terraform_resource_workload1_sa1" {
+  resource_definition_id = humanitec_resource_definition.aws_terraform_resource_workload1_sa1.id
+  app_id                 = humanitec_application.app.id
+  res_id                 = "modules.${var.workload}"
+}
+
 
 resource "humanitec_resource_definition" "aws_terraform_resource_workload1" {
   // a Workload attaches the service account
@@ -49,13 +56,6 @@ resource "humanitec_resource_definition" "aws_terraform_resource_workload1" {
   name        = "${var.app_name}-${var.workload}-workload"
   type        = "workload"
 
-  // use new https://registry.terraform.io/providers/humanitec/humanitec/latest/docs/resources/resource_definition_criteria
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-      res_id = "modules.${var.workload}"
-    }
-  ]
 
   driver_inputs = {
     values = {
@@ -76,4 +76,16 @@ EOL
     secrets = {
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      criteria
+    ]
+  }
+}
+
+resource "humanitec_resource_definition_criteria" "aws_terraform_resource_workload1" {
+  resource_definition_id = humanitec_resource_definition.aws_terraform_resource_workload1.id
+  app_id                 = humanitec_application.app.id
+  res_id                 = "modules.${var.workload}"
 }
