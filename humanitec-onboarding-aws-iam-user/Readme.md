@@ -62,6 +62,7 @@ subjects:
   kind: Group
   name: humanitec
 ```
+**Humanitec strongly recommends following [Security best practices for RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/), in particular [Apply least-privilege permissions](https://kubernetes.io/docs/concepts/security/rbac-good-practices/), avoiding the creation of users and/or roles with the full privileged permissions.**
 
 
 If using `CONFIG_MAP`
