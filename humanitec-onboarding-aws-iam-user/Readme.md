@@ -46,6 +46,7 @@ If using `API_AND_CONFIG_MAP` or `API` and `Amazon EKS access policies` (Recomme
 aws eks associate-access-policy --cluster-name CLUSTER_NAME --principal-arn arn:aws:iam::ACCOUNT_ID:user/USERNAME \
   --access-scope type=cluster --policy-arn arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy
 ```
+**Humanitec strongly recommends following [Security best practices in IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html), in particular [Apply least-privilege permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege), avoiding the creation of users and/or roles with the [`AmazonEKSClusterAdminPolicy`](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonEKSClusterPolicy.html) policy, [cluster vs namespaced users](https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html), or similar full privileged permissions.**
 
 If using `API_AND_CONFIG_MAP` or `API` and `Kubernetes RBAC authorization`:
 
