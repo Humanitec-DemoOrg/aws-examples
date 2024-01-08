@@ -38,7 +38,33 @@ Customer's:
 - For _each_ of your AWS Accounts:
     - Create the Humanitec Amazon IAM User
     - Tag the clusters that Humanitec needs access to with `Humanitec:true`
-    - For each Amazon EKS cluster tagged, configure your Amazon EKS Cluster config map
+    - For each Amazon EKS cluster tagged, configure your Amazon EKS Cluster config map or access entries
+
+If using `API_AND_CONFIG_MAP` or `API` and `Kubernetes RBAC authorization`:
+
+```
+aws eks create-access-entry --cluster-name CLUSTER_NAME --principal-arn arn:aws:iam::ACCOUNT_ID:user/USERNAME --type STANDARD --username USERNAME
+aws eks update-access-entry --cluster-name CLUSTER_NAME --principal-arn arn:aws:iam::ACCOUNT_ID:user/USERNAM --username USERNAME --kubernetes-groups "humanitec"
+```
+
+Deploy the following manifest:
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: humanitec-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: humanitec
+```
+
+
+If using `CONFIG_MAP`
 ```
 kubectl describe -n kube-system configmap/aws-auth
 ```
