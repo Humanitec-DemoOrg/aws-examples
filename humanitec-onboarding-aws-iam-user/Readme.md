@@ -87,7 +87,8 @@ kubectl describe -n kube-system configmap/aws-auth
       "userarn": "arn:aws:iam::ACCOUNT_ID:user/USERNAME"
       "username": "USERNAME"
 ```
-- Within Humanitec: use the credentials to configure your Amazon EKS resources with the following format:
+### Configure your EKS cluster resource definition credentials
+Within Humanitec: use the credentials to configure your Amazon EKS resources with the following format:
 ```
     {
     "aws_access_key_id":"AKIAIOSFODNN7EXAMPLE",
