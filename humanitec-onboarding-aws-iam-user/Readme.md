@@ -40,11 +40,20 @@ Customer's:
     - Tag the clusters that Humanitec needs access to with `Humanitec:true`
     - For each Amazon EKS cluster tagged, configure your Amazon EKS Cluster config map or access entries
 
+If using `API_AND_CONFIG_MAP` or `API` and `Amazon EKS access policies` (Recommended):
+
+```
+aws eks associate-access-policy --cluster-name CLUSTER_NAME --principal-arn arn:aws:iam::ACCOUNT_ID:user/USERNAME \
+  --access-scope type=cluster --policy-arn arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy
+```
+
 If using `API_AND_CONFIG_MAP` or `API` and `Kubernetes RBAC authorization`:
 
 ```
-aws eks create-access-entry --cluster-name CLUSTER_NAME --principal-arn arn:aws:iam::ACCOUNT_ID:user/USERNAME --type STANDARD --username USERNAME
-aws eks update-access-entry --cluster-name CLUSTER_NAME --principal-arn arn:aws:iam::ACCOUNT_ID:user/USERNAM --username USERNAME --kubernetes-groups "humanitec"
+aws eks create-access-entry --cluster-name CLUSTER_NAME --principal-arn arn:aws:iam::ACCOUNT_ID:user/USERNAME \
+  --type STANDARD --username USERNAME
+aws eks update-access-entry --cluster-name CLUSTER_NAME --principal-arn arn:aws:iam::ACCOUNT_ID:user/USERNAME \
+  --username USERNAME --kubernetes-groups "humanitec"
 ```
 
 Deploy the following manifest:
