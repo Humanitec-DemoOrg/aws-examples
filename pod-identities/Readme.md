@@ -7,7 +7,7 @@ If you wish to utilize IAM roles for service accounts (IRSA), this repository mi
 For more information the [AWS documentation](https://aws.amazon.com/blogs/aws/amazon-eks-pod-identity-simplifies-iam-permissions-for-applications-on-amazon-eks-clusters/)
 
 Requirements:
-* AWS Credentials with support to create IAM Roles and policies. For more information (../humanitec-onboarding-aws-iam-user)[../humanitec-onboarding-aws-iam-user]
+* AWS Credentials with support to create IAM Roles and policies. For more information [../humanitec-onboarding-aws-iam-user](../humanitec-onboarding-aws-iam-user)
 * EKS Cluster
     * Kubernetes >=1.24
     * Cluster Access Configuration set to `API` or `API_AND_CONFIG_MAP`
