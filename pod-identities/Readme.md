@@ -4,10 +4,10 @@ The following example shows how to configure multiple workloads and their corres
 
 If you wish to utilize IAM roles for service accounts (IRSA), this repository might help you, however AWS recommends using the new EKS Pod Identities approach.
 
-For more information the [AWS documentation](https://aws.amazon.com/blogs/aws/amazon-eks-pod-identity-simplifies-iam-permissions-for-applications-on-amazon-eks-clusters/)
+For more information about the EKS Pod Identities seethe [AWS documentation](https://aws.amazon.com/blogs/aws/amazon-eks-pod-identity-simplifies-iam-permissions-for-applications-on-amazon-eks-clusters/)
 
 Requirements:
-* AWS Credentials with support to create IAM Roles and policies. For more information [../humanitec-onboarding-aws-iam-user](../humanitec-onboarding-aws-iam-user)
+* AWS Credentials with support to create IAM Roles and policies. For more information see the [AWS IAM Humanitec Onboarding User](../humanitec-onboarding-aws-iam-user)
 * EKS Cluster
     * Kubernetes >=1.24
     * Cluster Access Configuration set to `API` or `API_AND_CONFIG_MAP`
