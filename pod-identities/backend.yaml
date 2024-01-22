@@ -1,0 +1,21 @@
+---
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: backend
+
+containers:
+  backend:
+    image: ubuntu:latest
+    command: ["/bin/bash"]
+    args: ["-c", 'while true; do printenv && echo "***"; sleep 120; done']
+    variables:
+      S3: ${resources.s3.arn}
+      SQS: ${resources.sqs.arn}
+resources:
+  "s3":
+    type: s3
+    class: mys3
+  "sqs":
+    type: sqs
+    class: mysqs

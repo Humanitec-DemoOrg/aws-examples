@@ -1,0 +1,14 @@
+access_key      = ""
+secret_key      = ""
+region          = "ca-west-1"
+
+humanitec_organization = "myorg"
+humanitec_token        = "mytoken"
+
+app = "myapp"
+
+# export HUMANITEC_TOKEN="mytoken"
+# export HUMANITEC_ORG="myorg"
+# export HUMANITEC_APP="myapp"
+# score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $HUMANITEC_APP --env development -f backend.yaml --deploy
+# score-humanitec delta --token $HUMANITEC_TOKEN --org $HUMANITEC_ORG --app $HUMANITEC_APP --env development -f frontend.yaml --deploy
