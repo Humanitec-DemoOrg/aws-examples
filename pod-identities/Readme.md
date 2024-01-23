@@ -22,7 +22,7 @@ Requirements:
 
     * In this example, we have defined 3 policies:
         * Two for [S3](resource-definition/policy-s3.tf) and [S3ro](resource-definition/policy-s3ro.tf)
-        * another for [SQS](resource-definition/policy-sqs.tf) 
+        * One for [SQS](resource-definition/policy-sqs.tf) 
         * These policies will be used for all your workloads, providing the same set of permissions agaisnt AWS resources, however, each workload will have access to only the resources that belong to its configuration as defined by the `Target Architecture`. These policies point to an inline Terraform manifest that actually creates the resources in AWS.
     * Each policy is identified by its parent caller resource by its class (note the highligthed line):
         * [s3#L36](resource-definition/policy-s3.tf#L36)
@@ -53,10 +53,11 @@ Requirements:
     * Example: 
         * `"$${resources['aws-policy.s3>s3'].outputs.arn}"`: this placeholder can be read as: retrieve all the ARNs of S3 buckets `>s3` that are requesting a policy of class s3 `aws-policy.s3`
     * If you had custom policies, you would need to adjust the class such as:
-        * `"$${resources['aws-policy.s3rw>s3'].outputs.arn}"` or `"$${resources['aws-policy.s3ro>s3'].outputs.arn}"`. * You would then need to [process and adjust them](resource-definition/source/s3-policy.tf#L34) as needed to build your policies.
+        * `"$${resources['aws-policy.s3rw>s3'].outputs.arn}"` or `"$${resources['aws-policy.s3ro>s3'].outputs.arn}"`
+        * You would then need to [process and adjust them](resource-definition/source/s3-policy.tf#L34) as needed to build your policies.
         * Custom policy example:
             * [`policy s3ro#L18`](resource-definition/policy-s3ro.tf#L18)
-            *  its parent AWS Resource [`s3ro#L8`](resource-definition/s3ro.tf#L8) 
+            * its parent AWS Resource [`s3ro#L8`](resource-definition/s3ro.tf#L8) 
             * Please note their class names and the way they are constructed, and how both resources are connected using the class `s3ro`.
 * Deploying Applications with Score
     * Please note the resources section within [backend.yaml](backend.yaml) and [frontend.yaml](frontend.yaml):
