@@ -43,7 +43,7 @@ Requirements:
     * If you had custom policies, you would need to adjust the class such as `"$${resources['aws-policy.s3rw>s3'].outputs.arn}"` or `"$${resources['aws-policy.s3ro>s3'].outputs.arn}"`. You would then need to [process and adjust them](resource-definition/source/s3-policy.tf#L34) as needed to build your policies.
     * Examples of a custom policy would be [`policy s3ro`](resource-definition/policy-s3ro.tf#L18), and its parent AWS Resource [`s3ro`](resource-definition/s3ro.tf#L8). Please note their class names and the way they are constructed, and how both resources are connected using the class `s3ro`.
 * Deploying Applications with Score
-    * Please see [backend.yaml] and [frontend.yaml] for an example of how to request a specific resource with their policy, in particular the resources property.
+    * Please see [backend.yaml](backend.yaml) and [frontend.yaml](frontend.yaml) for an example of how to request a specific resource with their policy, in particular the resources property.
         ```
         resources:
         "s3":
