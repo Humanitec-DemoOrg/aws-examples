@@ -41,6 +41,5 @@ resource "humanitec_resource_definition" "s3" {
 resource "humanitec_resource_definition_criteria" "s3" {
   resource_definition_id = humanitec_resource_definition.s3.id
   app_id                 = humanitec_application.app.id
-  env_id                 = "development"
   class                  = "mys3"
 }

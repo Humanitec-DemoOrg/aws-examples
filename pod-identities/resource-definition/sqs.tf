@@ -41,6 +41,5 @@ resource "humanitec_resource_definition" "sqs" {
 resource "humanitec_resource_definition_criteria" "sqs" {
   resource_definition_id = humanitec_resource_definition.sqs.id
   app_id                 = humanitec_application.app.id
-  env_id                 = "development"
   class                  = "mysqs"
 }

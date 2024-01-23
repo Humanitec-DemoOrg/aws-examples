@@ -43,5 +43,4 @@ resource "humanitec_resource_definition" "role" {
 resource "humanitec_resource_definition_criteria" "role" {
   resource_definition_id = humanitec_resource_definition.role.id
   app_id                 = humanitec_application.app.id
-  env_id                 = "development"
 }

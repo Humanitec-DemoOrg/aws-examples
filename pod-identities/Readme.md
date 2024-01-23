@@ -90,5 +90,5 @@ Requirements:
             * [workload (frontend)#L36](resource-definition/workload-frontend.tf#L36)
 
 ## Humanitec IAC Relationship
-The following diagram explains the relationship between resource definitions and matching criteria. The example below will configure one resource of type S3 with its corresponding policy, then attach it to a workload named `backend`.
+The following diagram explains the relationship between resource definitions and matching criteria. The example below will configure one resource of type S3 with its corresponding policy, then attach it to a workload named `backend`. Matching Criterias are designed to allow the same resource definitions be reused across any environment type and name. In order to customize per environment, `env_id` and `env_type` can be added accordingly to the resoruce definitions.
 ![Humanitec IAC Relationship](humanitec-iac.svg)
