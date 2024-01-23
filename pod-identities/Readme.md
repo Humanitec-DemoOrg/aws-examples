@@ -37,7 +37,7 @@ Requirements:
       Within this stanza, you can configure which policy will be created automatically. In the case depicted, the Orchestrator will create a policy with a class `s3`. If you had different kind of S3 policies, you would configure such `"aws-policy.s3rw"` or `"aws-policy.s3ro"`. This would also require to create two different classes of S3 resource definitions.
 * AWS Resources and their AWS IAM Policies:
 
-    * Each policy will receive a set of ARNs using the [Resource Selector Syntax](https://developer.humanitec.com/platform-orchestrator/resources/resource-graph/#resource-selectors) placeholder:
+    * Each policy will receive a set of ARNs using the [Resource Selector Syntax](https://developer.humanitec.com/platform-orchestrator/resources/resource-graph/#resource-selectors) placeholder
 
     * Example: `"$${resources['aws-policy.s3>s3'].outputs.arn}"`, this placeholder can be read as: retrieve all the ARNs of S3 buckets `>s3` that are requesting a policy of class s3 `aws-policy.s3`
     * If you had custom policies, you would need to adjust the class such as `"$${resources['aws-policy.s3rw>s3'].outputs.arn}"` or `"$${resources['aws-policy.s3ro>s3'].outputs.arn}"`. You would then need to [process and adjust them](resource-definition/source/s3-policy.tf#L34) as needed to build your policies.
@@ -58,6 +58,6 @@ Requirements:
         ```
 * AWS IAM Role and Workload Association:
     * In order to put everything together, it is important to define a a resource definition of type [`aws-role`](resource-definition/role.tf) along with a [workload and service account](resource-definition/workload-backend.tf) for each workload in advance. 
-    * The role contains a placeholder `$${resources.workload>aws-policy.outputs.arn}` which can be read as: For the current workload, find all the policies created, and retrieve their ARNs. This role then will be created in AWS, and an EKS Pod Identity association would be created using its [Terraform definition](resource-definition/source/role.tf).
+    * The resource definition for the role contains a placeholder `$${resources.workload>aws-policy.outputs.arn}` which can be read as: For the current workload, find all the policies created, and retrieve their ARNs. This role then will be created in AWS, and an EKS Pod Identity association would be created using its [Terraform definition](resource-definition/source/role.tf).
     * 
 
