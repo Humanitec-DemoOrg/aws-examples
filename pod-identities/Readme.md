@@ -89,3 +89,6 @@ Requirements:
             * [workload (backend)#L36](resource-definition/workload-backend.tf#L36)
             * [workload (frontend)#L36](resource-definition/workload-frontend.tf#L36)
 
+## Humanitec IAC Relationship
+The following diagram explains the relationship between resource definitions and matching criteria. The example below will configure one resource of type S3 with its corresponding policy, then attach it to a workload named `backend`.
+![Humanitec IAC Relationship](humanitec-iac.svg)
