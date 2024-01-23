@@ -78,9 +78,14 @@ Requirements:
     * In order to put everything together, it is important to define a a resource definition of type [`aws-role`](resource-definition/role.tf) along with the [workload (backend)](resource-definition/workload-backend.tf),[workload (frontend)](resource-definition/workload-frontend.tf) and the [service account (backend)](resource-definition/service-account-backend.tf),[service account (frontend)](resource-definition/service-account-frontend.tf) for each workload in advance. 
     * The role  resource definition  contains a placeholder which references the AWS IAM Policies for the current context `$${resources.workload>aws-policy.outputs.arn}` which can be read as: For the current workload, find all the policies created, and retrieve their ARNs. This role then will be created in AWS, and an EKS Pod Identity association would be created using its [Terraform definition](resource-definition/source/role.tf).
     * Workload configuration:
-        * [workload (backend)](resource-definition/workload-backend.tf)
-        * [workload (frontend)](resource-definition/workload-frontend.tf)
+
         * Line 10 will trigger the creation of the custom service account for the workload
+            * [workload (backend)#L10](resource-definition/workload-backend.tf#L10)
+            * [workload (frontend)#L10](resource-definition/workload-frontend.tf#L10)
         * Line 16 will trigger the creation of the AWS ROLE for the workload.
+            * [workload (backend)#L16](resource-definition/workload-backend.tf#L16)
+            * [workload (frontend)#L16](resource-definition/workload-frontend.tf#L16)
         * Line 36 overrides using matching criteria the default workload with this custom one.
+            * [workload (backend)#L36](resource-definition/workload-backend.tf#L36)
+            * [workload (frontend)#L36](resource-definition/workload-frontend.tf#L36)
 
