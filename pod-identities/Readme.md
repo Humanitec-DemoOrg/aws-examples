@@ -56,8 +56,9 @@ Requirements:
         * `"$${resources['aws-policy.s3rw>s3'].outputs.arn}"` or `"$${resources['aws-policy.s3ro>s3'].outputs.arn}"`
         * You would then need to [process and adjust them](resource-definition/source/s3-policy.tf#L34) as needed to build your policies.
         * Custom policy example:
+            * The parent AWS Resource [`s3ro#L8`](resource-definition/s3ro.tf#L8) 
             * [`policy s3ro#L18`](resource-definition/policy-s3ro.tf#L18)
-            * its parent AWS Resource [`s3ro#L8`](resource-definition/s3ro.tf#L8) 
+            * [`policy s3ro#L36`](resource-definition/policy-s3ro.tf#L36)
             * Please note their class names and the way they are constructed, and how both resources are connected using the class `s3ro`.
 * Deploying Applications with Score
     * Please note the resources section within [backend.yaml](backend.yaml) and [frontend.yaml](frontend.yaml):
