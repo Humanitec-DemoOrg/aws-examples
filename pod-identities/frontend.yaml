@@ -1,0 +1,21 @@
+---
+apiVersion: score.dev/v1b1
+
+metadata:
+  name: frontend
+
+containers:
+  frontend:
+    image: ubuntu:latest
+    command: ["/bin/bash"]
+    args: ["-c", 'while true; do printenv && echo "***"; sleep 120; done']
+    variables:
+      S3: ${resources.s3f.arn}
+      SQS: ${resources.sqsf.arn}
+resources:
+  "s3f":
+    type: s3
+    class: mys3
+  "sqsf":
+    type: sqs
+    class: mysqs

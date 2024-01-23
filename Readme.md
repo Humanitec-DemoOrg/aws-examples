@@ -27,3 +27,4 @@ In this repository you will find a collection of examples on how to integrate yo
 - Using AWS Secrets Manager with RDS databases [db-secrets-manager](db-secrets-manager)
 - Workload Profiles: Custom CRDs [workload-profile/crd](workload-profile/crd)
 - Workload Profiles: Init Containers [workload-profile/initcontainer](workload-profile/initcontainer)
+- How to configure Amazon EKS Pod Identities for your workloads [pod-identities](pod-identities)
