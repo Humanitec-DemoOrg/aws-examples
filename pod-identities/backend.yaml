@@ -11,11 +11,15 @@ containers:
     args: ["-c", 'while true; do printenv && echo "***"; sleep 120; done']
     variables:
       S3: ${resources.s3.arn}
+      S3ro: ${resources.s3ro.arn}
       SQS: ${resources.sqs.arn}
 resources:
   "s3":
     type: s3
     class: mys3
+  "s3ro":
+    type: s3
+    class: mys3ro
   "sqs":
     type: sqs
     class: mysqs
