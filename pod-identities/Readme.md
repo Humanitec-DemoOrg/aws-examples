@@ -56,3 +56,6 @@ Requirements:
             type: sqs
             class: mysqs
         ```
+* AWS IAM Role:
+    * In order to put everything together, it is important to define a a resource definition of type [`aws-role`](resource-definition/role.tf) along with a [workload and service account](resource-definition/workload-backend.tf). The role as a placeholder `$${resources.workload>aws-policy.outputs.arn}` which can be read as: For the current workload, find all the policies created, and retrieve their ARNs. This role then will be created in AWS, and an EKS Pod Identity association would be created using its [Terraform definition](resource-definition/source/role.tf).
+
