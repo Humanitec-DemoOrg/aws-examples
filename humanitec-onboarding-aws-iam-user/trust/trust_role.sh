@@ -1,7 +1,8 @@
 export AWS_ACCESS_KEY_ID=xxx
 export AWS_SECRET_ACCESS_KEY=xxx
 export AWS_DEFAULT_REGION=ca-central-1
-export EXTERNAL_ID=$(uuidgen | tr '[:upper:]' '[:lower:]') #this will be used as driver_account
+export AWS_ACCOUNT="012345678901"
+export EXTERNAL_ID=$(uuidgen | tr '[:upper:]' '[:lower:]')
 
 export HUMANITEC_ORG=xxx
 export HUMANITEC_TOKEN=xxx
@@ -59,13 +60,10 @@ aws iam attach-role-policy \
   --role-name ${ROLE_NAME} \
   --policy-arn ${POLICY_ARN}
 
-export CLOUD_ACCOUNT_NAME=${EXTERNAL_ID}
-export CLOUD_ACCOUNT_ID=${EXTERNAL_ID}
-
 humctl api post /orgs/${HUMANITEC_ORG}/resources/accounts \
 -d '{
-  "name": "'"${CLOUD_ACCOUNT_NAME}"'",
-  "id": "'"${CLOUD_ACCOUNT_ID}"'",
+  "name": "'"${AWS_ACCOUNT}"'",
+  "id": "'"${AWS_ACCOUNT}"'",
   "type": "aws-role",
   "credentials": {
     "aws_role": "'"${ROLE_ARN}"'",
