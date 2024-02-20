@@ -1,5 +1,6 @@
 # Amazon IAM User Onboarding
-
+## Support for AWS Trust
+See [trust](trust) and [trust](https://developer.humanitec.com/platform-orchestrator/security/cloud-accounts/#aws-role-assumption)
 ## Background
 Humanitec follows the least privilege approach to security and access to customer's environments.
 Humanitec uses an Amazon IAM user per account with long term credentials to communicate with your Amazon EKS clusters, and Amazon IAM roles with temporary credentials to manage AWS Resources with Terraform.
