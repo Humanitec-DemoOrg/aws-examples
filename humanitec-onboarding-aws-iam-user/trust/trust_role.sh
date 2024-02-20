@@ -26,7 +26,7 @@ cat <<EOF > /tmp/trust-policy.json
 }
 EOF
 
-export ROLE_NAME=nick-${EXTERNAL_ID}
+export ROLE_NAME=humanitec-${EXTERNAL_ID}
 
 export ROLE_ARN=$(aws iam create-role --role-name ${ROLE_NAME} \
   --assume-role-policy-document file:///tmp/trust-policy.json \
@@ -47,7 +47,7 @@ cat <<EOF > /tmp/role-policy.json
   ]
 }
 EOF
-export POLICY_NAME=nick-${EXTERNAL_ID}
+export POLICY_NAME=humanitec-${EXTERNAL_ID}
 
 export POLICY_ARN=$(aws iam create-policy \
   --policy-name ${POLICY_NAME} \
