@@ -25,7 +25,7 @@ resource "humanitec_application" "app" {
 }
 
 resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
-  driver_type = "${var.humanitec_organization}/terraform"
+  driver_type = "humanitec/terraform"
   id          = "${var.app_name}-aws-terrafom-s3-bucket"
   name        = "${var.app_name}-aws-terrafom-s3-bucket"
   type        = "s3"
