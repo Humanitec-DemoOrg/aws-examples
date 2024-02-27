@@ -1,0 +1,64 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  # humanitec creds
+  TF_VAR_HUMANITEC_ORG: myorg
+  HUMANITEC_ORG: myorg
+  # Configure this secret as variable in your pipeline, create a new one under "Service Users"
+  # TF_VAR_HUMANITEC_TOKEN: $(TF_VAR_HUMANITEC_TOKEN)
+  HUMANITEC_TOKEN: $(TF_VAR_HUMANITEC_TOKEN)
+  TF_VAR_HUMANITEC_APP: azureapp
+  HUMANITEC_APP: azureapp
+
+  # Terraform cloud for state storage (free version)
+  # configure your Terraform Org for Default Execution Mode "local"
+  # Create a TEAM token
+  # Configure this secret as variable in your pipeline
+  # the script will create workspaces within the default project for the org, adjust accordingly if needed
+  # TFE_TOKEN: $(TFE_TOKEN)
+  TF_CLOUD_ORGANIZATION: "azurehumanitec"
+steps:
+  - script: |
+      sudo mkdir /home/vsts/.local/bin
+      sudo snap install --classic opentofu
+      curl -fLO https://github.com/humanitec/cli/releases/download/v0.13.5/cli_0.13.5_linux_amd64.tar.gz
+      curl -fLO https://github.com/score-spec/score-humanitec/releases/download/0.10.1/score-humanitec_0.10.1_linux_amd64.tar.gz
+      tar xvzf cli_0.13.5_linux_amd64.tar.gz
+      tar xvzf score-humanitec_0.10.1_linux_amd64.tar.gz
+      rm cli_0.13.5_linux_amd64.tar.gz README.md score-humanitec_0.10.1_linux_amd64.tar.gz LICENSE
+
+      sudo mv humctl /home/vsts/.local/bin
+      sudo chmod +x /home/vsts/.local/bin/humctl
+
+      sudo mv score-humanitec /home/vsts/.local/bin
+      sudo chmod +x /home/vsts/.local/bin/score-humanitec
+
+  - script: |
+
+      humctl version
+      tofu version
+      score-humanitec --version
+
+      chmod +x ./resource-definition/create_resource_definitions.sh
+      cd resource-definition
+      # here's where you have another pipeline with dev/prod and PRs to deploy separately
+      ./create_resource_definitions.sh
+
+    displayName: "Create resource definitions for each environment"
+
+  - script: |
+
+      # here's where you have another pipeline with dev/prod and PRs to deploy separately
+      chmod +x ./deploy.sh
+      ./deploy.sh
+
+    displayName: "Deploy dev & prod"
