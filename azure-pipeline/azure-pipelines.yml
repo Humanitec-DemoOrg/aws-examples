@@ -51,6 +51,7 @@ steps:
       chmod +x ./resource-definition/create_resource_definitions.sh
       cd resource-definition
       # here's where you have another pipeline with dev/prod and PRs to deploy separately
+      # these are templates, instructions to Humanitec how to create a resource, in this case a blob storage and a database
       ./create_resource_definitions.sh
 
     displayName: "Create resource definitions for each environment"
@@ -58,6 +59,7 @@ steps:
   - script: |
 
       # here's where you have another pipeline with dev/prod and PRs to deploy separately
+      # each environment will get their own DB/Storage based on the definitions above
       chmod +x ./deploy.sh
       ./deploy.sh
 
