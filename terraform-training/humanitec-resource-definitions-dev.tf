@@ -1,5 +1,5 @@
 resource "humanitec_resource_definition" "s3_dev" {
-  driver_type = "${var.humanitec_organization}/terraform"
+  driver_type = "humanitec/terraform"
   id          = "${var.app_name}-s3-dev"
   name        = "${var.app_name}-s3-dev"
   type        = "s3"
@@ -27,17 +27,16 @@ resource "humanitec_resource_definition" "s3_dev" {
     }
   }
 
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-      env_id = var.dev_env
-    }
-  ]
+}
 
+resource "humanitec_resource_definition_criteria" "s3_dev" {
+  resource_definition_id = humanitec_resource_definition.s3_dev.id
+  app_id                 = humanitec_application.app.id
+  env_id                 = var.dev_env
 }
 
 resource "humanitec_resource_definition" "postgres_dev" {
-  driver_type = "${var.humanitec_organization}/terraform"
+  driver_type = "humanitec/terraform"
   id          = "${var.app_name}-postgres-dev"
   name        = "${var.app_name}-postgres-dev"
   type        = "postgres"
@@ -65,17 +64,17 @@ resource "humanitec_resource_definition" "postgres_dev" {
     }
   }
 
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-      env_id = var.dev_env
-    }
-  ]
-
 }
 
+resource "humanitec_resource_definition_criteria" "postgres_dev" {
+  resource_definition_id = humanitec_resource_definition.postgres_dev.id
+  app_id                 = humanitec_application.app.id
+  env_id                 = var.dev_env
+}
+
+
 resource "humanitec_resource_definition" "mariadb_dev" {
-  driver_type = "${var.humanitec_organization}/terraform"
+  driver_type = "humanitec/terraform"
   id          = "${var.app_name}-mariadb-dev"
   name        = "${var.app_name}-mariadb-dev"
   type        = "mariadb"
@@ -103,11 +102,12 @@ resource "humanitec_resource_definition" "mariadb_dev" {
     }
   }
 
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-      env_id = var.dev_env
-    }
-  ]
 
 }
+
+resource "humanitec_resource_definition_criteria" "mariadb_dev" {
+  resource_definition_id = humanitec_resource_definition.mariadb_dev.id
+  app_id                 = humanitec_application.app.id
+  env_id                 = var.dev_env
+}
+

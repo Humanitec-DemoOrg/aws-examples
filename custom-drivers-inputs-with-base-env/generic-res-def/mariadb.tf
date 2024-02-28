@@ -1,5 +1,5 @@
 resource "humanitec_resource_definition" "mariadb" {
-  driver_type = "${var.humanitec_organization}/terraform"
+  driver_type = "humanitec/terraform"
   id          = "generic-res-mariadb"
   name        = "generic-res-mariadb"
   type        = "mariadb"
@@ -26,10 +26,11 @@ resource "humanitec_resource_definition" "mariadb" {
     }
   }
 
-  criteria = [
-    {
-      app_id = var.app_id
-    }
-  ]
 
+}
+
+
+resource "humanitec_resource_definition_criteria" "mariadb" {
+  resource_definition_id = humanitec_resource_definition.mariadb.id
+  app_id                 = var.app_id
 }

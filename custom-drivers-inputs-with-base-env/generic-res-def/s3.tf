@@ -1,5 +1,5 @@
 resource "humanitec_resource_definition" "s3" {
-  driver_type = "${var.humanitec_organization}/terraform"
+  driver_type = "humanitec/terraform"
   id          = "generic-res-s3"
   name        = "generic-res-s3"
   type        = "s3"
@@ -28,10 +28,10 @@ resource "humanitec_resource_definition" "s3" {
     }
   }
 
-  criteria = [
-    {
-      app_id = var.app_id
-    }
-  ]
 
+}
+
+resource "humanitec_resource_definition_criteria" "s3" {
+  resource_definition_id = humanitec_resource_definition.s3.id
+  app_id                 = var.app_id
 }

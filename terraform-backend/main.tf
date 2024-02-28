@@ -23,17 +23,16 @@ provider "humanitec" {
   token  = var.humanitec_token
 }
 
+resource "humanitec_resource_definition_criteria" "aws_terraform_resource_s3_bucket" {
+  resource_definition_id = humanitec_resource_definition.aws_terraform_resource_s3_bucket.id
+  res_id                 = null
+}
+
 resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
-  driver_type = "${var.humanitec_organization}/terraform"
+  driver_type = "humanitec/terraform"
   id          = "aws-terrafom-s3-bucket"
   name        = "aws-terrafom-s3-bucket"
   type        = "s3"
-
-  criteria = [
-    {
-      res_id = null
-    }
-  ]
 
   driver_inputs = {
     secrets = {

@@ -24,17 +24,17 @@ resource "humanitec_application" "app" {
   name = var.app_name
 }
 
+resource "humanitec_resource_definition_criteria" "aws_terraform_resource_s3_bucket" {
+  resource_definition_id = humanitec_resource_definition.aws_terraform_resource_s3_bucket.id
+  app_id                 = humanitec_application.app.id
+}
+
 resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
   driver_type = "humanitec/terraform"
   id          = "${var.app_name}-aws-terrafom-s3-bucket"
   name        = "${var.app_name}-aws-terrafom-s3-bucket"
   type        = "s3"
 
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-    }
-  ]
 
   driver_inputs = {
     secrets = {

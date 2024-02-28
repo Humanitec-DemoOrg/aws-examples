@@ -122,16 +122,10 @@ provider "aws" {
 
 ```
 resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
-  driver_type = "${var.humanitec_organization}/terraform"
+  driver_type = "humanitec/terraform"
   id          = "aws-terrafom-s3-bucket"
   name        = "aws-terrafom-s3-bucket"
   type        = "s3"
-
-  criteria = [
-    {
-      res_id = null
-    }
-  ]
 
   driver_inputs = {
     secrets = {

@@ -1,5 +1,5 @@
 resource "humanitec_resource_definition" "postgres" {
-  driver_type = "${var.humanitec_organization}/terraform"
+  driver_type = "humanitec/terraform"
   id          = "generic-res-postgres"
   name        = "generic-res-postgres"
   type        = "postgres"
@@ -27,10 +27,10 @@ resource "humanitec_resource_definition" "postgres" {
     }
   }
 
-  criteria = [
-    {
-      app_id = var.app_id
-    }
-  ]
 
+}
+
+resource "humanitec_resource_definition_criteria" "postgres" {
+  resource_definition_id = humanitec_resource_definition.postgres.id
+  app_id                 = var.app_id
 }

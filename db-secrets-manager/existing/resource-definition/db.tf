@@ -1,5 +1,5 @@
 resource "humanitec_resource_definition" "postgres" {
-  driver_type = "${var.humanitec_organization}/terraform"
+  driver_type = "humanitec/terraform"
   id          = "existing-postgres"
   name        = "existing-postgres"
   type        = "postgres"
