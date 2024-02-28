@@ -26,9 +26,4 @@ EOL
       }
     })
   }
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
 }

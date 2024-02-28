@@ -33,11 +33,6 @@ EOL
     }
   }
 
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
 }
 
 
@@ -77,11 +72,6 @@ EOL
     }
   }
 
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
 }
 
 resource "humanitec_resource_definition_criteria" "aws_terraform_resource_workload1" {

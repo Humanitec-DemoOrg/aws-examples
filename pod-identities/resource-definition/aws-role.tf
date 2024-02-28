@@ -33,11 +33,6 @@ resource "humanitec_resource_definition" "role" {
 
     })
   }
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
 }
 
 resource "humanitec_resource_definition_criteria" "role" {

@@ -23,11 +23,7 @@ resource "humanitec_resource_definition" "s3_policy" {
       }
     })
   }
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
+
 }
 
 resource "humanitec_resource_definition_criteria" "s3_policy" {

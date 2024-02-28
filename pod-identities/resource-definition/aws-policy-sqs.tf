@@ -23,11 +23,6 @@ resource "humanitec_resource_definition" "sqs_policy" {
       }
     })
   }
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
 }
 
 resource "humanitec_resource_definition_criteria" "sqs_policy" {

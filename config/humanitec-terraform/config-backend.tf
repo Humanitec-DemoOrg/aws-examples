@@ -15,9 +15,4 @@ resource "humanitec_resource_definition" "config_backend" {
     })
   }
 
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
 }

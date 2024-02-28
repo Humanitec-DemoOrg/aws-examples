@@ -14,9 +14,4 @@ resource "humanitec_resource_definition" "s3" {
       "region" : "$${resources.config.outputs.region}"
     })
   }
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
 }

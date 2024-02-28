@@ -30,11 +30,6 @@ resource "humanitec_resource_definition" "s3" {
 
     })
   }
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
 
 }
 

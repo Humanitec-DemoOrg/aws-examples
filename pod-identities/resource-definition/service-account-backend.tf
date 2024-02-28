@@ -28,11 +28,6 @@ EOL
     secrets_string = jsonencode({
     })
   }
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
 }
 
 resource "humanitec_resource_definition_criteria" "workload_backend_sa" {

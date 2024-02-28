@@ -30,11 +30,6 @@ resource "humanitec_resource_definition" "sqs" {
 
     })
   }
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
 
 }
 

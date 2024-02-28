@@ -17,11 +17,6 @@ resource "humanitec_resource_definition" "hardcoded_config_for_s3" {
     })
   }
 
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
 }
 
 resource "humanitec_resource_definition_criteria" "hardcoded_config_for_s3d" {
@@ -46,11 +41,7 @@ resource "humanitec_resource_definition" "s3_from_hardcoded_config" {
       "region" : "$${resources['config.hardcoded-config-for-s3'].outputs.region}"
     })
   }
-  lifecycle {
-    ignore_changes = [
-      criteria
-    ]
-  }
+
 }
 
 resource "humanitec_resource_definition_criteria" "s3_from_hardcoded_config" {
