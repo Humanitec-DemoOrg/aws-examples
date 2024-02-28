@@ -33,15 +33,16 @@ EOL
     }
   }
 
-  # this should be dynamic
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-      res_id = "modules.backend.externals.${var.dns_local_resource_name}"
-    },
-    {
-      app_id = humanitec_application.app.id
-      res_id = "modules.frontend.externals.${var.dns_local_resource_name}"
-    }
-  ]
+}
+
+resource "humanitec_resource_definition_criteria" "dns_local1" {
+  resource_definition_id = humanitec_resource_definition.dns_local.id
+  app_id                 = humanitec_application.app.id
+  res_id                 = "modules.backend.externals.${var.dns_local_resource_name}"
+}
+
+resource "humanitec_resource_definition_criteria" "dns_local2" {
+  resource_definition_id = humanitec_resource_definition.dns_local.id
+  app_id                 = humanitec_application.app.id
+  res_id                 = "modules.frontend.externals.${var.dns_local_resource_name}"
 }

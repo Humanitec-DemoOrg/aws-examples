@@ -29,9 +29,10 @@ resource "humanitec_resource_definition" "eks" {
     }
   }
 
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-    }
-  ]
+}
+
+
+resource "humanitec_resource_definition_criteria" "eks" {
+  resource_definition_id = humanitec_resource_definition.eks.id
+  app_id                 = humanitec_application.app.id
 }

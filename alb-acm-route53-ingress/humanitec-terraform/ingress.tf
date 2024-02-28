@@ -24,10 +24,9 @@ resource "humanitec_resource_definition" "ingress" {
     secrets = {
     }
   }
+}
 
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-    }
-  ]
+resource "humanitec_resource_definition_criteria" "ingress" {
+  resource_definition_id = humanitec_resource_definition.ingress.id
+  app_id                 = humanitec_application.app.id
 }

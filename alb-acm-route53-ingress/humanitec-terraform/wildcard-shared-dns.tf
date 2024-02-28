@@ -22,10 +22,11 @@ resource "humanitec_resource_definition" "dns" {
     }
   }
 
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-      res_id = "shared.${var.dns_shared_resource_name}"
-    }
-  ]
+}
+
+
+resource "humanitec_resource_definition_criteria" "dns" {
+  resource_definition_id = humanitec_resource_definition.dns.id
+  app_id                 = humanitec_application.app.id
+  res_id                 = "shared.${var.dns_shared_resource_name}"
 }
