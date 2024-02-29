@@ -1,0 +1,6 @@
+humanitec_org   = "myorg"
+humanitec_token = "mytoken"
+humanitec_app   = "gcpapp"
+driver_account  = "mygcpaccount"
+location        = "us-east1"
+project         = "mygcpproject"
