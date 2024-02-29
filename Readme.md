@@ -30,3 +30,4 @@ In this repository you will find a collection of examples on how to integrate yo
 - How to configure Amazon EKS Pod Identities for your workloads (Former EKS IRSA - IAM Roles for service account) [pod-identities](pod-identities)
 - Azure Pipeline demo [azure-pipeline](azure-pipeline)
 - GCP Terraform demo [gcp-demo](gcp-demo)
+- Azure demo [azure-demo](azure-demo)
