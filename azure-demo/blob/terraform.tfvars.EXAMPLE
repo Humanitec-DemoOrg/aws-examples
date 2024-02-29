@@ -1,0 +1,9 @@
+humanitec_organization       = "myorg"
+humanitec_token              = "mytoken"
+region                       = "eastus"
+app                          = "azure"
+azure_subscription_id        = ""
+azure_subscription_tenant_id = ""
+service_principal_id         = ""
+password                     = "" #https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret
+resource_group_name          = "myresourcegroupname"
