@@ -1,0 +1,11 @@
+apiVersion: humanitec.org/v1b1
+profile: "humanitec/default-module"
+spec:
+  containers:
+    example-name:
+      securityContext:
+        capabilities:
+          add:
+            - SYS_PTRACE
+        privileged: true
+        runAsUser: 0
