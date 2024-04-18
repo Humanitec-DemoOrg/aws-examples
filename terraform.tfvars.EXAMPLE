@@ -1,0 +1,7 @@
+humanitec_organization = "myorg"
+humanitec_token        = "mytoken"
+
+app   = "tfc"
+org   = "my-tfc-token"
+token = "MY.atlasv1.TOKEN"
+
