@@ -31,3 +31,4 @@ In this repository you will find a collection of examples on how to integrate yo
 - Azure Pipeline demo [azure-pipeline](azure-pipeline)
 - GCP Terraform demo [gcp-demo](gcp-demo)
 - Azure demo [azure-demo](azure-demo)
+- Terraform Cloud Integration [tfc](tfc)
