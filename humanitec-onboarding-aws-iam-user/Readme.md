@@ -3,7 +3,7 @@
 ### Recommended way to configure your AWS Access
 See [trust](trust) and [trust](https://developer.humanitec.com/platform-orchestrator/security/cloud-accounts/#aws-role-assumption)
 
-# Reference Information as of April 2024
+# Reference Information as of April 2024 (use trust above for better results)
 ## Background
 Humanitec follows the least privilege approach to security and access to customer's environments.
 Humanitec uses an Amazon IAM user per account with long term credentials to communicate with your Amazon EKS clusters, and Amazon IAM roles with temporary credentials to manage AWS Resources with Terraform.
