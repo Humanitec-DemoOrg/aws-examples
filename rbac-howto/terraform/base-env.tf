@@ -5,8 +5,8 @@ resource "humanitec_resource_definition" "base-env" {
   type        = "base-env"
 
   driver_inputs = {
-    values = {
-      templates = jsonencode({
+    values_string = jsonencode({
+      templates = {
         init      = ""
         manifests = <<EOL
 namespace-rbac:
@@ -39,14 +39,14 @@ namespace-rbac:
 EOL
         outputs   = ""
         cookie    = ""
-      })
-    }
-    secrets = {
-      templates = jsonencode({
+      }
+    })
+    secrets_string = jsonencode({
+      templates = {
         outputs = <<EOL
 EOL
-      })
-    }
+      }
+    })
   }
 
 }

@@ -35,13 +35,13 @@ resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
   type        = "s3"
 
   driver_inputs = {
-    secrets = {
-      variables = jsonencode({
+    secrets_string = jsonencode({
+      variables = {
         access_key = var.access_key
         secret_key = var.secret_key
-      })
-    },
-    values = {
+      }
+    }),
+    values_string = jsonencode({
       "script" = <<EOL
 terraform {
   backend "s3" {
@@ -57,23 +57,21 @@ terraform {
   }
 }
 EOL
-      "source" = jsonencode(
-        {
-          path = "s3/terraform/bucket/"
-          rev  = "refs/heads/main"
-          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
-        }
-      )
-      "variables" = jsonencode(
-        {
-          region                   = var.region,
-          bucket                   = "my-bucket-$${context.app.id}-$${context.env.id}"
-          assume_role_arn          = "arn:aws:iam::ACCOUNT_ID:role/<<HUMANITEC-ROLE-NAME-FOR-S3>>"
-          assume_role_session_name = "<<HUMANITEC-SAAS-ACCESS-EXAMPLE-TO-S3>>"
-          assume_role_external_id  = "<<SOME-KNOWN-EXTERNAL-ID>>"
-        }
-      )
-    }
+      "source" = {
+        path = "s3/terraform/bucket/"
+        rev  = "refs/heads/main"
+        url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
+      }
+
+      "variables" = {
+        region                   = var.region,
+        bucket                   = "my-bucket-$${context.app.id}-$${context.env.id}"
+        assume_role_arn          = "arn:aws:iam::ACCOUNT_ID:role/<<HUMANITEC-ROLE-NAME-FOR-S3>>"
+        assume_role_session_name = "<<HUMANITEC-SAAS-ACCESS-EXAMPLE-TO-S3>>"
+        assume_role_external_id  = "<<SOME-KNOWN-EXTERNAL-ID>>"
+      }
+
+    })
   }
 
 }

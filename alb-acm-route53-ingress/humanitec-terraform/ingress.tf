@@ -9,7 +9,7 @@ resource "humanitec_resource_definition" "ingress" {
   driver_type = "humanitec/ingress"
 
   driver_inputs = {
-    values = {
+    values_string = jsonencode({
       "annotations" : jsonencode({
         "alb.ingress.kubernetes.io/certificate-arn" : "${var.ingress_cert_arn}",
         "alb.ingress.kubernetes.io/group.name" : "${var.ingress_group_name}",
@@ -20,7 +20,7 @@ resource "humanitec_resource_definition" "ingress" {
       }),
       "class" : "alb",
       "no_tls" : true
-    }
+    })
   }
 }
 

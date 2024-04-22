@@ -15,9 +15,9 @@ resource "humanitec_resource_definition" "dns_local" {
   }
 
   driver_inputs = {
-    values = {
+    values_string = jsonencode({
 
-      templates = jsonencode({
+      templates = {
         init      = <<EOL
 D: ".${var.dns_local_domain}"
 W: {{ index (regexSplit "\\." "$${context.res.id}" -1) 1 }}
@@ -27,8 +27,8 @@ EOL
 host: $${context.app.id}-{{.init.W}}-$${context.env.id}{{.init.D}}
 EOL
         cookie    = ""
-      })
-    }
+      }
+    })
   }
 
 }

@@ -131,21 +131,21 @@ resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
   type        = "s3"
 
   driver_inputs = {
-    secrets = {
-      variables = jsonencode({
+    secrets_string = jsonencode({
+      variables = {
         access_key = var.access_key
         secret_key = var.secret_key
-      })
-    },
-    values = {
-      "source" = jsonencode(
+      }
+    }),
+    values_string = jsonencode({
+      "source" =
         {
           path = "s3/terraform/bucket/"
           rev  = "refs/heads/main"
           url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
         }
-      )
-      "variables" = jsonencode(
+
+      "variables" =
         {
           region                   = var.region,
           bucket                   = "my-company-my-app-$${context.app.id}-$${context.env.id}",
@@ -153,8 +153,8 @@ resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
           assume_role_session_name = "<<HUMANITEC-SAAS-ACCESS-EXAMPLE-TO-S3>>"
           assume_role_external_id  = "<<SOME-KNOWN-EXTERNAL-ID>>"
         }
-      )
-    }
+
+    })
   }
 
 }
@@ -165,34 +165,33 @@ The example above goes to public Github, to configure a private git repository, 
 
 ```
   driver_inputs = {
-    secrets = {
-      variables = jsonencode({
+    secrets_string = {
+      variables = {
         access_key = var.access_key
         secret_key = var.secret_key
 
-      })
-      source = jsonencode({
+      }
+      source = {
         ssh_key  = var.ssh_key # SSH Private Key (for connections over SSH). (Optional)
         password = var.password # Password or Personal Account Token. (Optional)
-      })
+      }
 
-    },
-    values = {
-      "source" = jsonencode(
+    }),
+    values_string = jsonencode({
+      "source" = 
         {
           path     = "iam-role-eks/terraform/parameter/"
           rev      = "refs/heads/main"
           url      = "https://github.com/MYPRIVATEORG/my-app-resources.git"
           username = var.username # User Name to authenticate. Default is `git`. 
         }
-      )
-      "variables" = jsonencode(
+      
+      "variables" =
         {
           region                    = var.region
           terraform_assume_role_arn = var.terraform_role
         }
-      )
-    }
+    })
   }
   ```
 

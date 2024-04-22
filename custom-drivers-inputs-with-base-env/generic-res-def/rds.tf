@@ -5,21 +5,19 @@ resource "humanitec_resource_definition" "postgres" {
   type        = "postgres"
 
   driver_inputs = {
-    values = {
-      "source" = jsonencode(
-        {
-          path = "terraform-training/postgres/"
-          rev  = "refs/heads/main"
-          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
-        }
-      )
-      "variables" = jsonencode(
-        {
-          username = "$${resources.base-env.outputs.db_username}"
-          size     = "$${resources.base-env.outputs.db_instance_size}"
-        }
-      )
-    }
+    values_string = jsonencode({
+      "source" = {
+        path = "terraform-training/postgres/"
+        rev  = "refs/heads/main"
+        url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
+      }
+
+      "variables" = {
+        username = "$${resources.base-env.outputs.db_username}"
+        size     = "$${resources.base-env.outputs.db_instance_size}"
+      }
+
+    })
   }
 
 

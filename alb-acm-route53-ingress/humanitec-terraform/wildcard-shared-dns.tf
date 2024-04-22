@@ -14,10 +14,10 @@ resource "humanitec_resource_definition" "dns" {
   }
 
   driver_inputs = {
-    values = {
+    values_string = jsonencode({
       "domain" : var.dns_shared_domain,
       "template" : "$${context.app.id}-$${context.env.id}"
-    }
+    })
   }
 
 }

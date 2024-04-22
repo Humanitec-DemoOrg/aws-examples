@@ -5,25 +5,22 @@ resource "humanitec_resource_definition" "mariadb" {
   type        = "mariadb"
 
   driver_inputs = {
-    secrets = {
-      variables = jsonencode({
+    secrets_string = jsonencode({
+      variables = {
         password = "$${resources.base-env.outputs.db_password_mariadb}"
-      })
-    },
-    values = {
-      "source" = jsonencode(
-        {
-          path = "terraform-training/mariadb/"
-          rev  = "refs/heads/main"
-          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
-        }
-      )
-      "variables" = jsonencode(
-        {
-          username = "$${resources.base-env.outputs.db_username_mariadb}"
-        }
-      )
-    }
+      }
+    }),
+    values_string = jsonencode({
+      "source" = {
+        path = "terraform-training/mariadb/"
+        rev  = "refs/heads/main"
+        url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
+      }
+      "variables" = {
+        username = "$${resources.base-env.outputs.db_username_mariadb}"
+      }
+
+    })
   }
 
 

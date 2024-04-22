@@ -21,12 +21,12 @@ resource "humanitec_resource_definition" "eks" {
       "proxy_url" : "${var.eks_proxy_url}",
       "region" : "${var.region}"
     })
-    secrets = {
-      "credentials" = jsonencode({
+    secrets_string = jsonencode({
+      "credentials" = {
         "aws_access_key_id" : var.aws_access_key_id,
         "aws_secret_access_key" : var.aws_secret_access_key
-      })
-    }
+      }
+    })
   }
 
 }

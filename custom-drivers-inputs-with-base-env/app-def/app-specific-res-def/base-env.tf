@@ -38,8 +38,8 @@ resource "humanitec_resource_definition" "base-env" {
 
 
   driver_inputs = {
-    values = {
-      templates = jsonencode({
+    values_string = jsonencode({
+      templates = {
         init      = ""
         manifests = ""
         outputs   = <<EOL
@@ -51,14 +51,14 @@ bucket_prefix:     "${var.bucket_prefix}"
 db_username_mariadb:  "${var.db_username_mariadb}"
 EOL
         cookie    = ""
-      })
-    }
-    secrets = {
-      templates = jsonencode({
+      }
+    })
+    secrets_string = jsonencode({
+      templates = {
         outputs = <<EOL
 db_password_mariadb: "${var.db_password_mariadb}"
 EOL
-      })
-    }
+      }
+    })
   }
 }

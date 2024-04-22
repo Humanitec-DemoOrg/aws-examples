@@ -7,8 +7,8 @@ resource "humanitec_resource_definition" "aws_terraform_resource_workload1_sa1" 
 
 
   driver_inputs = {
-    values = {
-      templates = jsonencode({
+    value_string = jsonencode({
+      templates = {
         init      = <<EOL
 name: ${var.app_name}-${var.workload}-sa
 EOL
@@ -27,10 +27,8 @@ EOL
 name: {{ .init.name }}
 EOL
         cookie    = ""
-      })
-    }
-    secrets = {
-    }
+      }
+    })
   }
 
 }
@@ -53,8 +51,8 @@ resource "humanitec_resource_definition" "aws_terraform_resource_workload1" {
 
 
   driver_inputs = {
-    values = {
-      templates = jsonencode({
+    values_string = jsonencode({
+      templates = {
         init      = <<EOL
 EOL
         manifests = <<EOL
@@ -66,10 +64,9 @@ update:
       value: $${resources.k8s-service-account.outputs.name}
 EOL
         cookie    = ""
-      })
-    }
-    secrets = {
-    }
+      }
+    })
+
   }
 
 }

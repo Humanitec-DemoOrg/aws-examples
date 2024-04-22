@@ -5,9 +5,9 @@ resource "humanitec_resource_definition" "namespace" {
   driver_type = "humanitec/template"
 
   driver_inputs = {
-    values = {
+    values_string = jsonencode({
 
-      templates = jsonencode({
+      templates = {
         init      = ""
         manifests = <<EOL
 namespace:
@@ -26,8 +26,8 @@ EOL
 namespace: $${context.app.id}-$${context.env.id}
 EOL
         cookie    = ""
-      })
-    }
+      }
+    })
   }
 
 }

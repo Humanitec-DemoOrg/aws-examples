@@ -37,28 +37,26 @@ resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
 
 
   driver_inputs = {
-    secrets = {
-      variables = jsonencode({
+    secrets_string = jsonencode({
+      variables = {
         access_key = var.access_key
         secret_key = var.secret_key
-      })
-    },
-    values = {
-      "source" = jsonencode(
-        {
-          path = "s3/terraform/bucket/"
-          rev  = "refs/heads/main"
-          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
-        }
-      )
-      "variables" = jsonencode(
-        {
-          region          = var.region,
-          bucket          = "my-company-my-app-$${context.app.id}-$${context.env.id}",
-          assume_role_arn = var.assume_role_arn
-        }
-      )
-    }
+      }
+    }),
+    values_string = jsonencode({
+      "source" = {
+        path = "s3/terraform/bucket/"
+        rev  = "refs/heads/main"
+        url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
+      }
+
+      "variables" = {
+        region          = var.region,
+        bucket          = "my-company-my-app-$${context.app.id}-$${context.env.id}",
+        assume_role_arn = var.assume_role_arn
+      }
+
+    })
   }
 
 }

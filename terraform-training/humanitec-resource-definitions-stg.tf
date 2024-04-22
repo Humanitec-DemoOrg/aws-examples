@@ -5,21 +5,19 @@ resource "humanitec_resource_definition" "s3_stg" {
   type        = "s3"
 
   driver_inputs = {
-    values = {
-      "source" = jsonencode(
-        {
-          path = "terraform-training/s3/"
-          rev  = "refs/heads/main"
-          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
-        }
-      )
-      "variables" = jsonencode(
-        {
-          region = "ca-central-1"
-          bucket = "my-company-my-app-$${context.app.id}-$${context.env.id}"
-        }
-      )
-    }
+    values_string = jsonencode({
+      "source" = {
+        path = "terraform-training/s3/"
+        rev  = "refs/heads/main"
+        url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
+      }
+
+      "variables" = {
+        region = "ca-central-1"
+        bucket = "my-company-my-app-$${context.app.id}-$${context.env.id}"
+      }
+
+    })
   }
 
 
@@ -37,21 +35,18 @@ resource "humanitec_resource_definition" "postgres_stg" {
   type        = "postgres"
 
   driver_inputs = {
-    values = {
-      "source" = jsonencode(
-        {
-          path = "terraform-training/postgres/"
-          rev  = "refs/heads/main"
-          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
-        }
-      )
-      "variables" = jsonencode(
-        {
-          name = "mydb"
-          size = "xl"
-        }
-      )
-    }
+    values_string = jsonencode({
+      "source" = {
+        path = "terraform-training/postgres/"
+        rev  = "refs/heads/main"
+        url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
+      }
+      "variables" = {
+        name = "mydb"
+        size = "xl"
+      }
+
+    })
   }
 
 
@@ -70,21 +65,19 @@ resource "humanitec_resource_definition" "mariadb_stg" {
   type        = "mariadb"
 
   driver_inputs = {
-    values = {
-      "source" = jsonencode(
-        {
-          path = "terraform-training/mariadb/"
-          rev  = "refs/heads/main"
-          url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
-        }
-      )
-      "variables" = jsonencode(
-        {
-          name = "mymariadb"
-          size = "xl"
-        }
-      )
-    }
+    values_string = jsonencode({
+      "source" = {
+        path = "terraform-training/mariadb/"
+        rev  = "refs/heads/main"
+        url  = "https://github.com/Humanitec-DemoOrg/aws-examples.git"
+      }
+
+      "variables" = {
+        name = "mymariadb"
+        size = "xl"
+      }
+
+    })
   }
 
 }
