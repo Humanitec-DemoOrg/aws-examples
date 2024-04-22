@@ -5,11 +5,6 @@ resource "humanitec_resource_definition" "s3_stg" {
   type        = "s3"
 
   driver_inputs = {
-    secrets = {
-      variables = jsonencode({
-
-      })
-    },
     values = {
       "source" = jsonencode(
         {
@@ -42,11 +37,6 @@ resource "humanitec_resource_definition" "postgres_stg" {
   type        = "postgres"
 
   driver_inputs = {
-    secrets = {
-      variables = jsonencode({
-
-      })
-    },
     values = {
       "source" = jsonencode(
         {
@@ -80,11 +70,6 @@ resource "humanitec_resource_definition" "mariadb_stg" {
   type        = "mariadb"
 
   driver_inputs = {
-    secrets = {
-      variables = jsonencode({
-
-      })
-    },
     values = {
       "source" = jsonencode(
         {

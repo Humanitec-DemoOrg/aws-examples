@@ -5,11 +5,6 @@ resource "humanitec_resource_definition" "s3" {
   type        = "s3"
 
   driver_inputs = {
-    secrets = {
-      variables = jsonencode({
-
-      })
-    },
     values = {
       "source" = jsonencode(
         {

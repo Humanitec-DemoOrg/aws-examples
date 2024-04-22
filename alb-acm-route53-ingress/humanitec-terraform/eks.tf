@@ -14,13 +14,13 @@ resource "humanitec_resource_definition" "eks" {
   driver_type = "humanitec/k8s-cluster-eks"
 
   driver_inputs = {
-    values = {
+    values_string = jsonencode({
       "loadbalancer" : "${var.region}",
       "loadbalancer_hosted_zone" : "${var.region}",
       "name" : "${var.eks_name}",
       "proxy_url" : "${var.eks_proxy_url}",
       "region" : "${var.region}"
-    }
+    })
     secrets = {
       "credentials" = jsonencode({
         "aws_access_key_id" : var.aws_access_key_id,

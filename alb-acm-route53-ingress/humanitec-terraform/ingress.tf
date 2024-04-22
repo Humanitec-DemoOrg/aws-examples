@@ -21,8 +21,6 @@ resource "humanitec_resource_definition" "ingress" {
       "class" : "alb",
       "no_tls" : true
     }
-    secrets = {
-    }
   }
 }
 

@@ -28,8 +28,6 @@ EOL
         cookie    = ""
       })
     }
-    secrets = {
-    }
   }
 
 }

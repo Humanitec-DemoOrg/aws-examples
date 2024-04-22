@@ -27,8 +27,6 @@ EOL
         cookie    = ""
       })
     }
-    secrets = {
-    }
   }
 
 }

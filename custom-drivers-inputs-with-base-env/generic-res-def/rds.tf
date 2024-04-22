@@ -5,11 +5,6 @@ resource "humanitec_resource_definition" "postgres" {
   type        = "postgres"
 
   driver_inputs = {
-    secrets = {
-      variables = jsonencode({
-
-      })
-    },
     values = {
       "source" = jsonencode(
         {

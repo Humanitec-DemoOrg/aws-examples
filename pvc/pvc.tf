@@ -5,8 +5,6 @@ resource "humanitec_resource_definition" "pvc" {
   type        = "volume"
 
   driver_inputs = {
-    secrets = {
-    },
     values = {
       "access_modes" : "ReadWriteOnce",
       "capacity" : "10Gi",
@@ -23,8 +21,6 @@ resource "humanitec_resource_definition" "efs" {
   type        = "volume"
 
   driver_inputs = {
-    secrets = {
-    },
     values = {
       "access_modes" : "ReadWriteMany",
       "capacity" : "10Gi",

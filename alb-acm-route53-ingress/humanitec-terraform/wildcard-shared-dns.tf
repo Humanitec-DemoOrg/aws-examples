@@ -18,8 +18,6 @@ resource "humanitec_resource_definition" "dns" {
       "domain" : var.dns_shared_domain,
       "template" : "$${context.app.id}-$${context.env.id}"
     }
-    secrets = {
-    }
   }
 
 }
