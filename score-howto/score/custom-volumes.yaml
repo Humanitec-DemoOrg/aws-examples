@@ -1,0 +1,24 @@
+#score.yaml
+---
+apiVersion: score.dev/v1b1
+metadata:
+  name: httpd
+containers:
+  kinit:
+    image: httpd:latest
+    volumes:
+      - source: "volumes.myvolume"
+        target: /volume
+        read_only: true
+#extensions.yaml
+---
+apiVersion: humanitec.org/v1b1
+
+spec:
+  extraVolumes:
+    - name: myvolume
+      csi:
+        driver: secrets-store.csi.x-k8s.io
+        readOnly: true
+        volumeAttributes:
+          secretProviderClass: "my-custom-class"

@@ -15,6 +15,7 @@ Please follow the instructions here [https://docs.score.dev/docs/get-started/ins
 1. Configure an emptyDir: [score/emptydir.yaml](score/emptydir.yaml) and [score/emptydir-extension.yaml](score/emptydir-extension.yaml)
 1. Add Files: [score/files.yaml](score/files.yaml)
 1. Security Context [score/podsecuritycontext-v1-core-extension.yaml](score/podsecuritycontext-v1-core-extension.yaml) and [score/securitycontext-v1-core-extension.yaml](score/securitycontext-v1-core-extension.yaml)
+1. Custom volumes: [score/custom-volumes.yaml](score/custom-volumes.yaml)
 
 ### Deployment
 ```
