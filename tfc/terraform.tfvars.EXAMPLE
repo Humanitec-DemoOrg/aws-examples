@@ -3,5 +3,5 @@ humanitec_token        = "mytoken"
 
 app   = "tfc"
 org   = "my-tfc-org"
-token = "MY.atlasv1.TEAM-TOKEN"
+token = "MY.atlasv1.USE-A-TFC-TEAM-TOKEN-PERSONAL-WONT-WORK"
 
