@@ -1,0 +1,22 @@
+# for use with workload resource type
+update:
+  - op: add
+    path: /spec/annotations
+    value:
+      {{- range $key, $val := .resource.spec.template.metadata.annotations }}
+        {{ $key }}: {{ $val | quote }}
+      {{- end }}
+      ad.datadoghq.com/${context.app.id}.logs: '[{"source": "myapp"}]'
+  {{- range $containerId, $value := .resource.spec.containers }}
+  - op: add
+    path: /spec/containers/{{ $containerId }}/volumeMounts
+    value:
+      - mountPath: /host/etc/motd.confg 
+        name: hostpath-privileged
+  {{- end }}
+  - op: add
+    path: /spec/extraVolumes
+    value:
+      - name: hostpath-privileged
+        hostPath:
+            path: /etc/motd.confg
