@@ -1,0 +1,56 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  Connect your AWS account with Humanitec to manage resources on your behalf. Updated April 2024.
+Outputs:
+  HumanitecRoleArn:
+    Description: "Humanitec IAM Access Role ARN"
+    Value: !GetAtt HumanitecRole.Arn
+  HumanitecExternalId:
+    Description: "Humanitec External ID for secure access"
+    Value: !Select [2, !Split ["/", !Ref AWS::StackId]]
+Resources:
+  HumanitecRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName:
+        !Join ["-", ["humanitec", "resource", "access", !Ref AWS::AccountId]]
+      Description: Connect your AWS account with Humanitec to manage resources on your behalf. Updated April 2024.
+      MaxSessionDuration: 43200
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS:
+                - arn:aws:iam::767398028804:user/humanitec
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                sts:ExternalId: !Select [2, !Split ["/", !Ref AWS::StackId]]
+          - Effect: Deny
+            Principal:
+              AWS:
+                - arn:aws:iam::767398028804:user/humanitec
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                sts:ExternalId: !Select [2, !Split ["/", !Ref AWS::StackId]]
+              NotIpAddress:
+                "aws:SourceIp":
+                  - 34.159.97.57
+                  - 35.198.74.96
+                  - 34.141.77.162
+                  - 34.89.188.214
+                  - 34.159.140.35
+                  - 34.89.165.141
+                  - 34.32.134.107
+                  - 34.91.7.12
+                  - 34.91.109.253
+                  - 34.141.184.227
+                  - 34.147.1.204
+                  - 35.204.216.33
+              Bool:
+                "aws:ViaAWSService": False
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess

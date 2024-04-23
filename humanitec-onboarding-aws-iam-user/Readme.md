@@ -3,6 +3,12 @@
 ### Recommended way to configure your AWS Access
 See [trust](trust) and [trust](https://developer.humanitec.com/platform-orchestrator/security/cloud-accounts/#aws-role-assumption)
 
+Cloudformation with policies:
+- To access EKS. The cluster must have the tag `Humanitec: true` and an IAM access entry with an access policy of `AmazonEKSClusterAdminPolicy` [trust/humanitec-eks-access.yaml](trust/humanitec-eks-access.yaml)
+- To manage AWS resources: [trust/humanitec-resource-access.yaml](trust/humanitec-resource-access.yaml)
+
+These policies must be updated everytime that new IPs or permissions are required.
+
 # Reference Information as of April 2024 (use trust above for better results)
 ## Background
 Humanitec follows the least privilege approach to security and access to customer's environments.
