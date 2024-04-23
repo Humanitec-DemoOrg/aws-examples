@@ -171,7 +171,7 @@ The example above goes to public Github, to configure a private git repository, 
 
 ```
   driver_inputs = {
-    secrets_string = {
+    secrets_string = jsonencode({
       variables = {
         access_key = var.access_key
         secret_key = var.secret_key
