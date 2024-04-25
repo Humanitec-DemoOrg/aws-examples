@@ -79,7 +79,9 @@ variable "eks_resource_name" {
   default = "my-eks-id" //TODO: use the name of your cluster
 }
 
-resource "humanitec_resource_definition" "eks" { // SEE BELOW FOR EKS API with `AmazonEKSClusterAdminPolicy` and ConfigMap
+resource "humanitec_resource_definition" "eks" {
+  // SEE BELOW FOR EKS API with `AmazonEKSClusterAdminPolicy` and ConfigMap
+  // Make sure your cluster is tagged with "Humanitec: true"
 
   id          = "${var.eks_resource_name}-${local.account}"
   name        = "${var.eks_resource_name}-${local.account}"
