@@ -1,0 +1,8 @@
+humanitec_organization = ""
+humanitec_token        = ""
+
+# This code needs AWS credentials exported as well for the AWS Provider
+
+app_name          = "testapp"
+eks_resource_name = "my-cluster"
+agent_id          = "my-cluster-agent"
