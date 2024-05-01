@@ -12,41 +12,37 @@ These policies must be updated everytime that new IPs or permissions are require
 # Reference Information as of April 2024 (use trust above for better results)
 ## Background
 Humanitec follows the least privilege approach to security and access to customer's environments.
-Humanitec uses an Amazon IAM user per account with long term credentials to communicate with your Amazon EKS clusters, and Amazon IAM roles with temporary credentials to manage AWS Resources with Terraform.
+Humanitec uses an Amazon IAM roles with temporary credentials to communicate with your Amazon EKS clusters and to manageAWS Resources with Terraform.
 
 ### Policies
-The Humanitec Amazon IAM User requires the following permissions:
+The Humanitec Amazon Role  r requires the following permissions:
 - Amazon EKS Deployment access to clusters tagged with `Humanitec: true`.
-- Allow Humanitec Terraform management cloud to assume roles in your target AWS accounts to manage your infrastructure, the rolename must start with the prefix `humanitec`.
 - Access to the AWS API from Humanitec [outbound public IPs](https://docs.humanitec.com/getting-started/technical-requirements).
 
 ### How Humanitec uses the AWS credentials
 - To deploy to your Amazon EKS clusters:
-    - Humanitec uses the Amazon IAM User access key and secret to call the Amazon EKS API, and get the metadata required to communicate to your Amazon EKS cluster.
+    - Humanitec uses the Amazon IAM role, and get the metadata required to communicate to your Amazon EKS cluster.
     - Humanitec deploys to your Amazon EKS cluster over a secure tunnel.
 - To deploy and manage infrastructure:
-    - Humanitec uses the Amazon IAM User access key and secret to call the AWS STS API, assumes the specified Amazon IAM role within your Humanitec resource definition, and gets AWS temporary credentials.
+    - Humanitec uses the Amazon IAM role to call the AWS STS API, assumes the specified Amazon IAM role within your Humanitec resource definition.
     - Humanitec deploys to your AWS account over a secure tunnel.
 
 ### Credentials and Access Responsibility
 
-![Roles and Access](images/humanitec-roles.png)
-
 Humanitec's:
-- Custody of Amazon IAM long term credentials per account and resource definitions.
+- Custody of Amazon IAM role that is trusted by your account.
 - AWS Role Assumption and management of temporary access credentials.
-- Maintenance of the Humanitec Amazon IAM user standard policies, and publication of reference manifests.
+- Maintenance of the Humanitec Amazon Role standard policies, and publication of reference manifests.
 
 Customer's:
-- Create and maintain the Humanitec Amazon IAM user according to manifests provided by Humanitec.
-- Rotate Amazon IAM long term credentials and update them within Humanitec for each Amazon EKS cluster, AWS account and Humanitec resource definition.
+- Create and maintain the Humanitec Amazon Role and trust user according to manifests provided by Humanitec.
 - Create and maintain Amazon IAM roles within their AWS accounts to manage the infrastructure.
 - Create and maintain Amazon IAM policies allowing and denying access to actions based on their specific needs.
 
 **Humanitec strongly recommends following [Security best practices in IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html), in particular [Apply least-privilege permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege), avoiding the creation of users and/or roles with the [`arn:aws:iam::aws:policy/AdministratorAccess`](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions.html#jf_administrator) policy, or similar full privileged permissions.**
 ## How to allow Humanitec to access your Amazon EKS Clusters
 - For _each_ of your AWS Accounts:
-    - Create the Humanitec Amazon IAM User
+    - Create the Humanitec IAM Role
     - Tag the clusters that Humanitec needs access to with `Humanitec:true`
     - For each Amazon EKS cluster tagged, configure your Amazon EKS Cluster config map or access entries
 
