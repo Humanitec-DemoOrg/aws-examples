@@ -9,7 +9,6 @@ Cloudformation with policies:
 
 These policies must be updated everytime that new IPs or permissions are required.
 
-# Reference Information as of April 2024 (use trust above for better results)
 ## Background
 Humanitec follows the least privilege approach to security and access to customer's environments.
 Humanitec uses an Amazon IAM roles with temporary credentials to communicate with your Amazon EKS clusters and to manageAWS Resources with Terraform.
