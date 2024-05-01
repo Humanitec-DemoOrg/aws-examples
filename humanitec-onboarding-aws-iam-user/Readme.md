@@ -104,8 +104,6 @@ Within Humanitec: use the credentials to configure your Amazon EKS resources wit
 
 ## How to allow Humanitec to access your AWS infrastructure via Terraform
 
-![Humanitec Terraform Roles](images/humanitec-terraform-roles.png)
-
 - Our examples use the  Humanitec Terraform Provider,  documentation can be found [here](https://registry.terraform.io/providers/humanitec/humanitec/latest/docs).
 - **Create IAM AWS Roles with Amazon IAM policies as needed**, see [../s3/terraform/example-s3-admin-role/main.tf](../s3/terraform/example-s3-admin-role/main.tf) for a complete example.
     - Make sure your Amazon IAM role name starts with the prefix `humanitec`, for example `humanitec-s3-admin-role`.
